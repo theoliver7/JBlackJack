@@ -1,5 +1,6 @@
 package github;
 
 public class Peter {
-	int a= 3+3;
+	int a= 3+123456789;
+
 }
