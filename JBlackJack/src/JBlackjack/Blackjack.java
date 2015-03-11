@@ -22,7 +22,10 @@ public class Blackjack extends JFrame {
 
 	public Blackjack() {
 		setTitle("JBlackJack");
-		getContentPane().setBackground(new Color(8, 138, 8));		
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setBackground(Color.green);
+		setSize(800, 700);
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		setVisible(true);
+		setDefaultCloseOperation(EXIT_ON_CLOSE); 
 	}
 }
