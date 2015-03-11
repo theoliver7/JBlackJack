@@ -1,5 +1,5 @@
 package JBlackjack;
 
-public class karte {
+public class Karte {
 
 }

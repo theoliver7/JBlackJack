@@ -1,5 +1,5 @@
 package JBlackjack;
 
-public class bank {
+public class Bank {
 
 }
