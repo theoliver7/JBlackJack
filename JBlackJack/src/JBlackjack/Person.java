@@ -2,10 +2,8 @@ package JBlackjack;
 
 import java.awt.List;
 
-public static abstract class Person {
-	protected Person dealer;
-	protected Person spieler;
-	
+public abstract class Person {
+	Spiel Spiel_1 = new Spiel();
 	List AktuelleKarten = new List();
 	
 }
