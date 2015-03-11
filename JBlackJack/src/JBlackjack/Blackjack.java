@@ -9,6 +9,10 @@ import javax.swing.JFrame;
 
 public class Blackjack extends JFrame {
 
+	/**
+    * 
+    */
+	private static final long serialVersionUID = 1L;
 	private static JButton Kartenehmen = new JButton("Karte Ziehen");
 
 	public static void main(String[] args) {
@@ -16,7 +20,7 @@ public class Blackjack extends JFrame {
 		Spiel.setSize(800, 700);
 		Spiel.setVisible(true);
 		Spiel.add(Kartenehmen, BorderLayout.SOUTH);
-		Kartenehmen.setPreferredSize(new Dimension(100,100));
+		Kartenehmen.setPreferredSize(new Dimension(100, 100));
 		Kartenehmen.setVisible(true);
 	}
 
@@ -26,6 +30,6 @@ public class Blackjack extends JFrame {
 		setSize(800, 700);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setVisible(true);
-		setDefaultCloseOperation(EXIT_ON_CLOSE); 
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 }
