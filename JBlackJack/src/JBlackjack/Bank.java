@@ -25,10 +25,6 @@ public class Bank {
 	}
 	
 	
-	
-	
-	
-	
 /* 
  * Getter und Settermethoden
  */
