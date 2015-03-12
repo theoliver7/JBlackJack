@@ -50,7 +50,6 @@ public class Karte {
 			Kartenstappel.add(stapel[a]);
 			Kartenstappel_backup.remove(stapel[a]);
 		}
-		
 		for (Karte i:Kartenstappel){	
 			System.out.println(i);
 		}

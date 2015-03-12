@@ -5,15 +5,15 @@ import java.util.Random;
 
 
 public class Kartenstapel {	
-	
+	private static ArrayList<Karte> Kartenstappel = new ArrayList<Karte>();
 	
 	public void stapelgenerieren(){
-		ArrayList<Karte> Kartenstappel = new ArrayList<Karte>();
+		Karte oberstekarte = new Karte(null, null);
+		
 		ArrayList<Karte> Kartenstappel_backup = new ArrayList<Karte>();
 		Karte stapel[] = new Karte[52];
 		String typ[] = { "Spade", "Hearts", "Clubs", "Diamonds" };
-		String nummer[] = { "Ace", "2", "3", "4", "5", "6", "7", "8", "9",
-				"10", "Jack", "Queen", "King" };
+		String nummer[] = { "Ace", "2", "3", "4", "5", "6", "7", "8", "9","10", "Jack", "Queen", "King" };
 		int k = 0;
 		for (int i = 0; i < typ.length; i++) {
 			for (int j = 0; j < nummer.length; j++) {
@@ -35,6 +35,13 @@ public class Kartenstapel {
 			Kartenstappel.add(stapel[a]);
 			Kartenstappel_backup.remove(stapel[a]);
 		}
+	}
+	
+	public static ArrayList<Karte> getKartenstappel() {
+		return Kartenstappel;
+	}
+	public void setKartenstappel(ArrayList<Karte> kartenstappel) {
+		Kartenstappel = kartenstappel;
 	}
 }
 	
