@@ -1,41 +1,20 @@
 package JBlackjack;
 
+import java.util.ArrayList;
+
 public class Karte {
-	
-// Variablen deklarieren
-	private String sorte;
-	private int[] wert;
-	private String[][] KartenID;
-
-	
-	
-	
-	
-	
-// Getter und Settermethoden	
-	public String getSorte() {
-		return sorte;
+	public Karte(String string, String string2) {
+		// TODO Auto-generated constructor stub
 	}
 
-	public void setSorte(String sorte) {
-		this.sorte = sorte;
+	ArrayList<Karte> Stapel = new ArrayList<Karte>();
+	String suit[] = { "Spade", "Hearts", "Clubs", "Diamonds" };
+	String number[] = { "Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10","Jack", "Queen", "King" };
+	{
+		for (int i = 0; i < suit.length; i++) {
+			for (int j = 0; j < number.length; j++) {
+				Stapel.add(new Karte(suit[i], number[j]));
+			}
+		}
 	}
-
-	public int[] getWert() {
-		return wert;
-	}
-
-	public void setWert(int[] wert) {
-		this.wert = wert;
-	}
-
-	public String[][] getKartenID() {
-		return KartenID;
-	}
-
-	public void setKartenID(String[][] kartenID) {
-		KartenID = kartenID;
-	}
-
-	
 }
