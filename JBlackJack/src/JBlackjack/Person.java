@@ -2,7 +2,7 @@ package JBlackjack;
 
 import java.awt.List;
 
-public static abstract class Person {
+public abstract class Person {
 	protected Person dealer;
 	protected Person spieler;
 	
