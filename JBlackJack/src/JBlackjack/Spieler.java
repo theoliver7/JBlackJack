@@ -11,7 +11,7 @@ public class Spieler extends Person {
 	
 //Methoden
 	public boolean entscheiden_S(){
-		
+		       
 		return entscheiden_S;
 	}
 	
