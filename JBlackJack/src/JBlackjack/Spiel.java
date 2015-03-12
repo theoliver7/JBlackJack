@@ -8,7 +8,7 @@ public class Spiel {
 
 	public void SpielStarten() {
 		if (neuesSpiel == 1) {
-			Person Person = new Person();
+			
 		}
 	}
 
