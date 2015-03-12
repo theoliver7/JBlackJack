@@ -16,6 +16,7 @@ public class Spieler extends Person {
 	}
 	
 
+<<<<<<< HEAD
 //Getter und Settermethoden	
 	public String getSpielername() {
 		return Spielername;
@@ -36,4 +37,7 @@ public class Spieler extends Person {
 	public void setSpielbeenden(boolean spielbeenden) {
 		this.spielbeenden = spielbeenden;
 	}
+=======
+	
+>>>>>>> origin/master
 }

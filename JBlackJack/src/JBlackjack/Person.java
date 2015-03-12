@@ -3,6 +3,7 @@ package JBlackjack;
 import java.lang.reflect.Array;
 
 public abstract class Person {
+<<<<<<< HEAD
 
 //Variablen deklarieren
 	private Array aktuelleKarten;
@@ -37,3 +38,11 @@ public abstract class Person {
 	}
 
 }
+=======
+	protected Person dealer;
+	protected Person spieler;
+	
+	List AktuelleKarten = new List();
+	
+}
+>>>>>>> origin/master
