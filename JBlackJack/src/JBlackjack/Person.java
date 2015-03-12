@@ -1,11 +1,39 @@
 package JBlackjack;
 
-import java.awt.List;
+import java.lang.reflect.Array;
 
 public abstract class Person {
-	protected Person dealer;
-	protected Person spieler;
+
+//Variablen deklarieren
+	private Array aktuelleKarten;
 	
-	List AktuelleKarten = new List();
 	
+	
+//Methoden
+	public void kartenehmen() {
+
+	}
+
+	public void verwerfen() {
+
+	}
+
+	public void assueberpruefung() {
+
+	}
+
+	public void wertueberpruefung() {
+	}
+	
+	
+//Getter und Settermethoden
+
+	public Array getAktuelleKarten() {
+		return aktuelleKarten;
+	}
+
+	public void setAktuelleKarten(Array aktuelleKarten) {
+		this.aktuelleKarten = aktuelleKarten;
+	}	
 }
+

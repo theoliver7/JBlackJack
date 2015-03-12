@@ -6,8 +6,11 @@ public class Dealer extends Person {
 	
 	public boolean entscheiden_dealer(){
 		
-		
 		return entscheidung;
+	}
+	
+	public void neueRunde(){
+		
 	}
 	
 }
