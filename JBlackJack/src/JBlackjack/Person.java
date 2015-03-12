@@ -11,7 +11,7 @@ public abstract class Person {
 	
 //Methoden
 	public void kartenehmen() {
-
+		
 	}
 
 	public void verwerfen() {

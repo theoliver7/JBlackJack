@@ -18,7 +18,7 @@ public class Karte {
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(String name) { 
 		this.name = name;
 	}
 	
@@ -52,7 +52,7 @@ public class Karte {
 		}
 		
 		for (Karte i:Kartenstappel){	
-			System.out.println(i);
+			System.out.println(i + "My name is oli!");
 		}
 	}
 
