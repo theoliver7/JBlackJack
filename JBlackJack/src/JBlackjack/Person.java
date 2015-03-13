@@ -5,12 +5,10 @@ import java.util.ArrayList;
 
 public abstract class Person {
 
-//Variablen deklarieren
+	// Variablen deklarieren
 	private Array aktuelleKarten;
-	
-	
-	
-//Methoden
+
+	// Methoden
 	public void kartenehmen() {
 		ArrayList<Karte> oberstekarte = new ArrayList<Karte>();
 		ArrayList<Karte> Karten = new ArrayList<Karte>();
@@ -19,7 +17,7 @@ public abstract class Person {
 		for (int i =0 ; i<10 ; i++) {
 			if (i == 1) {
 				oberstekarte;
-			}
+			} 
 		}
 	}
 
@@ -33,9 +31,8 @@ public abstract class Person {
 
 	public void wertueberpruefung() {
 	}
-	
-	
-//Getter und Settermethoden
+
+	// Getter und Settermethoden
 
 	public Array getAktuelleKarten() {
 		return aktuelleKarten;
@@ -43,6 +40,5 @@ public abstract class Person {
 
 	public void setAktuelleKarten(Array aktuelleKarten) {
 		this.aktuelleKarten = aktuelleKarten;
-	}	
+	}
 }
-

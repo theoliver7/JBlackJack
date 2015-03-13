@@ -51,7 +51,7 @@ public class Karte {
 			Kartenstappel_backup.remove(stapel[a]);
 		}
 		for (Karte i:Kartenstappel){	
-			System.out.println(i + "My name is oli!");
+			System.out.println(i);
 		}
 	}
 
