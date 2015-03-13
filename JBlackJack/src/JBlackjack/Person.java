@@ -5,22 +5,24 @@ import java.util.ArrayList;
 
 public abstract class Person {
 
-//Variablen deklarieren
-	private Array aktuelleKarten;
-	
-	
-	
-//Methoden
-	public void kartenehmen() {
-		ArrayList<Karte> oberstekarte = new ArrayList<Karte>();
-		ArrayList<Karte> Karten = new ArrayList<Karte>();
-		Karten = getAktuelleKarten();
-		
-		for (int i =0 ; i<10 ; i++) {
-			if (i == 1) {
-				oberstekarte;
-			}
-		}
+	// Methoden
+	public static void kartenehmen() {
+		Kartenstapel.oberstekarte = Kartenstapel.getKartenstappel().get(1);
+		System.out.println(Kartenstapel.getOberstekarte());
+		Kartenstapel.getKartenstappel().remove(Kartenstapel.oberstekarte);
+	}
+	public static void main(String[] args) {
+		Kartenstapel.stapelgenerieren();
+		kartenehmen();
+		kartenehmen();
+		kartenehmen();
+		kartenehmen();
+		kartenehmen();
+		kartenehmen();
+		kartenehmen();
+		kartenehmen();
+		kartenehmen();
+		kartenehmen();
 	}
 
 	public void verwerfen() {
@@ -33,16 +35,14 @@ public abstract class Person {
 
 	public void wertueberpruefung() {
 	}
-	
-	
-//Getter und Settermethoden
+
+	// Getter und Settermethoden
 
 	public Array getAktuelleKarten() {
-		return aktuelleKarten;
+		Array aktuelleKarten = null;
+		return aktuelleKarten ;
 	}
 
 	public void setAktuelleKarten(Array aktuelleKarten) {
-		this.aktuelleKarten = aktuelleKarten;
-	}	
+	}
 }
-

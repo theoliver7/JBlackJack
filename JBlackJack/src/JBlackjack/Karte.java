@@ -6,8 +6,8 @@ import java.util.Random;
 public class Karte {
 	private String name;
 
-	public Karte(String string, String string2) {
-		this.setName(string + " " + string2);
+	public Karte(String string, String string2, int wert) {
+		this.setName(string + " " + string2 + " " + wert);
 	}
 
 	public String toString() {
@@ -29,10 +29,11 @@ public class Karte {
 		String typ[] = { "Spade", "Hearts", "Clubs", "Diamonds" };
 		String nummer[] = { "Ace", "2", "3", "4", "5", "6", "7", "8", "9",
 				"10", "Jack", "Queen", "King" };
+		int wert[] = {1,2,3,4,5,6,7,8,9,10,10,10,10};
 		int k = 0;
 		for (int i = 0; i < typ.length; i++) {
 			for (int j = 0; j < nummer.length; j++) {
-				Karte kar = new Karte(typ[i], nummer[j]);
+				Karte kar = new Karte(typ[i], nummer[j],wert[j]);
 				stapel[k] = kar;
 				k++;
 			}
