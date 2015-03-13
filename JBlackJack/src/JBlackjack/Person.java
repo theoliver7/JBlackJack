@@ -16,7 +16,7 @@ public abstract class Person {
 	}
 	public static void main(String[] args) {
 		Kartenstapel.stapelgenerieren();
-		kartenehmen();
+		
 		kartenehmen();
 		kartenehmen();
 			
@@ -48,6 +48,13 @@ public abstract class Person {
 	}
 	public static int getKartenwert() {
 		kartenwert = kartenwert + Kartenstapel.oberstekarte.getWert();
-		return kartenwert;
+		if (kartenwert>21){
+			kartenwert=0;
+			return kartenwert;
+		}
+		else{
+			return kartenwert;
+		}
+		
 	}
 }

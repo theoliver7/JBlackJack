@@ -13,8 +13,8 @@ public class Bank {
 	}
 
 	public static String gewinnerermitteln() {
-		int dealer = 1;
-		int spieler = 2;
+		int dealer = Dealer.getKartenwert();
+		int spieler = Spieler.getKartenwert();
 
 		if (dealer < spieler) {
 			gewinner = "Der Spieler hat gewonnen";
@@ -23,7 +23,7 @@ public class Bank {
 		}
 
 		else {
-			gewinner = "Der Spieler hat gewonnen";
+			gewinner = "Der Dealer hat gewonnen";
 			kontostandanpassen(+10);
 			return gewinner;
 		}
