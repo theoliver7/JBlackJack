@@ -4,25 +4,22 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public abstract class Person {
-
+	private static int kartenwert = 0;
+	
+	static ArrayList<Karte> aktuelleHand = new ArrayList<Karte>();
 	// Methoden
-	public static void kartenehmen() {
+	public static void kartenehmen() {	
 		Kartenstapel.oberstekarte = Kartenstapel.getKartenstappel().get(1);
-		System.out.println(Kartenstapel.getOberstekarte());
 		Kartenstapel.getKartenstappel().remove(Kartenstapel.oberstekarte);
+		System.out.println(getAktuelleKarten());
+		System.out.println(getKartenwert());
 	}
 	public static void main(String[] args) {
 		Kartenstapel.stapelgenerieren();
 		kartenehmen();
 		kartenehmen();
 		kartenehmen();
-		kartenehmen();
-		kartenehmen();
-		kartenehmen();
-		kartenehmen();
-		kartenehmen();
-		kartenehmen();
-		kartenehmen();
+			
 	}
 
 	public void verwerfen() {
@@ -38,12 +35,16 @@ public abstract class Person {
 
 	// Getter und Settermethoden
 
-	public Array getAktuelleKarten() {
-		Array aktuelleKarten = null;
-		return aktuelleKarten ;
+	public static ArrayList<Karte> getAktuelleKarten() {
+		aktuelleHand.add(Kartenstapel.oberstekarte);
+		return aktuelleHand;
 	}
 
-	public void setAktuelleKarten(Array aktuelleKarten) {
-	
+	public void setAktuelleHand(Array aktuelleKarten) {
+		
+	}
+	public static int getKartenwert() {
+		kartenwert = kartenwert + Kartenstapel.oberstekarte.getWert();
+		return kartenwert;
 	}
 }

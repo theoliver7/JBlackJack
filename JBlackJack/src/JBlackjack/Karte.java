@@ -5,15 +5,26 @@ import java.util.Random;
 
 public class Karte {
 	private String name;
+	private int wert;
+	
+
+	public int getWert() {
+		return wert;
+	}
+
+	public void setWert(int wert) {
+		this.wert = wert;
+	}
 
 	public Karte(String string, String string2, int wert) {
 		this.setName(string + " " + string2 + " " + wert);
+		this.setWert(wert);
+		
 	}
 
 	public String toString() {
 		return this.getName();
 	}
-
 	public String getName() {
 		return name;
 	}
@@ -55,5 +66,4 @@ public class Karte {
 			System.out.println(i);
 		}
 	}
-
 }

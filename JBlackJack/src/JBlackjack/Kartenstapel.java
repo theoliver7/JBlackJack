@@ -7,6 +7,7 @@ public class Kartenstapel {
 	private static ArrayList<Karte> Kartenstappel = new ArrayList<Karte>();
 	static Karte oberstekarte;
 	static Karte stapel[] = new Karte[56];	
+	private static int wert;
 	
 	public static void stapelgenerieren() {
 		ArrayList<Karte> Kartenstappel_backup = new ArrayList<Karte>();
@@ -54,12 +55,21 @@ public class Kartenstapel {
 	}
 
 	public static Karte getOberstekarte() {
-		
 		return oberstekarte;
 	}
-
+	
 	public void setOberstekarte(Karte oberstekarte) {
 		Kartenstapel.oberstekarte = oberstekarte;
+	}
+
+
+
+	public static int getWert() {
+		return wert;
+	}
+	
+	public static void setWert(int wert) {
+		Kartenstapel.wert = wert;
 	}
 
 }
