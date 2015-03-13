@@ -44,5 +44,6 @@ public abstract class Person {
 	}
 
 	public void setAktuelleKarten(Array aktuelleKarten) {
+	
 	}
 }
