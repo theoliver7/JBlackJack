@@ -2,17 +2,17 @@ package JBlackjack;
 
 public class Bank {
 	// Variablen deklarieren
-	private int kontostand = 500;
-	private String gewinner;
+	private static int kontostand = 500;
+	private static String gewinner;
 
 	// Methoden
 
-	public int kontostandanzeigen() {
-
+	public static int kontostandanzeigen() {
+		System.out.println(kontostand);
 		return kontostand;
 	}
 
-	public String gewinnerermitteln() {
+	public static String gewinnerermitteln() {
 		int dealer = 1;
 		int spieler = 2;
 
@@ -30,7 +30,7 @@ public class Bank {
 
 	}
 
-	public int kontostandanpassen(int einsatz) {
+	public static int kontostandanpassen(int einsatz) {
 		kontostand = kontostand + einsatz;
 		return kontostand;
 	}
@@ -43,7 +43,7 @@ public class Bank {
 	}
 
 	public void setKontostand(int kontostand) {
-		this.kontostand = kontostand;
+		Bank.kontostand = kontostand;
 	}
 
 }

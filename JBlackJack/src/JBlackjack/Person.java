@@ -20,6 +20,9 @@ public abstract class Person {
 		kartenehmen();
 		kartenehmen();
 			
+			
+		Bank.gewinnerermitteln();
+		Bank.kontostandanzeigen();
 	}
 
 	public void verwerfen() {
