@@ -33,7 +33,7 @@ public class Spieler extends Person {
 			if (Dealer.dealerkartenwert <= 21) {
 				Dealer.dealer_kartenehmen();
 			}
-		} else if (Dealer.dealerkartenwert >= 21) {
+		} else {
 			Dealer.setDealerkartenwert(0);
 			System.out.println();
 			Bank.gewinnerErmitteln();
