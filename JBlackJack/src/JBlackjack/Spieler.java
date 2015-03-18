@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-
 public class Spieler extends Person {
 
 	// Variablen deklarieren
@@ -14,9 +13,9 @@ public class Spieler extends Person {
 	static int spielerkartenwert = 0;
 	static ArrayList<Karte> spielerHand = new ArrayList<Karte>();
 	private static String weitereKarte;
-	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	static BufferedReader br = new BufferedReader(new InputStreamReader(
+			System.in));
 
-	
 	// Methoden
 	public boolean entscheiden_S() {
 
@@ -24,24 +23,28 @@ public class Spieler extends Person {
 	}
 
 	public static void spieler_kartenehmen() {
-		if ((spielerkartenwert <= Dealer.dealerkartenwert) && (spielerkartenwert<=21)) {
-			Kartenstapel.oberstekarte = Kartenstapel.getKartenstappel().get(0);
-			Kartenstapel.getKartenstappel().remove(Kartenstapel.oberstekarte);
-			System.out.println("Spieler :");
+		if (spielerkartenwert <= Dealer.dealerkartenwert) {
+			Kartenstapel.obersteKarte = Kartenstapel.getKartenstappel().get(0);
+			Kartenstapel.getKartenstappel().remove(Kartenstapel.obersteKarte);
+			System.out.println("Spieler : ");
 			System.out.println(getSpielerHand());
 			System.out.println(getspielerKartenwert());
 			System.out.println();
-			Dealer.dealer_kartenehmen();
-		}else{
-			spielerkartenwert = 0;		
+			if (Dealer.dealerkartenwert <= 21) {
+				Dealer.dealer_kartenehmen();
+			}
+		} else if (Dealer.dealerkartenwert >= 21) {
+			Dealer.setDealerkartenwert(0);
 			System.out.println();
 			Bank.gewinnerErmitteln();
 		}
+
 	}
 
 	// Getter und Settermethoden
 	public static int getspielerKartenwert() {
-		spielerkartenwert = spielerkartenwert + Kartenstapel.oberstekarte.getWert();
+		spielerkartenwert = spielerkartenwert
+				+ Kartenstapel.obersteKarte.getWert();
 		if (spielerkartenwert > 21) {
 			spielerkartenwert = 0;
 			return spielerkartenwert;
@@ -55,7 +58,7 @@ public class Spieler extends Person {
 	}
 
 	public static ArrayList<Karte> getSpielerHand() {
-		spielerHand.add(Kartenstapel.oberstekarte);
+		spielerHand.add(Kartenstapel.obersteKarte);
 		return spielerHand;
 	}
 

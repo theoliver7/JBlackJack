@@ -5,11 +5,11 @@ import java.util.Random;
 
 public class Kartenstapel {
 	private static ArrayList<Karte> Kartenstappel = new ArrayList<Karte>();
-	static Karte oberstekarte;
+	static Karte obersteKarte;
 	static Karte stapel[] = new Karte[56];	
 	private static int wert;
 	
-	public static void stapelgenerieren() {
+	public static void stapelGenerieren() {
 		ArrayList<Karte> Kartenstappel_backup = new ArrayList<Karte>();
 		
 		String typ[] = { "Spade", "Hearts", "Clubs", "Diamonds" };
@@ -39,13 +39,10 @@ public class Kartenstapel {
 				Kartenstappel_backup.remove(stapel[a]);
 			} else {
 				Kartenstappel_backup.remove(stapel[a]);
-				oberstekarte = stapel[a];
+				obersteKarte = stapel[a];
 			}						
 		}
 	}
-	
-	
-
 	public static ArrayList<Karte> getKartenstappel() {
 		return Kartenstappel;
 	}
@@ -54,12 +51,12 @@ public class Kartenstapel {
 		Kartenstappel = kartenstappel;
 	}
 
-	public static Karte getOberstekarte() {
-		return oberstekarte;
+	public static Karte getObersteKarte() {
+		return obersteKarte;
 	}
 	
-	public void setOberstekarte(Karte oberstekarte) {
-		Kartenstapel.oberstekarte = oberstekarte;
+	public void setObersteKarte(Karte oberstekarte) {
+		Kartenstapel.obersteKarte = oberstekarte;
 	}
 
 

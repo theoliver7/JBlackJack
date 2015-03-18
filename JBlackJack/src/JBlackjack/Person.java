@@ -3,28 +3,26 @@ package JBlackjack;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+@SuppressWarnings("unused")
 public abstract class Person {
+	
 	
 	
 	static ArrayList<Karte> aktuelleHand = new ArrayList<Karte>();
 	// Methoden
 	public static void main(String[] args) {
-		Kartenstapel.stapelgenerieren();
+		Kartenstapel.stapelGenerieren();
 		
 		Spieler Oliver = new Spieler();
 		Dealer Miguel = new Dealer();
-			
 		
-		Spieler.spieler_kartenehmen();
-		
+		Dealer.dealer_kartenehmen();
 	}
 
 	public void verwerfen() {
-
 	}
 
-	public void assueberpruefung() {
-
+	public void assUeberpruefung() {
 	}
 
 	public void wertueberpruefung() {
@@ -33,12 +31,11 @@ public abstract class Person {
 	// Getter und Settermethoden
 
 	public static ArrayList<Karte> getAktuelleKarten() {
-		aktuelleHand.add(Kartenstapel.oberstekarte);
+		aktuelleHand.add(Kartenstapel.obersteKarte);
 		return aktuelleHand;
 	}
 
 	public void setAktuelleHand(Array aktuelleKarten) {
-		
 	}
 	
 }
