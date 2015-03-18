@@ -17,12 +17,12 @@ public abstract class Person {
 	public static void main(String[] args) {
 		Kartenstapel.stapelgenerieren();
 		
-		kartenehmen();
-		kartenehmen();
+		Spieler Oliver = new Spieler();
+		Dealer Miguel = new Dealer();
 			
-			
-		Bank.gewinnerermitteln();
-		Bank.kontostandanzeigen();
+		Dealer.dealer_kartenehmen();
+		Spieler.kartenehmen();
+		
 	}
 
 	public void verwerfen() {
