@@ -38,7 +38,7 @@ public class Gui extends JFrame {
 		add(Karten,BorderLayout.CENTER);
 
 		// JFrame Eigenschaften
-		setSize(1000, 1000);
+		setSize(1200, 1000);
 		getContentPane().setBackground(new Color(10, 108, 3));
 		setTitle("JBlackJack");
 		setLocationRelativeTo(null);
@@ -66,3 +66,4 @@ public class Gui extends JFrame {
 }
 
 
+//																  -><- line 69 / y: 69
