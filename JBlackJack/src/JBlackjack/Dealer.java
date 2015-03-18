@@ -2,10 +2,13 @@ package JBlackjack;
 
 import java.util.ArrayList;
 
+
+@SuppressWarnings("unused")
 public class Dealer extends Person {
 	private boolean entscheidung;
 	static ArrayList<Karte> dealerHand = new ArrayList<Karte>();
 	static int dealerkartenwert = 0;
+	private int Drop_the_Supression;
 
 	public boolean entscheiden_dealer() {
 
