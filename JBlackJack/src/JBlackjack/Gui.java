@@ -3,7 +3,6 @@ package JBlackjack;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.net.URL;
-
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -14,19 +13,20 @@ import javax.swing.JPanel;
 public class Gui extends JFrame {
 	private static final long serialVersionUID = 1L;
 	// JPanel
-	JPanel Button = new JPanel();
-	JPanel Navigation = new JPanel();
-	JPanel Karten = new JPanel();
+	JPanel Button 		= new JPanel();
+	JPanel Navigation 	= new JPanel();
+	JPanel Karten 		= new JPanel();
 	// Buttons
-	JButton Karte = new JButton("Karte nehmen");
-	JButton Einsatz = new JButton("Einsatz erhöhen");
-	JButton Aufgeben = new JButton("Aufgeben");
-	JButton Verlassen = new JButton("Verlassen");
+	JButton Karte 		= new JButton("Karte nehmen");
+	JButton Einsatz 	= new JButton("Einsatz erhöhen");
+	JButton Aufgeben 	= new JButton("Aufgeben");
+	JButton Verlassen 	= new JButton("Verlassen");
 	// Karten
 	protected static final Icon newImageIcon = loadIcon("Spade Ace.jpg");
 	JMenuItem newMenuItem = new JMenuItem(newImageIcon);
 
 	public Gui() {
+
 		// Elemente zu dem JFrame hinzufügen
 		Button.add(Einsatz, BorderLayout.SOUTH);
 		Button.add(Karte, BorderLayout.SOUTH);
@@ -35,7 +35,7 @@ public class Gui extends JFrame {
 		Karten.add(newMenuItem, BorderLayout.CENTER);
 		add(Button, BorderLayout.SOUTH);
 		add(Navigation, BorderLayout.EAST);
-		add(Karten,BorderLayout.CENTER);
+		add(Karten, BorderLayout.CENTER);
 
 		// JFrame Eigenschaften
 		setSize(1200, 1000);
@@ -55,7 +55,9 @@ public class Gui extends JFrame {
 		final URL resource = Gui.class.getResource("/images/" + iconName);
 
 		if (resource == null) {
+
 			// TODO Replace by logger
+
 			System.err.println("Error in " + Gui.class.getName()
 					+ ": Icon /images/" + iconName + " could not be loaded.");
 			return new ImageIcon();
@@ -64,6 +66,3 @@ public class Gui extends JFrame {
 	}
 
 }
-
-
-//																  -><- line 69 / y: 69
