@@ -116,7 +116,7 @@ public class Gui extends JFrame implements ActionListener {
 			Dealer.dealer_kartenehmen();
 			final Icon newImageIcon_2 = loadIcon(Kartenstapel.obersteKarte.getName() + ".jpg");
 			JMenuItem newMenuItem_2 = new JMenuItem(newImageIcon_2);
-			hand_spieler.add(newMenuItem_2, FlowLayout.RIGHT);
+			hand_spieler.add(newMenuItem_2);
 			newMenuItem_2.setBackground(new Color(10, 108, 3));
 			this.add(hand_dealer, FlowLayout.RIGHT);
 			revalidate();
