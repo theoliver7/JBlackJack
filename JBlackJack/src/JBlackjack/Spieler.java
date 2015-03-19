@@ -7,10 +7,10 @@ import java.util.ArrayList;
 public class Spieler extends Person {
 
 	// Variablen deklarieren
-	private String Spielername;
+	private String SpielerName;
 	private boolean entscheiden_S;
 	private boolean spielbeenden;
-	static int spielerkartenwert = 0;
+	static int spielerKartenwert = 0;
 	static ArrayList<Karte> spielerHand = new ArrayList<Karte>();
 	private static String weitereKarte;
 	static BufferedReader br = new BufferedReader(new InputStreamReader(
@@ -29,16 +29,28 @@ public class Spieler extends Person {
 		System.out.println(getSpielerHand());
 		System.out.println(getspielerKartenwert());
 		System.out.println();
+		if (Dealer.dealerkartenwert <= 17) {
+			Dealer.dealer_kartenehmen();
+		} else {
+			Bank.gewinnerErmitteln();
+		}
 	}
 
 	// Getter und Settermethoden
 	public static int getspielerKartenwert() {
-		spielerkartenwert = spielerkartenwert+ Kartenstapel.obersteKarte.getWert();
-			return spielerkartenwert;
+		spielerKartenwert = spielerKartenwert+ Kartenstapel.obersteKarte.getWert();
+		spielerKartenwert = spielerKartenwert
+				+ Kartenstapel.obersteKarte.getWert();
+		if (spielerKartenwert > 21) {
+			spielerKartenwert = 0;
+			return spielerKartenwert;
+		} else {
+			return spielerKartenwert;
+		}
 	}
 
-	public static void setspielerkartenwert(int spielerkartenwert) {
-		Spieler.spielerkartenwert = spielerkartenwert;
+	public static void setSpielerKartenwert(int spielerKartenwert) {
+		Spieler.spielerKartenwert = spielerKartenwert;
 	}
 
 	public static ArrayList<Karte> getSpielerHand() {
@@ -51,11 +63,11 @@ public class Spieler extends Person {
 	}
 
 	public String getSpielername() {
-		return Spielername;
+		return SpielerName;
 	}
 
 	public void setSpielername(String spielername) {
-		Spielername = spielername;
+		SpielerName = spielername;
 	}
 
 	public boolean isSpielbeenden() {

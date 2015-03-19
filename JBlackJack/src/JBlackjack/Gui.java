@@ -56,7 +56,7 @@ public class Gui extends JFrame implements ActionListener {
 		Einsatz.addActionListener(this);
 		Aufgeben.addActionListener(this);
 		Verlassen.addActionListener(this);
-
+		
 		panel.add(Karte, BorderLayout.EAST);
 		panel.add(Einsatz, BorderLayout.NORTH);
 		panel.add(Aufgeben, BorderLayout.SOUTH);
@@ -67,6 +67,7 @@ public class Gui extends JFrame implements ActionListener {
 		Navigation.add(Verlassen, BorderLayout.EAST);
 		Navigation.setBackground(new Color(10, 108, 3));
 		this.add(Navigation, BorderLayout.EAST);
+
 
 		hand_spieler.setBackground(new Color(10, 108, 3));
 		this.add(hand_spieler, FlowLayout.LEFT);
@@ -81,6 +82,9 @@ public class Gui extends JFrame implements ActionListener {
         Einsatz_Panel.setBackground(new Color(10, 108, 3));
         this.add(Einsatz_Panel, BorderLayout.WEST);
 
+
+		hand_spieler.setBackground(new Color(10, 108, 3));
+		this.add(hand_spieler, BorderLayout.CENTER);
 	}
 
 	public static void main(String[] args) {
@@ -143,8 +147,7 @@ public class Gui extends JFrame implements ActionListener {
 
 		if (resource == null) {
 			// TODO Replace by logger
-			System.err.println("Error in " + Gui.class.getName()
-					+ ": Icon /images/" + iconName + " could not be loaded.");
+			System.err.println("Error in " + Gui.class.getName()+ ": Icon /images/" + iconName + " could not be loaded.");
 			return new ImageIcon();
 		}
 		return new ImageIcon(resource);
