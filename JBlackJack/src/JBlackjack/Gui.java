@@ -34,7 +34,7 @@ public class Gui extends JFrame implements ActionListener {
 		hand = new JPanel();
 		// JFrame Eigenschaften
 		setSize(1200, 1000);
-//		getContentPane().setBackground(new Color(10, 108, 3));
+		// getContentPane().setBackground(new Color(10, 108, 3));
 		setTitle("JBlackJack");
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,29 +72,31 @@ public class Gui extends JFrame implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent ae) {
-		
-		if (i == 0) {
-			Kartenstapel.stapelGenerieren();
-			Spieler.spieler_kartenehmen();
-			final Icon newImageIcon = loadIcon("Spade 8.jpg");
-			JMenuItem newMenuItem = new JMenuItem(newImageIcon);
-			panel.add(newMenuItem, BorderLayout.CENTER);
-			i++;
 
-		} else {
-			
-			if (ae.getSource().equals(getKarte())) {
+		if (ae.getSource().equals(getKarte())) {
+			if (i == 0) {
+				System.out.println("Ihr Einsatz : " + Bank.getEinsatz());
+				Kartenstapel.stapelGenerieren();
+				Spieler.spieler_kartenehmen();
+				final Icon newImageIcon = loadIcon("Spade 8.jpg");
+				JMenuItem newMenuItem = new JMenuItem(newImageIcon);
+				panel.add(newMenuItem, BorderLayout.CENTER);
+				i++;
+			} else {
+				System.out.println("Ihr Einsatz : " + Bank.getEinsatz());
+				Spieler.spieler_kartenehmen();
 				final Icon oberstekarte = loadIcon("Spade 8.jpg");
 				JMenuItem newMenuItem = new JMenuItem(oberstekarte);
 				panel.add(newMenuItem, BorderLayout.CENTER);
 			}
-			if (ae.getSource().equals(getEinsatz())) {
-//				Kartenstapel.stapelGenerieren();
-				Spieler.spieler_kartenehmen();
-			}
-			if (ae.getSource().equals(getAufgeben())) {
-				System.out.println("test");
-			}
+		}
+		if (ae.getSource().equals(getEinsatz())) {
+
+			Bank.einsatzErhoehen(20);
+			System.out.println("Ihr Einsatz : " + Bank.getEinsatz());
+		}
+		if (ae.getSource().equals(getAufgeben())) {
+			System.out.println("test");
 		}
 	}
 
