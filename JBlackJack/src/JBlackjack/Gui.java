@@ -2,13 +2,17 @@ package JBlackjack;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 public class Gui extends JFrame implements ActionListener {
@@ -21,13 +25,16 @@ public class Gui extends JFrame implements ActionListener {
 	JPanel Navigation;
 	JLabel label;
 	JPanel panel;
+	JPanel hand;
+	int i = 0;
 
 	public Gui() {
 		panel = new JPanel();
 		label = new JLabel();
+		hand = new JPanel();
 		// JFrame Eigenschaften
 		setSize(1200, 1000);
-		getContentPane().setBackground(new Color(10, 108, 3));
+//		getContentPane().setBackground(new Color(10, 108, 3));
 		setTitle("JBlackJack");
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,51 +50,66 @@ public class Gui extends JFrame implements ActionListener {
 		Aufgeben.addActionListener(this);
 		Verlassen.addActionListener(this);
 
-		panel.setLayout(new FlowLayout());
-		
-		panel.add(Karte,BorderLayout.EAST);
-		panel.add(Einsatz,BorderLayout.NORTH);
-		panel.add(Aufgeben,BorderLayout.SOUTH);
+		// panel.setLayout(new Gui());
 
+		panel.add(Karte, BorderLayout.EAST);
+		panel.add(Einsatz, BorderLayout.NORTH);
+		panel.add(Aufgeben, BorderLayout.SOUTH);
+		panel.setBackground(new Color(10, 108, 3));
 		panel.add(label);
-		this.add(panel);
-	}
+		this.add(panel, BorderLayout.SOUTH);
 
-	public void actionPermormed(ActionEvent e) {
-		if (e.getSource().equals("Karte nehmen")) {
-			System.out.println("HI");
-		}
+		// final Icon newImageIcon =
+		// loadIcon(Kartenstapel.obersteKarte.getName()+".jpg");
+		// JMenuItem newMenuItem =new JMenuItem(newImageIcon);
+		// panel.add(newMenuItem, BorderLayout.CENTER);
 	}
 
 	public static void main(String[] args) {
+
 		Gui bl = new Gui();
 		bl.setVisible(true);
 	}
 
-	// private static Icon loadIcon(String iconName) {
-	// final URL resource = Gui.class.getResource("/images/" + iconName);
-	//
-	// if (resource == null) {
-	//
-	// // TODO Replace by logger
-	//
-	// System.err.println("Error in " + Gui.class.getName()
-	// + ": Icon /images/" + iconName + " could not be loaded.");
-	// return new ImageIcon();
-	// }
-	// return new ImageIcon(resource);
-	// }
-
 	public void actionPerformed(ActionEvent ae) {
-		if (ae.getSource() == this.Karte) {
-			System.out.println("Peter");
-		} else if (ae.getSource().equals(getEinsatz())) {
-			label.setText("Button 2 wurde betätigt");
+		
+		if (i == 0) {
+			Kartenstapel.stapelGenerieren();
 			Spieler.spieler_kartenehmen();
-		} else if (ae.getSource() == this.Aufgeben) {
-			label.setText(("Button 3 wurde betätigt"));
-			Spieler.spieler_kartenehmen();
+			final Icon newImageIcon = loadIcon("Spade 8.jpg");
+			JMenuItem newMenuItem = new JMenuItem(newImageIcon);
+			panel.add(newMenuItem, BorderLayout.CENTER);
+			i++;
+
+		} else {
+			
+			if (ae.getSource().equals(getKarte())) {
+				final Icon oberstekarte = loadIcon("Spade 8.jpg");
+				JMenuItem newMenuItem = new JMenuItem(oberstekarte);
+				panel.add(newMenuItem, BorderLayout.CENTER);
+			}
+			if (ae.getSource().equals(getEinsatz())) {
+//				Kartenstapel.stapelGenerieren();
+				Spieler.spieler_kartenehmen();
+			}
+			if (ae.getSource().equals(getAufgeben())) {
+				System.out.println("test");
+			}
 		}
+	}
+
+	private static Icon loadIcon(String iconName) {
+		final URL resource = Gui.class.getResource("/images/" + iconName);
+
+		if (resource == null) {
+
+			// TODO Replace by logger
+
+			System.err.println("Error in " + Gui.class.getName()
+					+ ": Icon ../images/" + iconName + " could not be loaded.");
+			return new ImageIcon();
+		}
+		return new ImageIcon(resource);
 	}
 
 	public JButton getKarte() {
