@@ -23,15 +23,16 @@ public class Gui extends JFrame implements ActionListener {
 	JButton Verlassen;
 	JPanel Buttons;
 	JPanel Navigation;
-	JLabel label;
 	JPanel panel;
-	JPanel hand;
+	static JPanel hand_spieler;
+	JLabel label;
 	int i = 0;
 
 	public Gui() {
 		panel = new JPanel();
 		label = new JLabel();
-		hand = new JPanel();
+		hand_spieler = new JPanel();
+		Navigation = new JPanel();
 		// JFrame Eigenschaften
 		setSize(1200, 1000);
 		// getContentPane().setBackground(new Color(10, 108, 3));
@@ -41,7 +42,7 @@ public class Gui extends JFrame implements ActionListener {
 		setVisible(true);
 
 		Karte = new JButton("Karte nehmen");
-		Einsatz = new JButton("Einsatz erhöhen");
+		Einsatz = new JButton("Einsatz erhöhen [+20]");
 		Verlassen = new JButton("Verlassen");
 		Aufgeben = new JButton("Aufgeben");
 
@@ -50,8 +51,6 @@ public class Gui extends JFrame implements ActionListener {
 		Aufgeben.addActionListener(this);
 		Verlassen.addActionListener(this);
 
-		// panel.setLayout(new Gui());
-
 		panel.add(Karte, BorderLayout.EAST);
 		panel.add(Einsatz, BorderLayout.NORTH);
 		panel.add(Aufgeben, BorderLayout.SOUTH);
@@ -59,14 +58,21 @@ public class Gui extends JFrame implements ActionListener {
 		panel.add(label);
 		this.add(panel, BorderLayout.SOUTH);
 
+		Navigation.add(Verlassen, BorderLayout.EAST);
+		Navigation.setBackground(new Color(10, 108, 3));
+		this.add(Navigation, BorderLayout.EAST);
+
 		// final Icon newImageIcon =
-		// loadIcon(Kartenstapel.obersteKarte.getName()+".jpg");
-		// JMenuItem newMenuItem =new JMenuItem(newImageIcon);
-		// panel.add(newMenuItem, BorderLayout.CENTER);
+		// loadIcon(Kartenstapel.obersteKarte.getName()+ ".jpg");
+		// JMenuItem newMenuItem = new JMenuItem(newImageIcon);
+		hand_spieler.setBackground(new Color(10, 108, 3));
+		//
+		// hand_spieler.add(newMenuItem, BorderLayout.CENTER);
+		this.add(hand_spieler, BorderLayout.CENTER);
 	}
 
 	public static void main(String[] args) {
-
+		Kartenstapel.stapelGenerieren();
 		Gui bl = new Gui();
 		bl.setVisible(true);
 	}
@@ -78,25 +84,38 @@ public class Gui extends JFrame implements ActionListener {
 				System.out.println("Ihr Einsatz : " + Bank.getEinsatz());
 				Kartenstapel.stapelGenerieren();
 				Spieler.spieler_kartenehmen();
-				final Icon newImageIcon = loadIcon("Spade 8.jpg");
+				final Icon newImageIcon = loadIcon(Kartenstapel.obersteKarte
+						.getName() + ".jpg");
 				JMenuItem newMenuItem = new JMenuItem(newImageIcon);
-				panel.add(newMenuItem, BorderLayout.CENTER);
+				hand_spieler.add(newMenuItem, BorderLayout.CENTER);
+				newMenuItem.setBackground(new Color(10, 108, 3));
+				this.add(hand_spieler, BorderLayout.CENTER);
+				revalidate();
+				repaint();
+
 				i++;
 			} else {
 				System.out.println("Ihr Einsatz : " + Bank.getEinsatz());
 				Spieler.spieler_kartenehmen();
-				final Icon oberstekarte = loadIcon("Spade 8.jpg");
-				JMenuItem newMenuItem = new JMenuItem(oberstekarte);
-				panel.add(newMenuItem, BorderLayout.CENTER);
+				final Icon newImageIcon = loadIcon(Kartenstapel.obersteKarte
+						.getName() + ".jpg");
+				JMenuItem newMenuItem = new JMenuItem(newImageIcon);
+				hand_spieler.add(newMenuItem, BorderLayout.CENTER);
+				newMenuItem.setBackground(new Color(10, 108, 3));
+				this.add(hand_spieler, BorderLayout.CENTER);
+				revalidate();
+				repaint();
 			}
 		}
 		if (ae.getSource().equals(getEinsatz())) {
-
 			Bank.einsatzErhoehen(20);
 			System.out.println("Ihr Einsatz : " + Bank.getEinsatz());
 		}
 		if (ae.getSource().equals(getAufgeben())) {
-			System.out.println("test");
+			System.out.println("Aufgeben");
+		}
+		if (ae.getSource().equals(getVerlassen())) {
+			System.exit(0);
 		}
 	}
 
@@ -104,11 +123,9 @@ public class Gui extends JFrame implements ActionListener {
 		final URL resource = Gui.class.getResource("/images/" + iconName);
 
 		if (resource == null) {
-
 			// TODO Replace by logger
-
 			System.err.println("Error in " + Gui.class.getName()
-					+ ": Icon ../images/" + iconName + " could not be loaded.");
+					+ ": Icon /images/" + iconName + " could not be loaded.");
 			return new ImageIcon();
 		}
 		return new ImageIcon(resource);
