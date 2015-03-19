@@ -29,23 +29,12 @@ public class Spieler extends Person {
 		System.out.println(getSpielerHand());
 		System.out.println(getspielerKartenwert());
 		System.out.println();
-		if (Dealer.dealerkartenwert <= 17) {
-			Dealer.dealer_kartenehmen();
-		} else {
-			Bank.gewinnerErmitteln();
-		}
 	}
 
 	// Getter und Settermethoden
 	public static int getspielerKartenwert() {
-		spielerkartenwert = spielerkartenwert
-				+ Kartenstapel.obersteKarte.getWert();
-		if (spielerkartenwert > 21) {
-			spielerkartenwert = 0;
+		spielerkartenwert = spielerkartenwert+ Kartenstapel.obersteKarte.getWert();
 			return spielerkartenwert;
-		} else {
-			return spielerkartenwert;
-		}
 	}
 
 	public static void setspielerkartenwert(int spielerkartenwert) {

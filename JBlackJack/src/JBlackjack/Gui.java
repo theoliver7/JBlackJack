@@ -2,7 +2,7 @@ package JBlackjack;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Gui extends JFrame implements ActionListener {
@@ -24,7 +25,10 @@ public class Gui extends JFrame implements ActionListener {
 	JPanel Buttons;
 	JPanel Navigation;
 	JPanel panel;
-	static JPanel hand_spieler;
+	JPanel Einsatz_Panel;
+	JLabel Einsatz_Label;
+	static JPanel hand_spieler ;
+	static JPanel hand_dealer ;
 	JLabel label;
 	int i = 0;
 
@@ -32,10 +36,12 @@ public class Gui extends JFrame implements ActionListener {
 		panel = new JPanel();
 		label = new JLabel();
 		hand_spieler = new JPanel();
+		hand_dealer = new JPanel();
 		Navigation = new JPanel();
+		
 		// JFrame Eigenschaften
+		
 		setSize(1200, 1000);
-		// getContentPane().setBackground(new Color(10, 108, 3));
 		setTitle("JBlackJack");
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -62,60 +68,73 @@ public class Gui extends JFrame implements ActionListener {
 		Navigation.setBackground(new Color(10, 108, 3));
 		this.add(Navigation, BorderLayout.EAST);
 
-		// final Icon newImageIcon =
-		// loadIcon(Kartenstapel.obersteKarte.getName()+ ".jpg");
-		// JMenuItem newMenuItem = new JMenuItem(newImageIcon);
 		hand_spieler.setBackground(new Color(10, 108, 3));
-		//
-		// hand_spieler.add(newMenuItem, BorderLayout.CENTER);
-		this.add(hand_spieler, BorderLayout.CENTER);
+		this.add(hand_spieler, FlowLayout.LEFT);
+
+		hand_dealer.setBackground(new Color(10, 108, 3));
+		this.add(hand_dealer, FlowLayout.RIGHT);
+		
+		Einsatz_Panel = new JPanel();
+        Einsatz_Label= new JLabel();
+        Einsatz_Label.setText(String.valueOf("Einsatz: " + Bank.getEinsatz()));
+        Einsatz_Panel.add(Einsatz_Label, BorderLayout.EAST);
+        Einsatz_Panel.setBackground(new Color(10, 108, 3));
+        this.add(Einsatz_Panel, BorderLayout.WEST);
+
 	}
 
 	public static void main(String[] args) {
-		Kartenstapel.stapelGenerieren();
 		Gui bl = new Gui();
 		bl.setVisible(true);
 	}
 
 	public void actionPerformed(ActionEvent ae) {
-
 		if (ae.getSource().equals(getKarte())) {
-			if (i == 0) {
-				System.out.println("Ihr Einsatz : " + Bank.getEinsatz());
-				Kartenstapel.stapelGenerieren();
-				Spieler.spieler_kartenehmen();
-				final Icon newImageIcon = loadIcon(Kartenstapel.obersteKarte
-						.getName() + ".jpg");
-				JMenuItem newMenuItem = new JMenuItem(newImageIcon);
-				hand_spieler.add(newMenuItem, BorderLayout.CENTER);
-				newMenuItem.setBackground(new Color(10, 108, 3));
-				this.add(hand_spieler, BorderLayout.CENTER);
-				revalidate();
-				repaint();
 
-				i++;
-			} else {
-				System.out.println("Ihr Einsatz : " + Bank.getEinsatz());
-				Spieler.spieler_kartenehmen();
-				final Icon newImageIcon = loadIcon(Kartenstapel.obersteKarte
-						.getName() + ".jpg");
-				JMenuItem newMenuItem = new JMenuItem(newImageIcon);
-				hand_spieler.add(newMenuItem, BorderLayout.CENTER);
-				newMenuItem.setBackground(new Color(10, 108, 3));
-				this.add(hand_spieler, BorderLayout.CENTER);
-				revalidate();
-				repaint();
-			}
+			/*
+			 * Das Kartenstapel wird generiert und die Karte die der Spieler
+			 * nimmt wird auf dem Frame abgebildet
+			 */
+			System.out.println("Ihr Einsatz : " + Bank.getEinsatz());
+			Kartenstapel.stapelGenerieren();
+			Spieler.spieler_kartenehmen();
+			final Icon newImageIcon = loadIcon(Kartenstapel.obersteKarte.getName() + ".jpg");
+			JMenuItem newMenuItem = new JMenuItem(newImageIcon);
+			hand_spieler.add(newMenuItem, FlowLayout.LEFT);
+			newMenuItem.setBackground(new Color(10, 108, 3));
+			this.add(hand_spieler, FlowLayout.LEFT);
+			revalidate();
+			repaint();
+			/*
+			 * Der Dealer nimmt eine Karte, welche auf dem JFrame abgebildet
+			 * wird
+			 */
+			Dealer.dealer_kartenehmen();
+			final Icon newImageIcon_2 = loadIcon(Kartenstapel.obersteKarte.getName() + ".jpg");
+			JMenuItem newMenuItem_2 = new JMenuItem(newImageIcon_2);
+			hand_spieler.add(newMenuItem_2, FlowLayout.RIGHT);
+			newMenuItem_2.setBackground(new Color(10, 108, 3));
+			this.add(hand_dealer, FlowLayout.RIGHT);
+			revalidate();
+			repaint();
 		}
+
 		if (ae.getSource().equals(getEinsatz())) {
 			Bank.einsatzErhoehen(20);
-			System.out.println("Ihr Einsatz : " + Bank.getEinsatz());
+			Einsatz_Label.setText("Einsatz: " + String.valueOf(Bank.getEinsatz()));
 		}
 		if (ae.getSource().equals(getAufgeben())) {
 			System.out.println("Aufgeben");
 		}
 		if (ae.getSource().equals(getVerlassen())) {
-			System.exit(0);
+			int eingabe = JOptionPane.showConfirmDialog(null,
+                    "Wollen Sie das Spiel wirklich verlassen?",
+                    "Verlassen?",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE);
+			if(eingabe == JOptionPane.YES_OPTION){
+				System.exit(0);
+			}
 		}
 	}
 

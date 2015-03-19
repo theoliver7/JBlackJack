@@ -20,7 +20,6 @@ public class Dealer extends Person {
 		System.out.println(getDealerHand());
 		System.out.println(getdealerKartenwert());
 		System.out.println();
-		Bank.gewinnerErmitteln();
 	}
 
 public static ArrayList<Karte> getDealerHand() {
@@ -41,13 +40,7 @@ public static ArrayList<Karte> getDealerHand() {
 
 	public static int getdealerKartenwert() {
 		dealerkartenwert = dealerkartenwert + Kartenstapel.obersteKarte.getWert();
-		if (dealerkartenwert > 21) {
-			dealerkartenwert = 0;
 			return dealerkartenwert;
-		} else {
-			return dealerkartenwert;
-		}
-
 	}
 
 	public static void setDealerkartenwert(int dealerkartenwert) {

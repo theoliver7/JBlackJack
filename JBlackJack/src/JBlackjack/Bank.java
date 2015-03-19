@@ -3,14 +3,13 @@ package JBlackjack;
 public class Bank {
 	// Variablen deklarieren
 	private static int kontostand = 500;
-	private static int Einsatz = 0;
+	private static int Einsatz = 20;
 	// Methoden
 
 	public static void gewinnerErmitteln() {
 		int dealer = Dealer.getdealerKartenwert();
 		int spieler = Spieler.getspielerKartenwert();
 
-		
 		if (dealer <= spieler) {
 			System.out.println("Der Spieler hat gewonnen");
 			kontostandanpassen(Einsatz);
@@ -43,7 +42,7 @@ public class Bank {
 	/*
 	 * Getter und Settermethoden
 	 */
-	public int getKontostand() {
+	public static int getKontostand() {
 		return kontostand;
 	}
 
