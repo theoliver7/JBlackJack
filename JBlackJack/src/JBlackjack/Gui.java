@@ -62,7 +62,7 @@ public class Gui extends JFrame implements ActionListener {
 		// final Icon newImageIcon =
 		// loadIcon(Kartenstapel.obersteKarte.getName()+".jpg");
 		// JMenuItem newMenuItem =new JMenuItem(newImageIcon);
-		// panel.add(newMenuItem, BorderLayout.CENTER);
+		// panel.add(newMenuItem, BorderLayout.CENTER); 
 	}
 
 	public static void main(String[] args) {
