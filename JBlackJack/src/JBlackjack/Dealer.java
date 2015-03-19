@@ -14,15 +14,12 @@ public class Dealer extends Person {
 	}
 
 	public static void dealer_kartenehmen() {
-<<<<<<< HEAD
 		Kartenstapel.obersteKarte = Kartenstapel.getKartenstappel().get(0);
 		Kartenstapel.getKartenstappel().remove(Kartenstapel.obersteKarte);
 		System.out.println("Dealer :");
 		System.out.println(getDealerHand());
 		System.out.println(getdealerKartenwert());
 		System.out.println();
-		 }
-=======
 		if (dealerkartenwert <= 17) {
 			Kartenstapel.obersteKarte = Kartenstapel.getKartenstappel().get(0);
 			Kartenstapel.getKartenstappel().remove(Kartenstapel.obersteKarte);
@@ -38,11 +35,9 @@ public class Dealer extends Person {
 			System.out.println();
 			Bank.gewinnerErmitteln();
 		}
-
 	}
->>>>>>> ba6d98c09266e5b82cd7ff4d3dbb997f89945929
 
-	public static ArrayList<Karte> getDealerHand() {
+public static ArrayList<Karte> getDealerHand() {
 		dealerHand.add(Kartenstapel.obersteKarte);
 		int wert;
 		wert = Kartenstapel.obersteKarte.getWert();

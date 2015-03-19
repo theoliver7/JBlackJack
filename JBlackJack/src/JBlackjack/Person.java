@@ -9,10 +9,6 @@ public abstract class Person {
 	// Methoden
 	public static void main(String[] args) {
 		Kartenstapel.stapelGenerieren();
-<<<<<<< HEAD
-		
-=======
->>>>>>> ba6d98c09266e5b82cd7ff4d3dbb997f89945929
 		Spieler Oliver = new Spieler();
 		Dealer Miguel = new Dealer();
 		
