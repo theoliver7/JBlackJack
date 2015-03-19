@@ -5,8 +5,6 @@ import java.util.ArrayList;
 
 @SuppressWarnings("unused")
 public abstract class Person {
-	
-	
 	static ArrayList<Karte> aktuelleHand = new ArrayList<Karte>();
 	// Methoden
 	public static void main(String[] args) {
