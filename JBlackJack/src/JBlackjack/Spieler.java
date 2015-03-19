@@ -23,22 +23,18 @@ public class Spieler extends Person {
 	}
 
 	public static void spieler_kartenehmen() {
-		if (spielerkartenwert <= Dealer.dealerkartenwert) {
-			Kartenstapel.obersteKarte = Kartenstapel.getKartenstappel().get(0);
-			Kartenstapel.getKartenstappel().remove(Kartenstapel.obersteKarte);
-			System.out.println("Spieler : ");
-			System.out.println(getSpielerHand());
-			System.out.println(getspielerKartenwert());
-			System.out.println();
-			if (Dealer.dealerkartenwert <= 21) {
-				Dealer.dealer_kartenehmen();
-			}
-		} else {
-			Dealer.setDealerkartenwert(0);
-			System.out.println();
+		Kartenstapel.obersteKarte = Kartenstapel.getKartenstappel().get(0);
+		Kartenstapel.getKartenstappel().remove(Kartenstapel.obersteKarte);
+		System.out.println("Spieler : ");
+		System.out.println(getSpielerHand());
+		System.out.println(getspielerKartenwert());
+		System.out.println();if (spielerkartenwert<21) 
+		
+		if (Dealer.dealerkartenwert <= 17 ) {	
+			Dealer.dealer_kartenehmen();
+			} else {
 			Bank.gewinnerErmitteln();
 		}
-
 	}
 
 	// Getter und Settermethoden

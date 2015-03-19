@@ -7,7 +7,6 @@ import java.util.ArrayList;
 public abstract class Person {
 	
 	
-	
 	static ArrayList<Karte> aktuelleHand = new ArrayList<Karte>();
 	// Methoden
 	public static void main(String[] args) {
@@ -16,13 +15,25 @@ public abstract class Person {
 		Spieler Oliver = new Spieler();
 		Dealer Miguel = new Dealer();
 		
-		Dealer.dealer_kartenehmen();
+		Spieler.spieler_kartenehmen();
+		Spieler.spieler_kartenehmen();
+
+		Spieler.spieler_kartenehmen();
+
 	}
 
 	public void verwerfen() {
 	}
 
-	public void assUeberpruefung() {
+	public static int assUeberpruefung(int wert) {
+		String ass_ueberpruefung;
+		if (wert == 1) {
+			System.out.println("Ass = true");
+			ass_ueberpruefung = "true";
+		} else {			
+			ass_ueberpruefung = "false";
+		}
+		return wert;
 	}
 
 	public void wertueberpruefung() {

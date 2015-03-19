@@ -2,12 +2,11 @@ package JBlackjack;
 
 import java.util.ArrayList;
 
-@SuppressWarnings("unused")
 public class Dealer extends Person {
 	private boolean entscheidung;
 	static ArrayList<Karte> dealerHand = new ArrayList<Karte>();
 	static int dealerkartenwert = 0;
-	private int Drop_the_Supression;
+	private static String nummer;
 
 	public boolean entscheiden_dealer() {
 
@@ -15,26 +14,19 @@ public class Dealer extends Person {
 	}
 
 	public static void dealer_kartenehmen() {
-		if (dealerkartenwert <= 17) {
-			Kartenstapel.obersteKarte = Kartenstapel.getKartenstappel().get(0);
-			Kartenstapel.getKartenstappel().remove(Kartenstapel.obersteKarte);
-			System.out.println("Dealer :");
-			System.out.println(getDealerHand());
-			System.out.println(getdealerKartenwert());
-			System.out.println();
-			if (Spieler.spielerkartenwert <= 21) {
-				Spieler.spieler_kartenehmen();
-			}
-		} else {
-			Spieler.setspielerkartenwert(0);
-			System.out.println();
-			Bank.gewinnerErmitteln();
-		}
-
-	}
+		Kartenstapel.obersteKarte = Kartenstapel.getKartenstappel().get(0);
+		Kartenstapel.getKartenstappel().remove(Kartenstapel.obersteKarte);
+		System.out.println("Dealer :");
+		System.out.println(getDealerHand());
+		System.out.println(getdealerKartenwert());
+		System.out.println();
+		 }
 
 	public static ArrayList<Karte> getDealerHand() {
 		dealerHand.add(Kartenstapel.obersteKarte);
+		int wert;
+		wert = Kartenstapel.obersteKarte.getWert();
+		Person.assUeberpruefung(wert);
 		return dealerHand;
 	}
 

@@ -6,6 +6,7 @@ import java.util.Random;
 public class Karte {
 	private String name;
 	private int wert;
+	private static String nummer;
 	
 
 	public int getWert() {
@@ -16,8 +17,8 @@ public class Karte {
 		this.wert = wert;
 	}
 
-	public Karte(String string, String string2, int wert) {
-		this.setName(string + " " + string2 + " " + wert);
+	public Karte(String string, String nummer, int wert) {
+		this.setName(string + " " + nummer + " " + wert);
 		this.setWert(wert);
 		
 	}
@@ -65,5 +66,13 @@ public class Karte {
 		for (Karte i:Kartenstappel){	
 			System.out.println(i);
 		}
+	}
+
+	public String getNummer() {
+		return nummer;
+	}
+
+	public static void setNummer(String nummer) {
+		Karte.nummer = nummer;
 	}
 }
