@@ -25,7 +25,7 @@ public class Dealer extends Person {
 			if (Spieler.spielerkartenwert <= 21) {
 				Spieler.spieler_kartenehmen();
 			}
-		} else {
+		} else if (Spieler.spielerkartenwert >= 21) {
 			Spieler.setspielerkartenwert(0);
 			System.out.println();
 			Bank.gewinnerErmitteln();
@@ -47,8 +47,7 @@ public class Dealer extends Person {
 	}
 
 	public static int getdealerKartenwert() {
-		dealerkartenwert = dealerkartenwert
-				+ Kartenstapel.obersteKarte.getWert();
+		dealerkartenwert = dealerkartenwert + Kartenstapel.obersteKarte.getWert();
 		if (dealerkartenwert > 21) {
 			dealerkartenwert = 0;
 			return dealerkartenwert;

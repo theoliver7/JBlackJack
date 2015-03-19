@@ -30,12 +30,6 @@ public class Spieler extends Person {
 			System.out.println(getSpielerHand());
 			System.out.println(getspielerKartenwert());
 			System.out.println();
-			if (Dealer.dealerkartenwert <= 21) {
-				Dealer.dealer_kartenehmen();
-			}
-		} else {
-			Dealer.setDealerkartenwert(0);
-			System.out.println();
 			Bank.gewinnerErmitteln();
 		}
 
@@ -82,3 +76,10 @@ public class Spieler extends Person {
 		this.spielbeenden = spielbeenden;
 	}
 }
+
+
+
+
+
+
+
