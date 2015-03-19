@@ -13,9 +13,7 @@ public abstract class Person {
 		Dealer Miguel = new Dealer();
 		
 		Spieler.spieler_kartenehmen();
-		Spieler.spieler_kartenehmen();
 
-		Spieler.spieler_kartenehmen();
 
 	}
 

@@ -20,21 +20,7 @@ public class Dealer extends Person {
 		System.out.println(getDealerHand());
 		System.out.println(getdealerKartenwert());
 		System.out.println();
-		if (dealerkartenwert <= 17) {
-			Kartenstapel.obersteKarte = Kartenstapel.getKartenstappel().get(0);
-			Kartenstapel.getKartenstappel().remove(Kartenstapel.obersteKarte);
-			System.out.println("Dealer :");
-			System.out.println(getDealerHand());
-			System.out.println(getdealerKartenwert());
-			System.out.println();
-			if (Spieler.spielerkartenwert <= 21) {
-				Spieler.spieler_kartenehmen();
-			}
-		} else if (Spieler.spielerkartenwert >= 21) {
-			Spieler.setspielerkartenwert(0);
-			System.out.println();
-			Bank.gewinnerErmitteln();
-		}
+		Bank.gewinnerErmitteln();
 	}
 
 public static ArrayList<Karte> getDealerHand() {
