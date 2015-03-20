@@ -27,25 +27,18 @@ public class Spieler extends Person {
 		Kartenstapel.getKartenstappel().remove(Kartenstapel.obersteKarte);
 		System.out.println("Spieler : ");
 		System.out.println(getSpielerHand());
-		System.out.println(getspielerKartenwert());
+		System.out.println(setspielerKartenwert());
 		System.out.println();
 	}
 
 	// Getter und Settermethoden
 	public static int getspielerKartenwert() {
-		spielerKartenwert = spielerKartenwert+ Kartenstapel.obersteKarte.getWert();
-		spielerKartenwert = spielerKartenwert
-				+ Kartenstapel.obersteKarte.getWert();
-		if (spielerKartenwert > 21) {
-			spielerKartenwert = 0;
 			return spielerKartenwert;
-		} else {
-			return spielerKartenwert;
-		}
 	}
 
-	public static void setSpielerKartenwert(int spielerKartenwert) {
-		Spieler.spielerKartenwert = spielerKartenwert;
+	public static int setspielerKartenwert() {
+		spielerKartenwert = spielerKartenwert + Kartenstapel.obersteKarte.getWert();
+		return spielerKartenwert;
 	}
 
 	public static ArrayList<Karte> getSpielerHand() {

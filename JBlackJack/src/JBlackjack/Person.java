@@ -13,7 +13,7 @@ public abstract class Person {
 		Spieler Oliver = new Spieler();
 		Dealer Miguel = new Dealer();
 
-		Spieler.spieler_kartenehmen();
+		Dealer.dealer_kartenehmen();
 	}
 
 	public void verwerfen() {
