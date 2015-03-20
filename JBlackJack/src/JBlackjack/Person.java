@@ -8,13 +8,13 @@ public abstract class Person {
 	static ArrayList<Karte> aktuelleHand = new ArrayList<Karte>();
 
 	// Methoden
-	public static void main(String[] args) {
-		Kartenstapel.stapelGenerieren();
-		Spieler Oliver = new Spieler();
-		Dealer Miguel = new Dealer();
-
-		Dealer.dealer_kartenehmen();
-	}
+//	public static void main(String[] args) {
+//		Kartenstapel.stapelGenerieren();
+//		Spieler Oliver = new Spieler();
+//		Dealer Miguel = new Dealer();
+//
+//		Dealer.dealer_kartenehmen();
+//	}
 
 	public void verwerfen() {
 	}

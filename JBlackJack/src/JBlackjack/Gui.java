@@ -76,7 +76,7 @@ public class Gui extends JFrame implements ActionListener {
 		Weiter = new JButton("Weiter");
 
 		// JFrame Eigenschaften
-		setSize(1200, 1000);
+		setSize(800, 700);
 		setTitle("JBlackJack");
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -131,6 +131,10 @@ public class Gui extends JFrame implements ActionListener {
 		info.setBackground(new Color(10, 108, 3));
 		this.add(info, BorderLayout.NORTH);
 
+		if(Spieler.getspielerKartenwert()> 0 && Dealer.getdealerKartenwert()>0){
+			beenden.setEnabled(true);
+		}
+		
 	}
 
 	public static void main(String[] args) {
@@ -203,9 +207,7 @@ public class Gui extends JFrame implements ActionListener {
 
 		}
 		if (ae.getSource().equals(getVerlassen())) {
-			int eingabe = JOptionPane.showConfirmDialog(null,
-					"Wollen Sie das Spiel wirklich verlassen?", "Verlassen?",
-					JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+			int eingabe = JOptionPane.showConfirmDialog(null,"Wollen Sie das Spiel wirklich verlassen?", "Verlassen?",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 			if (eingabe == JOptionPane.YES_OPTION) {
 				System.exit(0);
 			}
