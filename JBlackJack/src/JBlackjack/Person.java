@@ -25,7 +25,7 @@ public abstract class Person {
 
 	public static int assUeberpruefung(int wert) {
 		String ass_ueberpruefung;
-		if (wert == 1) {
+		if (wert == 11) {
 			System.out.println("Ass = true");
 			ass_ueberpruefung = "true";
 		} else {

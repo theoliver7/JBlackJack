@@ -6,7 +6,7 @@ import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.ImageObserver;
+
 import java.net.URL;
 
 import javax.swing.Icon;
@@ -173,8 +173,12 @@ public class Gui extends JFrame implements ActionListener {
 					repaint();
 				}
 			} else {
-				Weiter.setEnabled(false);
-				Karte.setEnabled(false);
+				if (Spieler.getspielerKartenwert() <= 20) {
+					Karte.setEnabled(true);
+				} else {
+					Weiter.setEnabled(false);
+					Karte.setEnabled(false);
+				}
 			}
 		}
 		if (ae.getSource().equals(getEinsatz())) {
@@ -259,8 +263,12 @@ public class Gui extends JFrame implements ActionListener {
 					Weiter.setEnabled(false);
 					Karte.setEnabled(true);
 				} else {
-					Weiter.setEnabled(false);
-					Karte.setEnabled(true);
+					if (Spieler.getspielerKartenwert() <= 20) {
+						Karte.setEnabled(true);
+					} else {
+						Weiter.setEnabled(false);
+						Karte.setEnabled(true);
+					}
 				}
 			}
 		}
