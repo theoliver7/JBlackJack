@@ -29,11 +29,6 @@ public class Spieler extends Person {
 		System.out.println(getSpielerHand());
 		System.out.println(getspielerKartenwert());
 		System.out.println();
-		if (Dealer.dealerkartenwert <= 17) {
-			Dealer.dealer_kartenehmen();
-		} else {
-			Bank.gewinnerErmitteln();
-		}
 	}
 
 	// Getter und Settermethoden

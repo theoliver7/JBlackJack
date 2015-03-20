@@ -21,10 +21,13 @@ public class Gui extends JFrame implements ActionListener {
 	JButton Karte;
 	JButton Einsatz;
 	JButton Aufgeben;
+	JButton Weiter;
 	JButton Verlassen;
 	JPanel Buttons;
 	JPanel Navigation;
 	JPanel panel;
+	JPanel dealerhand;
+	JPanel spielerhand;
 	JPanel Einsatz_Panel;
 	JLabel Einsatz_Label;
 	static JPanel hand_spieler;
@@ -34,6 +37,8 @@ public class Gui extends JFrame implements ActionListener {
 
 	public Gui() {
 		panel = new JPanel();
+		dealerhand= new JPanel();
+		spielerhand= new JPanel();
 		label = new JLabel();
 		hand_spieler = new JPanel();
 		hand_dealer = new JPanel();
@@ -51,15 +56,18 @@ public class Gui extends JFrame implements ActionListener {
 		Einsatz = new JButton("Einsatz erhöhen [+20]");
 		Verlassen = new JButton("Verlassen");
 		Aufgeben = new JButton("Aufgeben");
+		Weiter= new JButton("Weiter");
 
 		Karte.addActionListener(this);
 		Einsatz.addActionListener(this);
 		Aufgeben.addActionListener(this);
 		Verlassen.addActionListener(this);
+		Weiter.addActionListener(this);
 
 		panel.add(Karte, BorderLayout.EAST, FlowLayout.LEFT);
 		panel.add(Einsatz, BorderLayout.NORTH, FlowLayout.CENTER);
 		panel.add(Aufgeben, BorderLayout.SOUTH, FlowLayout.RIGHT);
+		panel.add(Weiter, BorderLayout.EAST, FlowLayout.LEFT);
 		panel.setBackground(new Color(10, 108, 3));
 		panel.add(label);
 		this.add(panel, BorderLayout.SOUTH);
@@ -67,7 +75,13 @@ public class Gui extends JFrame implements ActionListener {
 		Navigation.add(Verlassen, BorderLayout.EAST);
 		Navigation.setBackground(new Color(10, 108, 3));
 		this.add(Navigation, BorderLayout.EAST);
-
+		
+		dealerhand.setBackground(new Color(102, 108, 223));
+		this.add(dealerhand, BorderLayout.NORTH);
+		
+		spielerhand.setBackground(new Color(2, 8, 223));
+		this.add(spielerhand, BorderLayout.CENTER);
+		
 		hand_spieler.setBackground(new Color(10, 108, 3));
 		this.add(hand_spieler, BorderLayout.CENTER);
 
@@ -102,21 +116,15 @@ public class Gui extends JFrame implements ActionListener {
 			JMenuItem newMenuItem = new JMenuItem(newImageIcon);
 			hand_spieler.add(newMenuItem);
 			newMenuItem.setBackground(new Color(10, 108, 3));
-			panel.add(hand_spieler, BorderLayout.NORTH);
+//			panel.add(hand_spieler);
+			spielerhand.add(hand_spieler, BorderLayout.CENTER);
+			this.add(spielerhand, BorderLayout.CENTER);
 			revalidate();
 			repaint();
 			/*
 			 * Der Dealer nimmt eine Karte, welche auf dem JFrame abgebildet
 			 * wird
 			 */
-			Dealer.dealer_kartenehmen();
-			final Icon newImageIcon_2 = loadIcon(Kartenstapel.obersteKarte.getName() + ".jpg");
-			JMenuItem newMenuItem_2 = new JMenuItem(newImageIcon_2);
-			hand_spieler.add(newMenuItem_2);
-			newMenuItem_2.setBackground(new Color(10, 108, 3));
-			this.add(hand_dealer, FlowLayout.CENTER);
-			revalidate();
-			repaint();
 		}
 
 		if (ae.getSource().equals(getEinsatz())) {
@@ -134,6 +142,24 @@ public class Gui extends JFrame implements ActionListener {
 				System.exit(0);
 			}
 		}
+		if (ae.getSource().equals(getWeiter())) {
+			Dealer.dealer_kartenehmen();
+			final Icon newImageIcon_2 = loadIcon(Kartenstapel.obersteKarte.getName() + ".jpg");
+			JMenuItem newMenuItem_2 = new JMenuItem(newImageIcon_2);
+			hand_spieler.add(newMenuItem_2);
+			newMenuItem_2.setBackground(new Color(10, 108, 3));
+			dealerhand.add(hand_dealer);
+			revalidate();
+			repaint();
+		}
+	}
+
+	public JButton getWeiter() {
+		return Weiter;
+	}
+
+	public void setWeiter(JButton weiter) {
+		Weiter = weiter;
 	}
 
 	private static Icon loadIcon(String iconName) {
