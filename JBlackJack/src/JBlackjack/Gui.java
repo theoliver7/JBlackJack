@@ -87,8 +87,8 @@ public class Gui extends JFrame implements ActionListener {
 		hand_dealer.setBorder(new EmptyBorder(10, 10, 100,  0));
 		hand_spieler.setBorder(new EmptyBorder(100, 10, 10, 0) );
 		
-//		this.add(hand_dealer,BorderLayout.CENTER,FlowLayout.LEFT);
-//		this.add(hand_spieler//,BorderLayout.CENTER,FlowLayout.RIGHT);
+		this.add(hand_dealer);
+	this.add(hand_spieler);
 	
 		hand_spieler.setBackground(new Color(10, 108, 3));
 		hand_dealer.setBackground(new Color(10, 108, 3));
