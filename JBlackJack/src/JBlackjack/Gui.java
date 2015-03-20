@@ -22,9 +22,10 @@ public class Gui extends JFrame implements ActionListener {
 	// JButton's
 	JButton Karte;
 	JButton Einsatz;
-	JButton Aufgeben;
+	JButton beenden;
 	JButton Weiter;
 	JButton Verlassen;
+	JButton ass;
 	// JPanel's
 	JPanel Buttons;
 	JPanel Navigation;
@@ -33,11 +34,15 @@ public class Gui extends JFrame implements ActionListener {
 	JPanel Kontostand_Panel;
 	JPanel hand_spieler;
 	JPanel hand_dealer;
+	JPanel info;
 
 	// JLabel's
 	JLabel Einsatz_Label;
 	JLabel Kontostand_Label;
 	JLabel label;
+	JLabel kartenwert_spieler;
+	JLabel kartenwert_dealer;
+	JLabel gewinner;
 
 	// Zähler initialisierung
 	int i = 0;
@@ -52,17 +57,21 @@ public class Gui extends JFrame implements ActionListener {
 		Navigation = new JPanel();
 		Kontostand_Panel = new JPanel();
 		Einsatz_Panel = new JPanel();
-
+		info = new JPanel();
+		
 		// Label Okjekte erstellen
 		Kontostand_Label = new JLabel();
 		label = new JLabel();
 		Einsatz_Label = new JLabel();
+		kartenwert_spieler = new JLabel();
+		kartenwert_dealer = new JLabel();
+		gewinner = new JLabel();
 
 		// Button Objekte erstellen
 		Karte = new JButton("Karte nehmen");
-		Einsatz = new JButton("Einsatz erh�hen [+20]");
+		Einsatz = new JButton("Einsatz erhöhen [+20]");
 		Verlassen = new JButton("Verlassen");
-		Aufgeben = new JButton("Aufgeben");
+		beenden = new JButton("Runde beenden");
 		Weiter = new JButton("Weiter");
 
 		// JFrame Eigenschaften
@@ -75,7 +84,7 @@ public class Gui extends JFrame implements ActionListener {
 		// actionListener den Button's hinzufügen
 		Karte.addActionListener(this);
 		Einsatz.addActionListener(this);
-		Aufgeben.addActionListener(this);
+		beenden.addActionListener(this);
 		Verlassen.addActionListener(this);
 		Weiter.addActionListener(this);
 		Weiter.setEnabled(false);
@@ -83,7 +92,7 @@ public class Gui extends JFrame implements ActionListener {
 		// Buttons dem BefehleMenu hinzufügen
 		menu.add(Karte, BorderLayout.EAST, FlowLayout.LEFT);
 		menu.add(Einsatz, BorderLayout.NORTH, FlowLayout.CENTER);
-		menu.add(Aufgeben, BorderLayout.SOUTH, FlowLayout.RIGHT);
+		menu.add(beenden, BorderLayout.SOUTH, FlowLayout.RIGHT);
 		menu.add(Weiter, BorderLayout.EAST, FlowLayout.LEFT);
 		menu.setBackground(new Color(10, 108, 3));
 		menu.add(label);
@@ -92,11 +101,13 @@ public class Gui extends JFrame implements ActionListener {
 		// Eigenschaften des Dealers
 		hand_dealer.setBorder(new EmptyBorder(100, 10, 10, 0));
 		hand_dealer.setBackground(new Color(10, 108, 3));
+		hand_dealer.add(kartenwert_dealer);
 		this.add(hand_dealer);
 
 		// Eigenschaften des Spielers
 		hand_spieler.setBorder(new EmptyBorder(10, 10, 100, 0));
 		hand_spieler.setBackground(new Color(10, 108, 3));
+		hand_spieler.add(kartenwert_spieler);
 		this.add(hand_spieler);
 
 		// Eigenschaten der Navigation
@@ -105,10 +116,19 @@ public class Gui extends JFrame implements ActionListener {
 		this.add(Navigation, BorderLayout.EAST);
 
 		// Kontostand Eigenschaften
-		Kontostand_Label.setText(String.valueOf("Kontostand: "+ Bank.getKontostand()));
+		Kontostand_Label.setText("Einsatz: "
+				+ String.valueOf(Bank.getEinsatz() + " \n Kontostand: "
+						+ Bank.getKontostand()));
 		Kontostand_Panel.add(Kontostand_Label, BorderLayout.EAST);
 		Kontostand_Panel.setBackground(new Color(10, 108, 3));
+		Kontostand_Panel.add(gewinner);
 		this.add(Kontostand_Panel, BorderLayout.WEST);
+		
+		// Eigenschaften des Info Panels
+		info.add(gewinner,BorderLayout.WEST);
+		info.setBackground(new Color(10, 108, 3));
+		this.add(info, BorderLayout.NORTH);
+		
 	}
 
 	public static void main(String[] args) {
@@ -130,9 +150,13 @@ public class Gui extends JFrame implements ActionListener {
 					System.out.println("Ihr Einsatz : " + Bank.getEinsatz());
 					Kartenstapel.stapelGenerieren();
 					Spieler.spieler_kartenehmen();
-					final Icon newImageIcon = loadIcon(Kartenstapel.obersteKarte.getName() + ".jpg");
+					final Icon newImageIcon = loadIcon(Kartenstapel.obersteKarte
+							.getName() + ".jpg");
 					JMenuItem newMenuItem = new JMenuItem(newImageIcon);
 					hand_spieler.add(newMenuItem);
+					kartenwert_spieler.setText(String
+							.valueOf("Deine Hand hat einen Wert von: "
+									+ Spieler.getspielerKartenwert()));
 					hand_dealer.setBackground(new Color(10, 108, 3));
 					newMenuItem.setBackground(new Color(10, 108, 3));
 					this.add(hand_spieler, BorderLayout.SOUTH);
@@ -160,7 +184,11 @@ public class Gui extends JFrame implements ActionListener {
 			}
 		}
 		if (ae.getSource().equals(getAufgeben())) {
-			System.out.println("Aufgeben");
+			gewinner.setText("Der " + Bank.gewinnerErmitteln() + " hat gewonnen");
+			Kontostand_Label.setText("Einsatz: "
+					+ String.valueOf(Bank.getEinsatz() + " \n Kontostand: "
+							+ Bank.getKontostand()));
+
 		}
 		if (ae.getSource().equals(getVerlassen())) {
 			int eingabe = JOptionPane.showConfirmDialog(null,
@@ -177,10 +205,14 @@ public class Gui extends JFrame implements ActionListener {
 			if ((Dealer.getdealerKartenwert() <= 17)
 					&& (Spieler.getspielerKartenwert() <= 21)) {
 				Dealer.dealer_kartenehmen();
-				final Icon newImageIcon_2 = loadIcon(Kartenstapel.obersteKarte.getName() + ".jpg");
+				final Icon newImageIcon_2 = loadIcon(Kartenstapel.obersteKarte
+						.getName() + ".jpg");
 				JMenuItem newMenuItem_2 = new JMenuItem(newImageIcon_2);
 				hand_dealer.add(newMenuItem_2);
 				newMenuItem_2.setBackground(new Color(10, 108, 3));
+				kartenwert_dealer.setText(String
+						.valueOf("Der Dealer hat eine Hand mit dem Wert: "
+								+ Dealer.getdealerKartenwert()));
 				this.add(hand_dealer);
 				revalidate();
 				repaint();
@@ -231,11 +263,11 @@ public class Gui extends JFrame implements ActionListener {
 	}
 
 	public JButton getAufgeben() {
-		return Aufgeben;
+		return beenden;
 	}
 
 	public void setAufgeben(JButton aufgeben) {
-		Aufgeben = aufgeben;
+		beenden = aufgeben;
 	}
 
 	public JButton getVerlassen() {
