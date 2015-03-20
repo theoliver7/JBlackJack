@@ -6,23 +6,29 @@ public class Bank {
 	private static int Einsatz = 20;
 	// Methoden
 
-	public static void gewinnerErmitteln() {
+	public static String gewinnerErmitteln() {
 		int dealer = Dealer.getdealerKartenwert();
 		int spieler = Spieler.getspielerKartenwert();
-
-		if (dealer <= spieler) {
-			System.out.println("Der Spieler hat gewonnen");
+		String gewinner=null;
+		if (dealer <= spieler || dealer>21) {
+		
 			kontostandanpassen(Einsatz);
 			System.out.println(kontostand);
+			gewinner="Spieler";
+			return gewinner;
 		}
+		
 		else {
-			System.out.println("Der Dealer hat gewonnen");
+			
 			int RAM = Einsatz;
 			Einsatz = Einsatz - Einsatz - Einsatz;
 			kontostandanpassen(Einsatz);
 			Einsatz = RAM;
 			System.out.println(kontostand);
+			gewinner="Dealer";
+			return gewinner;
 		}
+		
 	}
 	public static int einsatzErhoehen(int eingesetzt) {
 		Einsatz = Einsatz + eingesetzt;
