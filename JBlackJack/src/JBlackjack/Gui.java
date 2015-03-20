@@ -173,7 +173,7 @@ public class Gui extends JFrame implements ActionListener {
 					repaint();
 				}
 			} else {
-				if (Spieler.getspielerKartenwert() <= 20) {
+				if (Spieler.getspielerKartenwert(0) <= 20) {
 					Karte.setEnabled(true);
 				} else {
 					Weiter.setEnabled(false);
@@ -263,7 +263,7 @@ public class Gui extends JFrame implements ActionListener {
 					Weiter.setEnabled(false);
 					Karte.setEnabled(true);
 				} else {
-					if (Spieler.getspielerKartenwert() <= 20) {
+					if (Spieler.getspielerKartenwert(0) <= 20) {
 						Karte.setEnabled(true);
 					} else {
 						Weiter.setEnabled(false);
