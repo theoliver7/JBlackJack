@@ -90,8 +90,8 @@ public class Gui extends JFrame implements ActionListener {
 		this.add(menu, BorderLayout.SOUTH);
 
 		// Eigenschaften des Dealers
-		hand_dealer.setBackground(new Color(10, 108, 3));
 		hand_dealer.setBorder(new EmptyBorder(100, 10, 10, 0));
+		hand_dealer.setBackground(new Color(10, 108, 3));
 		this.add(hand_dealer);
 
 		// Eigenschaften des Spielers
@@ -105,18 +105,10 @@ public class Gui extends JFrame implements ActionListener {
 		this.add(Navigation, BorderLayout.EAST);
 
 		// Kontostand Eigenschaften
-		Kontostand_Label.setText(String.valueOf("Kontostand: "
-				+ Bank.getKontostand()));
+		Kontostand_Label.setText(String.valueOf("Kontostand: "+ Bank.getKontostand()));
 		Kontostand_Panel.add(Kontostand_Label, BorderLayout.EAST);
 		Kontostand_Panel.setBackground(new Color(10, 108, 3));
 		this.add(Kontostand_Panel, BorderLayout.WEST);
-
-		// Einsatz Eigenschaften
-		Einsatz_Label.setText(String.valueOf("Einsatz: " + Bank.getEinsatz()));
-		Einsatz_Panel.add(Einsatz_Label);
-		Einsatz_Panel.setBackground(new Color(10, 108, 3));
-		this.add(Einsatz_Panel, BorderLayout.WEST);
-
 	}
 
 	public static void main(String[] args) {
@@ -138,13 +130,13 @@ public class Gui extends JFrame implements ActionListener {
 					System.out.println("Ihr Einsatz : " + Bank.getEinsatz());
 					Kartenstapel.stapelGenerieren();
 					Spieler.spieler_kartenehmen();
-					final Icon newImageIcon = loadIcon(Kartenstapel.obersteKarte
-							.getName() + ".jpg");
+					final Icon newImageIcon = loadIcon(Kartenstapel.obersteKarte.getName() + ".jpg");
 					JMenuItem newMenuItem = new JMenuItem(newImageIcon);
 					hand_spieler.add(newMenuItem);
+					hand_dealer.setBackground(new Color(10, 108, 3));
 					newMenuItem.setBackground(new Color(10, 108, 3));
-					hand_spieler.setBackground(new Color(10, 108, 3));
 					this.add(hand_spieler, BorderLayout.SOUTH);
+					this.add(hand_dealer);
 					i++;
 					Karte.setEnabled(false);
 					Weiter.setEnabled(true);
@@ -188,7 +180,6 @@ public class Gui extends JFrame implements ActionListener {
 				final Icon newImageIcon_2 = loadIcon(Kartenstapel.obersteKarte.getName() + ".jpg");
 				JMenuItem newMenuItem_2 = new JMenuItem(newImageIcon_2);
 				hand_dealer.add(newMenuItem_2);
-				hand_dealer.setBackground(new Color(10, 108, 3));
 				newMenuItem_2.setBackground(new Color(10, 108, 3));
 				this.add(hand_dealer);
 				revalidate();
