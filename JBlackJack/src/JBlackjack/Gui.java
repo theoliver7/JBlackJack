@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 public class Gui extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
@@ -26,10 +27,11 @@ public class Gui extends JFrame implements ActionListener {
 	JPanel Buttons;
 	JPanel Navigation;
 	JPanel panel;
-	JPanel dealerhand;
-	JPanel spielerhand;
+	// JPanel dealerhand;
+	// JPanel spielerhand;
 	JPanel Einsatz_Panel;
 	JLabel Einsatz_Label;
+
 	static JPanel hand_spieler;
 	static JPanel hand_dealer;
 	JLabel label;
@@ -37,12 +39,11 @@ public class Gui extends JFrame implements ActionListener {
 
 	public Gui() {
 		panel = new JPanel();
-		dealerhand= new JPanel();
-		spielerhand= new JPanel();
 		label = new JLabel();
 		hand_spieler = new JPanel();
 		hand_dealer = new JPanel();
 		Navigation = new JPanel();
+		
 
 		// JFrame Eigenschaften
 
@@ -53,10 +54,10 @@ public class Gui extends JFrame implements ActionListener {
 		setVisible(true);
 
 		Karte = new JButton("Karte nehmen");
-		Einsatz = new JButton("Einsatz erhöhen [+20]");
+		Einsatz = new JButton("Einsatz erhï¿½hen [+20]");
 		Verlassen = new JButton("Verlassen");
 		Aufgeben = new JButton("Aufgeben");
-		Weiter= new JButton("Weiter");
+		Weiter = new JButton("Weiter");
 
 		Karte.addActionListener(this);
 		Einsatz.addActionListener(this);
@@ -76,25 +77,21 @@ public class Gui extends JFrame implements ActionListener {
 		Navigation.setBackground(new Color(10, 108, 3));
 		this.add(Navigation, BorderLayout.EAST);
 		
-		dealerhand.setBackground(new Color(102, 108, 223));
-		this.add(dealerhand, BorderLayout.NORTH);
-		
-		spielerhand.setBackground(new Color(2, 8, 223));
-		this.add(spielerhand, BorderLayout.CENTER);
-		
-		hand_spieler.setBackground(new Color(10, 108, 3));
-		this.add(hand_spieler, BorderLayout.CENTER);
-
-		hand_dealer.setBackground(new Color(10, 108, 3));
-		this.add(hand_dealer, BorderLayout.NORTH);
-
 		Einsatz_Panel = new JPanel();
 		Einsatz_Label = new JLabel();
 		Einsatz_Label.setText(String.valueOf("Einsatz: " + Bank.getEinsatz()));
-		Einsatz_Panel.add(Einsatz_Label, BorderLayout.EAST);
+		Einsatz_Panel.add(Einsatz_Label);
 		Einsatz_Panel.setBackground(new Color(10, 108, 3));
 		this.add(Einsatz_Panel, BorderLayout.WEST);
+	
+		hand_dealer.setBorder(new EmptyBorder(10, 10, 100,  0));
+		hand_spieler.setBorder(new EmptyBorder(100, 10, 10, 0) );
 		
+//		this.add(hand_dealer,BorderLayout.CENTER,FlowLayout.LEFT);
+//		this.add(hand_spieler//,BorderLayout.CENTER,FlowLayout.RIGHT);
+	
+		hand_spieler.setBackground(new Color(10, 108, 3));
+		hand_dealer.setBackground(new Color(10, 108, 3));
 	}
 
 	public static void main(String[] args) {
@@ -116,9 +113,10 @@ public class Gui extends JFrame implements ActionListener {
 			JMenuItem newMenuItem = new JMenuItem(newImageIcon);
 			hand_spieler.add(newMenuItem);
 			newMenuItem.setBackground(new Color(10, 108, 3));
-//			panel.add(hand_spieler);
-			spielerhand.add(hand_spieler, BorderLayout.CENTER);
-			this.add(spielerhand, BorderLayout.CENTER);
+			this.add(hand_spieler);
+			
+			// hand_.add(hand_spieler, BorderLayout.CENTER);
+
 			revalidate();
 			repaint();
 			/*
@@ -129,7 +127,8 @@ public class Gui extends JFrame implements ActionListener {
 
 		if (ae.getSource().equals(getEinsatz())) {
 			Bank.einsatzErhoehen(20);
-			Einsatz_Label.setText("Einsatz: "+ String.valueOf(Bank.getEinsatz()));
+			Einsatz_Label.setText("Einsatz: "
+					+ String.valueOf(Bank.getEinsatz()));
 		}
 		if (ae.getSource().equals(getAufgeben())) {
 			System.out.println("Aufgeben");
@@ -144,11 +143,14 @@ public class Gui extends JFrame implements ActionListener {
 		}
 		if (ae.getSource().equals(getWeiter())) {
 			Dealer.dealer_kartenehmen();
-			final Icon newImageIcon_2 = loadIcon(Kartenstapel.obersteKarte.getName() + ".jpg");
+			final Icon newImageIcon_2 = loadIcon(Kartenstapel.obersteKarte
+					.getName() + ".jpg");
 			JMenuItem newMenuItem_2 = new JMenuItem(newImageIcon_2);
-			hand_spieler.add(newMenuItem_2);
+		
+			hand_dealer.add(newMenuItem_2);
 			newMenuItem_2.setBackground(new Color(10, 108, 3));
-			dealerhand.add(hand_dealer);
+			this.add(hand_dealer,BorderLayout.SOUTH);
+			
 			revalidate();
 			repaint();
 		}
