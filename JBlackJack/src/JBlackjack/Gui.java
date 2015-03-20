@@ -149,7 +149,6 @@ public class Gui extends JFrame implements ActionListener {
 			 * Das Kartenstapel wird generiert und die Karte die der Spieler
 			 * nimmt wird auf dem Frame abgebildet
 			 */
-
 			if ((Spieler.getspielerKartenwert() <= 20)
 					&& (Dealer.getdealerKartenwert() <= 21)) {
 				if (i == 0) {
@@ -199,11 +198,11 @@ public class Gui extends JFrame implements ActionListener {
 			}
 		}
 		if (ae.getSource().equals(getAufgeben())) {
-			gewinner.setText("Der " + Bank.gewinnerErmitteln()
-					+ " hat gewonnen");
-			Kontostand_Label.setText("Einsatz: "
-					+ String.valueOf(Bank.getEinsatz() + " \n Kontostand: "
-							+ Bank.getKontostand()));
+			while (Dealer.getdealerKartenwert() <= Spieler.getspielerKartenwert()){
+				Dealer.dealer_kartenehmen();				
+			}
+			gewinner.setText("Der " + Bank.gewinnerErmitteln()+ " hat gewonnen");
+			Kontostand_Label.setText("Einsatz: "+ String.valueOf(Bank.getEinsatz() + " \n Kontostand: "+ Bank.getKontostand()));
 
 		}
 		if (ae.getSource().equals(getVerlassen())) {
