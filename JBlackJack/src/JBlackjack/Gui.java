@@ -131,10 +131,11 @@ public class Gui extends JFrame implements ActionListener {
 		info.setBackground(new Color(10, 108, 3));
 		this.add(info, BorderLayout.NORTH);
 
-		if (Spieler.getspielerKartenwert(0) > 0 && Dealer.getdealerKartenwert(0) > 0) {
+		if (Spieler.getspielerKartenwert(0) > 0
+				&& Dealer.getdealerKartenwert(0) > 0) {
 			beenden.setEnabled(true);
 		}
-		
+
 	}
 
 	public static void main(String[] args) {
@@ -149,17 +150,19 @@ public class Gui extends JFrame implements ActionListener {
 			 * Das Kartenstapel wird generiert und die Karte die der Spieler
 			 * nimmt wird auf dem Frame abgebildet
 			 */
-			if ((Spieler.getspielerKartenwert(0) <= 20)
-					&& (Dealer.getdealerKartenwert(0) <= 21)) {
+			if ((Spieler.getspielerKartenwert(0) <= 20) && (Dealer.getdealerKartenwert(0) <= 21)) {
 				if (i == 0) {
 					System.out.println("Ihr Einsatz : " + Bank.getEinsatz());
 					Kartenstapel.stapelGenerieren();
 					Spieler.spieler_kartenehmen();
-					final Icon newImageIcon = loadIcon(Kartenstapel.obersteKarte.getName() + ".jpg");
+					final Icon newImageIcon = loadIcon(Kartenstapel.obersteKarte
+							.getName() + ".jpg");
 					JMenuItem newMenuItem = new JMenuItem(newImageIcon);
 					hand_spieler.add(newMenuItem);
 					hand_dealer.setBackground(new Color(10, 108, 3));
-					kartenwert_spieler.setText(String.valueOf("Deine Hand hat einen Wert von: "+ Spieler.getspielerKartenwert(0)));
+					kartenwert_spieler.setText(String
+							.valueOf("Deine Hand hat einen Wert von: "
+									+ Spieler.getspielerKartenwert(0)));
 					hand_dealer.setBackground(new Color(10, 108, 3));
 					newMenuItem.setBackground(new Color(10, 108, 3));
 					this.add(hand_spieler, BorderLayout.SOUTH);
@@ -194,40 +197,48 @@ public class Gui extends JFrame implements ActionListener {
 			}
 		}
 		if (ae.getSource().equals(getAufgeben())) {
-			while (Dealer.getdealerKartenwert(0) <= Spieler.getspielerKartenwert(0)){
-				Dealer.dealer_kartenehmen();				
+			while (Dealer.getdealerKartenwert(0) <= Spieler.getspielerKartenwert(0)) {
+				Dealer.dealer_kartenehmen();
+				final Icon newImageIcon_2 = loadIcon(Kartenstapel.obersteKarte.getName() + ".jpg");
+				JMenuItem newMenuItem_2 = new JMenuItem(newImageIcon_2);
+				hand_dealer.add(newMenuItem_2);
+				newMenuItem_2.setBackground(new Color(10, 108, 3));
+				kartenwert_dealer.setText(String.valueOf("Der Dealer hat eine Hand mit dem Wert: "+ Dealer.getdealerKartenwert(0)));
+				this.add(hand_dealer);
+				hand_dealer.add(kartenwert_dealer);
+				revalidate();
+				repaint();
 			}
-			gewinner.setText("Der " + Bank.gewinnerErmitteln()+ " hat gewonnen");
-			Kontostand_Label.setText("Einsatz: "+ String.valueOf(Bank.getEinsatz() + " \n Kontostand: "+ Bank.getKontostand()));
+			gewinner.setText("Der " + Bank.gewinnerErmitteln()
+					+ " hat gewonnen");
+			Kontostand_Label.setText("Einsatz: "
+					+ String.valueOf(Bank.getEinsatz() + " \n Kontostand: "
+							+ Bank.getKontostand()));
 			Kartenstapel.Kartenstappel.clear();
 			Kartenstapel.stapelGenerieren();
 			Dealer.dealerHand.clear();
 			Spieler.spielerHand.clear();
-			
+
 			Container parent = hand_dealer.getParent();
 			parent.remove(hand_dealer);
 			parent.setBackground(new Color(10, 108, 3));
-			
+
 			Container parent_2 = hand_spieler.getParent();
 			parent_2.remove(hand_spieler);
 			parent_2.setBackground(new Color(10, 108, 3));
-			
-			
-		
+
 			hand_dealer.removeAll();
 			hand_spieler.removeAll();
-			
+
 			hand_dealer.updateUI();
 			hand_spieler.updateUI();
-			
-			
-			
+
 			Spieler.getspielerKartenwert(1);
 			Dealer.getdealerKartenwert(1);
-			
+
 			kartenwert_spieler = new JLabel();
 			kartenwert_dealer = new JLabel();
-			
+
 			Weiter.setEnabled(false);
 			Karte.setEnabled(true);
 
@@ -244,25 +255,34 @@ public class Gui extends JFrame implements ActionListener {
 		 * Der Dealer nimmt eine Karte, welche auf dem JFrame abgebildet wird
 		 */
 		if (ae.getSource().equals(getWeiter())) {
-			if ((Dealer.getdealerKartenwert(0) <= 16) || (Dealer.getdealerKartenwert(0) <= Spieler.getspielerKartenwert(0))) {
+			if ((Dealer.getdealerKartenwert(0) <= 16)
+					|| (Dealer.getdealerKartenwert(0) <= Spieler
+							.getspielerKartenwert(0))) {
 
 				/*
 				 * Wenn Spieler mehr als 21 dann abbrechen
 				 */
 				if (Spieler.getspielerKartenwert(0) <= 21) {
 					Dealer.dealer_kartenehmen();
-					final Icon newImageIcon_2 = loadIcon(Kartenstapel.obersteKarte.getName() + ".jpg");
+					final Icon newImageIcon_2 = loadIcon(Kartenstapel.obersteKarte
+							.getName() + ".jpg");
 					JMenuItem newMenuItem_2 = new JMenuItem(newImageIcon_2);
 					hand_dealer.add(newMenuItem_2);
 					newMenuItem_2.setBackground(new Color(10, 108, 3));
-					kartenwert_dealer.setText(String.valueOf("Der Dealer hat eine Hand mit dem Wert: "+ Dealer.getdealerKartenwert(0)));
+					kartenwert_dealer.setText(String
+							.valueOf("Der Dealer hat eine Hand mit dem Wert: "
+									+ Dealer.getdealerKartenwert(0)));
 					this.add(hand_dealer);
 					hand_dealer.add(kartenwert_dealer);
 					revalidate();
 					repaint();
 					i = 0;
 					Weiter.setEnabled(false);
-					Karte.setEnabled(true);
+					if (Spieler.getspielerKartenwert(0) > 22) {
+						Karte.setEnabled(false);
+					} else {
+						Karte.setEnabled(true);
+					}
 				} else {
 					if (Spieler.getspielerKartenwert(0) <= 20) {
 						Karte.setEnabled(true);
@@ -270,6 +290,7 @@ public class Gui extends JFrame implements ActionListener {
 						Weiter.setEnabled(false);
 						Karte.setEnabled(true);
 					}
+					i = 0;
 				}
 			}
 		}
