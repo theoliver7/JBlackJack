@@ -32,12 +32,18 @@ public class Spieler extends Person {
 	}
 
 	// Getter und Settermethoden
-	public static int getspielerKartenwert() {
+	public static int getspielerKartenwert(int veraendern) {
+		if (veraendern == 1) {
+			spielerKartenwert = 0;
 			return spielerKartenwert;
+		} else {
+			return spielerKartenwert;
+		}
 	}
 
 	public static int setspielerKartenwert() {
-		spielerKartenwert = spielerKartenwert + Kartenstapel.obersteKarte.getWert();
+		spielerKartenwert = spielerKartenwert
+				+ Kartenstapel.obersteKarte.getWert();
 		return spielerKartenwert;
 	}
 
@@ -64,6 +70,14 @@ public class Spieler extends Person {
 
 	public void setSpielbeenden(boolean spielbeenden) {
 		this.spielbeenden = spielbeenden;
+	}
+
+	public static String getWeitereKarte() {
+		return weitereKarte;
+	}
+
+	public static void setWeitereKarte(String weitereKarte) {
+		Spieler.weitereKarte = weitereKarte;
 	}
 
 }

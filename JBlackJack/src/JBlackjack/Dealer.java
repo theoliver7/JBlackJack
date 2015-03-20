@@ -17,12 +17,16 @@ public class Dealer extends Person {
 		Kartenstapel.obersteKarte = Kartenstapel.getKartenstappel().get(0);
 		Kartenstapel.getKartenstappel().remove(Kartenstapel.obersteKarte);
 		System.out.println("Dealer :");
-		System.out.println(getDealerHand());
+		System.out.println(setdealerHand());
 		System.out.println(setdealerkKartenwert());
 		System.out.println();
 	}
 
-public static ArrayList<Karte> getDealerHand() {
+public static ArrayList<Karte> getdealerHand(ArrayList<Karte> dealerHand) {
+		return Dealer.dealerHand = dealerHand;
+	}
+
+	public static ArrayList<Karte> setdealerHand() {
 		dealerHand.add(Kartenstapel.obersteKarte);
 		int wert;
 		wert = Kartenstapel.obersteKarte.getWert();
@@ -30,15 +34,16 @@ public static ArrayList<Karte> getDealerHand() {
 		return dealerHand;
 	}
 
-	public static void setDealerHand(ArrayList<Karte> dealerHand) {
-		Dealer.dealerHand = dealerHand;
-	}
-
 	public void neueRunde() {
 
 	}
-	public static int getdealerKartenwert() {
+	public static int getdealerKartenwert(int veraendern) {
+		if (veraendern == 1) {
+			dealerkartenwert = 0;
 			return dealerkartenwert;
+		} else {
+			return dealerkartenwert;
+		}
 	}
 
 	public static int setdealerkKartenwert() {

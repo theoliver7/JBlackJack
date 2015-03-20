@@ -7,8 +7,8 @@ public class Bank {
 	// Methoden
 
 	public static String gewinnerErmitteln() {
-		int dealer = Dealer.getdealerKartenwert();
-		int spieler = Spieler.getspielerKartenwert();
+		int dealer = Dealer.getdealerKartenwert(0);
+		int spieler = Spieler.getspielerKartenwert(0);
 		String gewinner=null;
 		if (dealer <= spieler || dealer>21) {
 		

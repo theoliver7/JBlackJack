@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Kartenstapel {
-	private static ArrayList<Karte> Kartenstappel = new ArrayList<Karte>();
+	static ArrayList<Karte> Kartenstappel = new ArrayList<Karte>();
 	static Karte obersteKarte;
 	static Karte stapel[] = new Karte[56];	
 	private static String nummer;
