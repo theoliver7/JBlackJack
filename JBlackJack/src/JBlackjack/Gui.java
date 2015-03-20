@@ -27,8 +27,8 @@ public class Gui extends JFrame implements ActionListener {
 	JPanel panel;
 	JPanel Einsatz_Panel;
 	JLabel Einsatz_Label;
-	static JPanel hand_spieler ;
-	static JPanel hand_dealer ;
+	static JPanel hand_spieler;
+	static JPanel hand_dealer;
 	JLabel label;
 	int i = 0;
 
@@ -38,9 +38,9 @@ public class Gui extends JFrame implements ActionListener {
 		hand_spieler = new JPanel();
 		hand_dealer = new JPanel();
 		Navigation = new JPanel();
-		
+
 		// JFrame Eigenschaften
-		
+
 		setSize(1200, 1000);
 		setTitle("JBlackJack");
 		setLocationRelativeTo(null);
@@ -48,7 +48,7 @@ public class Gui extends JFrame implements ActionListener {
 		setVisible(true);
 
 		Karte = new JButton("Karte nehmen");
-		Einsatz = new JButton("Einsatz erhÃ¶hen [+20]");
+		Einsatz = new JButton("Einsatz erhöhen [+20]");
 		Verlassen = new JButton("Verlassen");
 		Aufgeben = new JButton("Aufgeben");
 
@@ -56,10 +56,10 @@ public class Gui extends JFrame implements ActionListener {
 		Einsatz.addActionListener(this);
 		Aufgeben.addActionListener(this);
 		Verlassen.addActionListener(this);
-		
-		panel.add(Karte, BorderLayout.EAST);
-		panel.add(Einsatz, BorderLayout.NORTH);
-		panel.add(Aufgeben, BorderLayout.SOUTH);
+
+		panel.add(Karte, BorderLayout.EAST, FlowLayout.LEFT);
+		panel.add(Einsatz, BorderLayout.NORTH, FlowLayout.CENTER);
+		panel.add(Aufgeben, BorderLayout.SOUTH, FlowLayout.RIGHT);
 		panel.setBackground(new Color(10, 108, 3));
 		panel.add(label);
 		this.add(panel, BorderLayout.SOUTH);
@@ -68,23 +68,19 @@ public class Gui extends JFrame implements ActionListener {
 		Navigation.setBackground(new Color(10, 108, 3));
 		this.add(Navigation, BorderLayout.EAST);
 
-
-		hand_spieler.setBackground(new Color(10, 108, 3));
-		this.add(hand_spieler, FlowLayout.LEFT);
-
-		hand_dealer.setBackground(new Color(10, 108, 3));
-		this.add(hand_dealer, FlowLayout.RIGHT);
-		
-		Einsatz_Panel = new JPanel();
-        Einsatz_Label= new JLabel();
-        Einsatz_Label.setText(String.valueOf("Einsatz: " + Bank.getEinsatz()));
-        Einsatz_Panel.add(Einsatz_Label, BorderLayout.EAST);
-        Einsatz_Panel.setBackground(new Color(10, 108, 3));
-        this.add(Einsatz_Panel, BorderLayout.WEST);
-
-
 		hand_spieler.setBackground(new Color(10, 108, 3));
 		this.add(hand_spieler, BorderLayout.CENTER);
+
+		hand_dealer.setBackground(new Color(10, 108, 3));
+		this.add(hand_dealer, BorderLayout.NORTH);
+
+		Einsatz_Panel = new JPanel();
+		Einsatz_Label = new JLabel();
+		Einsatz_Label.setText(String.valueOf("Einsatz: " + Bank.getEinsatz()));
+		Einsatz_Panel.add(Einsatz_Label, BorderLayout.EAST);
+		Einsatz_Panel.setBackground(new Color(10, 108, 3));
+		this.add(Einsatz_Panel, BorderLayout.WEST);
+		
 	}
 
 	public static void main(String[] args) {
@@ -104,9 +100,9 @@ public class Gui extends JFrame implements ActionListener {
 			Spieler.spieler_kartenehmen();
 			final Icon newImageIcon = loadIcon(Kartenstapel.obersteKarte.getName() + ".jpg");
 			JMenuItem newMenuItem = new JMenuItem(newImageIcon);
-			hand_spieler.add(newMenuItem, FlowLayout.LEFT);
+			hand_spieler.add(newMenuItem);
 			newMenuItem.setBackground(new Color(10, 108, 3));
-			this.add(hand_spieler, FlowLayout.LEFT);
+			panel.add(hand_spieler, BorderLayout.NORTH);
 			revalidate();
 			repaint();
 			/*
@@ -118,25 +114,23 @@ public class Gui extends JFrame implements ActionListener {
 			JMenuItem newMenuItem_2 = new JMenuItem(newImageIcon_2);
 			hand_spieler.add(newMenuItem_2);
 			newMenuItem_2.setBackground(new Color(10, 108, 3));
-			this.add(hand_dealer, FlowLayout.RIGHT);
+			this.add(hand_dealer, FlowLayout.CENTER);
 			revalidate();
 			repaint();
 		}
 
 		if (ae.getSource().equals(getEinsatz())) {
 			Bank.einsatzErhoehen(20);
-			Einsatz_Label.setText("Einsatz: " + String.valueOf(Bank.getEinsatz()));
+			Einsatz_Label.setText("Einsatz: "+ String.valueOf(Bank.getEinsatz()));
 		}
 		if (ae.getSource().equals(getAufgeben())) {
 			System.out.println("Aufgeben");
 		}
 		if (ae.getSource().equals(getVerlassen())) {
 			int eingabe = JOptionPane.showConfirmDialog(null,
-                    "Wollen Sie das Spiel wirklich verlassen?",
-                    "Verlassen?",
-                    JOptionPane.YES_NO_OPTION,
-                    JOptionPane.WARNING_MESSAGE);
-			if(eingabe == JOptionPane.YES_OPTION){
+					"Wollen Sie das Spiel wirklich verlassen?", "Verlassen?",
+					JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+			if (eingabe == JOptionPane.YES_OPTION) {
 				System.exit(0);
 			}
 		}
@@ -147,7 +141,8 @@ public class Gui extends JFrame implements ActionListener {
 
 		if (resource == null) {
 			// TODO Replace by logger
-			System.err.println("Error in " + Gui.class.getName()+ ": Icon /images/" + iconName + " could not be loaded.");
+			System.err.println("Error in " + Gui.class.getName()
+					+ ": Icon /images/" + iconName + " could not be loaded.");
 			return new ImageIcon();
 		}
 		return new ImageIcon(resource);
