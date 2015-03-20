@@ -45,7 +45,7 @@ public class Gui extends JFrame implements ActionListener {
 	JLabel kartenwert_dealer;
 	JLabel gewinner;
 
-	// Zähler initialisierung
+	// Zï¿½hler initialisierung
 	int i = 0;
 
 	// Gui Klasse
@@ -70,19 +70,19 @@ public class Gui extends JFrame implements ActionListener {
 
 		// Button Objekte erstellen
 		Karte = new JButton("Karte nehmen");
-		Einsatz = new JButton("Einsatz erhöhen [+20]");
+		Einsatz = new JButton("Einsatz erhÃ¶hen [+20]");
 		Verlassen = new JButton("Verlassen");
 		beenden = new JButton("Runde beenden");
 		Weiter = new JButton("Weiter");
 
 		// JFrame Eigenschaften
-		setSize(1200, 1000);
+		setSize(800, 700);
 		setTitle("JBlackJack");
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 
-		// actionListener den Button's hinzufügen
+		// actionListener den Button's hinzufï¿½gen
 		Karte.addActionListener(this);
 		Einsatz.addActionListener(this);
 		beenden.addActionListener(this);
@@ -90,7 +90,7 @@ public class Gui extends JFrame implements ActionListener {
 		Weiter.addActionListener(this);
 		Weiter.setEnabled(false);
 
-		// Buttons dem BefehleMenu hinzufügen
+		// Buttons dem BefehleMenu hinzufï¿½gen
 		menu.add(Karte, BorderLayout.EAST, FlowLayout.LEFT);
 		menu.add(Einsatz, BorderLayout.NORTH, FlowLayout.CENTER);
 		menu.add(beenden, BorderLayout.SOUTH, FlowLayout.RIGHT);
@@ -131,6 +131,10 @@ public class Gui extends JFrame implements ActionListener {
 		info.add(gewinner,BorderLayout.WEST);
 		info.setBackground(new Color(10, 108, 3));
 		this.add(info, BorderLayout.NORTH);
+		
+		if(Spieler.getspielerKartenwert()> 0 && Dealer.getdealerKartenwert()>0){
+			beenden.setEnabled(true);
+		}
 		
 	}
 
@@ -199,9 +203,7 @@ public class Gui extends JFrame implements ActionListener {
 
 		}
 		if (ae.getSource().equals(getVerlassen())) {
-			int eingabe = JOptionPane.showConfirmDialog(null,
-					"Wollen Sie das Spiel wirklich verlassen?", "Verlassen?",
-					JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+			int eingabe = JOptionPane.showConfirmDialog(null,"Wollen Sie das Spiel wirklich verlassen?", "Verlassen?",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 			if (eingabe == JOptionPane.YES_OPTION) {
 				System.exit(0);
 			}

@@ -16,7 +16,7 @@ public class Kartenstapel {
 		String typ[] = { "Spade", "Hearts", "Clubs", "Diamonds" };
 		String nummer[] = { "Ace", "2", "3", "4", "5", "6", "7", "8", "9",
 				"10", "Jack", "Queen", "King" };
-		int wert[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10 };
+		int wert[] = { 11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10 };
 		int k = 0;
 		for (int i = 0; i < typ.length; i++) {
 			for (int j = 0; j < nummer.length; j++) {
