@@ -19,44 +19,60 @@ import javax.swing.border.EmptyBorder;
 
 public class Gui extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
+	// JButton's
 	JButton Karte;
 	JButton Einsatz;
 	JButton Aufgeben;
 	JButton Weiter;
 	JButton Verlassen;
+	// JPanel's
 	JPanel Buttons;
 	JPanel Navigation;
-	JPanel panel;
+	JPanel menu;
 	JPanel Einsatz_Panel;
-	JLabel Einsatz_Label;
 	JPanel Kontostand_Panel;
+	JPanel hand_spieler;
+	JPanel hand_dealer;
+
+	// JLabel's
+	JLabel Einsatz_Label;
 	JLabel Kontostand_Label;
-	static JPanel hand_spieler;
-	static JPanel hand_dealer;
 	JLabel label;
+
+	// Zähler initialisierung
 	int i = 0;
 
+	// Gui Klasse
 	public Gui() {
-		panel = new JPanel();
-		label = new JLabel();
+
+		// Panel Objekte erstellen
+		menu = new JPanel();
 		hand_spieler = new JPanel();
 		hand_dealer = new JPanel();
 		Navigation = new JPanel();
+		Kontostand_Panel = new JPanel();
+		Einsatz_Panel = new JPanel();
+
+		// Label Okjekte erstellen
+		Kontostand_Label = new JLabel();
+		label = new JLabel();
+		Einsatz_Label = new JLabel();
+
+		// Button Objekte erstellen
+		Karte = new JButton("Karte nehmen");
+		Einsatz = new JButton("Einsatz erh�hen [+20]");
+		Verlassen = new JButton("Verlassen");
+		Aufgeben = new JButton("Aufgeben");
+		Weiter = new JButton("Weiter");
 
 		// JFrame Eigenschaften
-
 		setSize(1200, 1000);
 		setTitle("JBlackJack");
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 
-		Karte = new JButton("Karte nehmen");
-		Einsatz = new JButton("Einsatz erh�hen [+20]");
-		Verlassen = new JButton("Verlassen");
-		Aufgeben = new JButton("Aufgeben");
-		Weiter = new JButton("Weiter");
-
+		// actionListener den Button's hinzufügen
 		Karte.addActionListener(this);
 		Einsatz.addActionListener(this);
 		Aufgeben.addActionListener(this);
@@ -64,41 +80,43 @@ public class Gui extends JFrame implements ActionListener {
 		Weiter.addActionListener(this);
 		Weiter.setEnabled(false);
 
-		panel.add(Karte, BorderLayout.EAST, FlowLayout.LEFT);
-		panel.add(Einsatz, BorderLayout.NORTH, FlowLayout.CENTER);
-		panel.add(Aufgeben, BorderLayout.SOUTH, FlowLayout.RIGHT);
-		panel.add(Weiter, BorderLayout.EAST, FlowLayout.LEFT);
-		panel.setBackground(new Color(10, 108, 3));
-		panel.add(label);
-		this.add(panel, BorderLayout.SOUTH);
+		// Buttons dem BefehleMenu hinzufügen
+		menu.add(Karte, BorderLayout.EAST, FlowLayout.LEFT);
+		menu.add(Einsatz, BorderLayout.NORTH, FlowLayout.CENTER);
+		menu.add(Aufgeben, BorderLayout.SOUTH, FlowLayout.RIGHT);
+		menu.add(Weiter, BorderLayout.EAST, FlowLayout.LEFT);
+		menu.setBackground(new Color(10, 108, 3));
+		menu.add(label);
+		this.add(menu, BorderLayout.SOUTH);
 
+		// Eigenschaften des Dealers
+		hand_dealer.setBackground(new Color(10, 108, 3));
+		hand_dealer.setBorder(new EmptyBorder(100, 10, 10, 0));
+		this.add(hand_dealer);
+
+		// Eigenschaften des Spielers
+		hand_spieler.setBorder(new EmptyBorder(10, 10, 100, 0));
+		hand_spieler.setBackground(new Color(10, 108, 3));
+		this.add(hand_spieler);
+
+		// Eigenschaten der Navigation
 		Navigation.add(Verlassen, BorderLayout.EAST);
 		Navigation.setBackground(new Color(10, 108, 3));
 		this.add(Navigation, BorderLayout.EAST);
 
-		Kontostand_Panel = new JPanel();
-		Kontostand_Label = new JLabel();
+		// Kontostand Eigenschaften
 		Kontostand_Label.setText(String.valueOf("Kontostand: "
 				+ Bank.getKontostand()));
 		Kontostand_Panel.add(Kontostand_Label, BorderLayout.EAST);
 		Kontostand_Panel.setBackground(new Color(10, 108, 3));
 		this.add(Kontostand_Panel, BorderLayout.WEST);
 
-		Einsatz_Panel = new JPanel();
-		Einsatz_Label = new JLabel();
+		// Einsatz Eigenschaften
 		Einsatz_Label.setText(String.valueOf("Einsatz: " + Bank.getEinsatz()));
 		Einsatz_Panel.add(Einsatz_Label);
 		Einsatz_Panel.setBackground(new Color(10, 108, 3));
 		this.add(Einsatz_Panel, BorderLayout.WEST);
-	
-		hand_dealer.setBorder(new EmptyBorder(10, 10, 100,  0));
-		hand_spieler.setBorder(new EmptyBorder(100, 10, 10, 0) );
-		
-		this.add(hand_dealer);
-	this.add(hand_spieler);
-	
-		hand_spieler.setBackground(new Color(10, 108, 3));
-		hand_dealer.setBackground(new Color(10, 108, 3));
+
 	}
 
 	public static void main(String[] args) {
@@ -113,16 +131,20 @@ public class Gui extends JFrame implements ActionListener {
 			 * Das Kartenstapel wird generiert und die Karte die der Spieler
 			 * nimmt wird auf dem Frame abgebildet
 			 */
-			if ((Dealer.getdealerKartenwert() <= 17)&& (Spieler.getspielerKartenwert() <= 21)) {
+
+			if ((Dealer.getdealerKartenwert() <= 17)
+					&& (Spieler.getspielerKartenwert() <= 21)) {
 				if (i == 0) {
 					System.out.println("Ihr Einsatz : " + Bank.getEinsatz());
 					Kartenstapel.stapelGenerieren();
 					Spieler.spieler_kartenehmen();
-					final Icon newImageIcon = loadIcon(Kartenstapel.obersteKarte.getName() + ".jpg");
+					final Icon newImageIcon = loadIcon(Kartenstapel.obersteKarte
+							.getName() + ".jpg");
 					JMenuItem newMenuItem = new JMenuItem(newImageIcon);
 					hand_spieler.add(newMenuItem);
 					newMenuItem.setBackground(new Color(10, 108, 3));
-					this.add(hand_spieler);
+					hand_spieler.setBackground(new Color(10, 108, 3));
+					this.add(hand_spieler, BorderLayout.SOUTH);
 					i++;
 					Karte.setEnabled(false);
 					Weiter.setEnabled(true);
@@ -160,17 +182,19 @@ public class Gui extends JFrame implements ActionListener {
 		 * Der Dealer nimmt eine Karte, welche auf dem JFrame abgebildet wird
 		 */
 		if (ae.getSource().equals(getWeiter())) {
-			if ((Dealer.getdealerKartenwert() <= 17) && (Spieler.getspielerKartenwert() <= 21)) {
+			if ((Dealer.getdealerKartenwert() <= 17)
+					&& (Spieler.getspielerKartenwert() <= 21)) {
 				Dealer.dealer_kartenehmen();
 				final Icon newImageIcon_2 = loadIcon(Kartenstapel.obersteKarte.getName() + ".jpg");
 				JMenuItem newMenuItem_2 = new JMenuItem(newImageIcon_2);
 				hand_dealer.add(newMenuItem_2);
+				hand_dealer.setBackground(new Color(10, 108, 3));
 				newMenuItem_2.setBackground(new Color(10, 108, 3));
-				this.add(hand_dealer,BorderLayout.SOUTH);	
+				this.add(hand_dealer);
 				revalidate();
 				repaint();
 				i = 0;
-				Karte.setEnabled(true);	
+				Karte.setEnabled(true);
 			} else {
 				Weiter.setEnabled(false);
 				Karte.setEnabled(false);
@@ -256,11 +280,11 @@ public class Gui extends JFrame implements ActionListener {
 	}
 
 	public JPanel getPanel() {
-		return panel;
+		return menu;
 	}
 
 	public void setPanel(JPanel panel) {
-		this.panel = panel;
+		this.menu = panel;
 	}
 
 }
