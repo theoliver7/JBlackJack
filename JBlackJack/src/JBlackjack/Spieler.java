@@ -13,8 +13,7 @@ public class Spieler extends Person {
 	static int spielerKartenwert = 0;
 	static ArrayList<Karte> spielerHand = new ArrayList<Karte>();
 	private static String weitereKarte;
-	static BufferedReader br = new BufferedReader(new InputStreamReader(
-			System.in));
+	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 	// Methoden
 	public boolean entscheiden_S() {
