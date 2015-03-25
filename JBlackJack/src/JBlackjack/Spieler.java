@@ -11,6 +11,7 @@ public class Spieler extends Person {
 	static int spielerKartenwert = 0;
 	static ArrayList<Karte> spielerHand = new ArrayList<Karte>();
 	private static String weitereKarte;
+
 	// Methoden
 	public boolean entscheiden_S() {
 
@@ -22,7 +23,7 @@ public class Spieler extends Person {
 		Kartenstapel.getKartenstappel().remove(Kartenstapel.obersteKarte);
 		System.out.println("Spieler : ");
 		System.out.println(getSpielerHand());
-		System.out.println(setspielerKartenwert());
+		System.out.println(setspielerKartenwert(Kartenstapel.obersteKarte.getWert()));
 		System.out.println();
 	}
 
@@ -36,9 +37,8 @@ public class Spieler extends Person {
 		}
 	}
 
-	public static int setspielerKartenwert() {
-		spielerKartenwert = spielerKartenwert
-				+ Kartenstapel.obersteKarte.getWert();
+	public static int setspielerKartenwert(int wert) {
+		spielerKartenwert = spielerKartenwert + wert;
 		return spielerKartenwert;
 	}
 

@@ -96,10 +96,9 @@ public class Gui extends JFrame implements ActionListener {
 
 		// actionListener den Button's hinzuf�gen
 		Karte.addActionListener(this);
-
 		beenden.addActionListener(this);
 		Verlassen.addActionListener(this);
-
+		ass.addActionListener(this);
 		starten.addActionListener(this);
 
 		einsatzButton.addActionListener(this);
@@ -145,9 +144,7 @@ public class Gui extends JFrame implements ActionListener {
 		this.add(Navigation, BorderLayout.EAST);
 
 		// Kontostand Eigenschaften
-		Kontostand_Label.setText("Einsatz: "
-				+ String.valueOf(Bank.getEinsatz() + " \n Kontostand: "
-						+ Bank.getKontostand()));
+		Kontostand_Label.setText("Einsatz: " + String.valueOf(Bank.getEinsatz() + " \n Kontostand: " + Bank.getKontostand()));
 		Kontostand_Panel.add(Kontostand_Label, BorderLayout.EAST);
 		Kontostand_Panel.setBackground(new Color(10, 108, 3));
 		befehle.setText("Mach einen Einsatz und nimm dannach eine Karte um das Spiel zu beginnen");
@@ -160,8 +157,7 @@ public class Gui extends JFrame implements ActionListener {
 		info.setBackground(new Color(112, 127, 112));
 		this.add(info, BorderLayout.NORTH);
 
-		if (Spieler.getspielerKartenwert(0) > 0
-				&& Dealer.getdealerKartenwert(0) > 0) {
+		if (Spieler.getspielerKartenwert(0) > 0 && Dealer.getdealerKartenwert(0) > 0) {
 			beenden.setEnabled(true);
 		}
 
@@ -190,14 +186,11 @@ public class Gui extends JFrame implements ActionListener {
 					System.out.println("Ihr Einsatz : " + Bank.getEinsatz());
 					Kartenstapel.stapelGenerieren();
 					Spieler.spieler_kartenehmen();
-					final Icon newImageIcon = loadIcon(Kartenstapel.obersteKarte
-							.getName() + ".png");
+					final Icon newImageIcon = loadIcon(Kartenstapel.obersteKarte.getName() + ".png");
 					JMenuItem newMenuItem = new JMenuItem(newImageIcon);
 					hand_spieler.add(newMenuItem);
 					hand_dealer.setBackground(new Color(10, 108, 3));
-					kartenwert_spieler.setText(String
-							.valueOf("Deine Hand hat einen Wert von: "
-									+ Spieler.getspielerKartenwert(0)));
+					kartenwert_spieler.setText(String.valueOf("Deine Hand hat einen Wert von: " + Spieler.getspielerKartenwert(0)));
 					hand_dealer.setBackground(new Color(10, 108, 3));
 					newMenuItem.setBackground(new Color(10, 108, 3));
 					this.add(hand_spieler, BorderLayout.SOUTH);
@@ -205,19 +198,11 @@ public class Gui extends JFrame implements ActionListener {
 					hand_spieler.add(kartenwert_spieler, BorderLayout.WEST);
 					i++;
 					Karte.setEnabled(false);
-					if ((Dealer.getdealerKartenwert(0) < 17)
-							|| (Spieler.getspielerKartenwert(0) > Dealer
-									.getdealerKartenwert(0))) {
+					if ((Dealer.getdealerKartenwert(0) < 17) || (Spieler.getspielerKartenwert(0) > Dealer.getdealerKartenwert(0))) {
 
 					}
-					if (Kartenstapel.obersteKarte.getName().equals(
-							"ace_of_clubs")
-							|| Kartenstapel.obersteKarte.getName().equals(
-									"ace_of_diamonds")
-							|| Kartenstapel.obersteKarte.getName().equals(
-									"ace_of_hearts")
-							|| Kartenstapel.obersteKarte.getName().equals(
-									"ace_of_spades")) {
+					if (Kartenstapel.obersteKarte.getName().equals("ace_of_clubs") || Kartenstapel.obersteKarte.getName().equals("ace_of_diamonds")
+							|| Kartenstapel.obersteKarte.getName().equals("ace_of_hearts") || Kartenstapel.obersteKarte.getName().equals("ace_of_spades")) {
 						ass.setVisible(true);
 						menu.add(ass);
 
@@ -234,6 +219,7 @@ public class Gui extends JFrame implements ActionListener {
 						Karte.setEnabled(false);
 						beenden.setEnabled(false);
 						starten.setEnabled(true);
+
 					}
 
 					einsatzButton.setEnabled(false);
@@ -247,14 +233,21 @@ public class Gui extends JFrame implements ActionListener {
 			 */
 			if (Dealer.getdealerKartenwert(0) <= 16) {
 				Dealer.dealer_kartenehmen();
-				final Icon newImageIcon_2 = loadIcon(Kartenstapel.obersteKarte
-						.getName() + ".png");
+				int test = 0;
+				
+					if (Kartenstapel.obersteKarte.getName().equals("ace_of_clubs") || Kartenstapel.obersteKarte.getName().equals("ace_of_diamonds")
+							|| Kartenstapel.obersteKarte.getName().equals("ace_of_hearts") || Kartenstapel.obersteKarte.getName().equals("ace_of_spades")) {
+						test = 1;
+				}
+					if (Dealer.getdealerKartenwert(0) > 21 && test == 1) {
+						Dealer.setdealerkKartenwert(-10);
+						test = 0;
+					}
+				final Icon newImageIcon_2 = loadIcon(Kartenstapel.obersteKarte.getName() + ".png");
 				JMenuItem newMenuItem_2 = new JMenuItem(newImageIcon_2);
 				hand_dealer.add(newMenuItem_2);
 				newMenuItem_2.setBackground(new Color(10, 108, 3));
-				kartenwert_dealer.setText(String
-						.valueOf("Der Dealer hat eine Hand mit dem Wert: "
-								+ Dealer.getdealerKartenwert(0)));
+				kartenwert_dealer.setText(String.valueOf("Der Dealer hat eine Hand mit dem Wert: " + Dealer.getdealerKartenwert(0)));
 				this.add(hand_dealer);
 				hand_dealer.add(kartenwert_dealer);
 				revalidate();
@@ -283,14 +276,11 @@ public class Gui extends JFrame implements ActionListener {
 			while (Dealer.getdealerKartenwert(0) <= 17) {
 
 				Dealer.dealer_kartenehmen();
-				final Icon newImageIcon_2 = loadIcon(Kartenstapel.obersteKarte
-						.getName() + ".png");
+				final Icon newImageIcon_2 = loadIcon(Kartenstapel.obersteKarte.getName() + ".png");
 				JMenuItem newMenuItem_2 = new JMenuItem(newImageIcon_2);
 				hand_dealer.add(newMenuItem_2);
 				newMenuItem_2.setBackground(new Color(10, 108, 3));
-				kartenwert_dealer.setText(String
-						.valueOf("Der Dealer hat eine Hand mit dem Wert: "
-								+ Dealer.getdealerKartenwert(0)));
+				kartenwert_dealer.setText(String.valueOf("Der Dealer hat eine Hand mit dem Wert: " + Dealer.getdealerKartenwert(0)));
 				this.add(hand_dealer);
 				hand_dealer.add(kartenwert_dealer);
 				revalidate();
@@ -312,17 +302,15 @@ public class Gui extends JFrame implements ActionListener {
 					int einsatz = Integer.parseInt(einsatzt_feld.getText());
 					if (einsatz > Bank.getKontostand()) {
 						befehle.setText("Du hast zu wenig Geld");
-					} else if (einsatz < 20) {
+					} else if (einsatz < 10) {
 
-						befehle.setText("Du musst mindestens 20 setzen");
+						befehle.setText("Du musst mindestens 10 setzen");
 					} else {
 						Karte.setEnabled(true);
+						einsatzButton.setEnabled(false);
 						befehle.setText("Nimm eine Karte");
 						Bank.einsatzErhoehen(einsatz);
-						Kontostand_Label.setText("Einsatz: "
-								+ String.valueOf(Bank.getEinsatz()
-										+ " \n Kontostand: "
-										+ Bank.getKontostand()));
+						Kontostand_Label.setText("Einsatz: " + String.valueOf(Bank.getEinsatz() + " \n Kontostand: " + Bank.getKontostand()));
 
 					}
 				} catch (NumberFormatException e) {
@@ -340,9 +328,7 @@ public class Gui extends JFrame implements ActionListener {
 
 			Bank.setEinsatz(0);
 			befehle.setText(Bank.gewinnerErmitteln());
-			Kontostand_Label.setText("Einsatz: "
-					+ String.valueOf(Bank.getEinsatz() + " \n Kontostand: "
-							+ Bank.getKontostand()));
+			Kontostand_Label.setText("Einsatz: " + String.valueOf(Bank.getEinsatz() + " \n Kontostand: " + Bank.getKontostand()));
 			Kartenstapel.Kartenstappel.clear();
 			Kartenstapel.stapelGenerieren();
 			Dealer.dealerHand.clear();
@@ -366,35 +352,24 @@ public class Gui extends JFrame implements ActionListener {
 			Dealer.getdealerKartenwert(1);
 
 			einsatzButton.setEnabled(true);
-
 			Karte.setEnabled(false);
 			beenden.setEnabled(false);
 			starten.setEnabled(false);
-
 			info.setVisible(true);
-
 			kartenwert_spieler = new JLabel();
 			kartenwert_dealer = new JLabel();
+			Karte.setEnabled(false);
+			einsatzButton.setEnabled(true);
 
-			Karte.setEnabled(true);
-
+			ass.setVisible(false);
 			i = 0;
 			if (Bank.getKontostand() == 0) {
-				int checker = JOptionPane
-						.showConfirmDialog(
-								null,
-								"Sie haben verloren, wollen sie ein neues Spiel starten?",
-								"Verloren", JOptionPane.YES_NO_OPTION,
-								JOptionPane.WARNING_MESSAGE);
+				int checker = JOptionPane.showConfirmDialog(null, "Sie haben verloren, wollen sie ein neues Spiel starten?", "Verloren", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 				if (checker == JOptionPane.YES_OPTION) {
 					System.out.println("5000");
 
 					Bank.setKontostand(500);
-					Kontostand_Label
-							.setText("Einsatz: "
-									+ String.valueOf(Bank.getEinsatz()
-											+ " \n Kontostand: "
-											+ Bank.getKontostand()));
+					Kontostand_Label.setText("Einsatz: " + String.valueOf(Bank.getEinsatz() + " \n Kontostand: " + Bank.getKontostand()));
 					befehle.setText("Nimm eine Karte");
 
 					this.add(Kontostand_Panel, BorderLayout.WEST);
@@ -404,9 +379,7 @@ public class Gui extends JFrame implements ActionListener {
 			}
 		}
 		if (ae.getSource().equals(getVerlassen())) {
-			int eingabe = JOptionPane.showConfirmDialog(null,
-					"Wollen Sie das Spiel wirklich verlassen?", "Verlassen?",
-					JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+			int eingabe = JOptionPane.showConfirmDialog(null, "Wollen Sie das Spiel wirklich verlassen?", "Verlassen?", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 			if (eingabe == JOptionPane.YES_OPTION) {
 				System.exit(0);
 			}
@@ -414,6 +387,14 @@ public class Gui extends JFrame implements ActionListener {
 		/*
 		 * Der Dealer nimmt eine Karte, welche auf dem JFrame abgebildet wird
 		 */
+		if (ae.getSource().equals(getAss())) {
+			Spieler.setspielerKartenwert(-10);
+			kartenwert_spieler.setText(String.valueOf("Deine Hand hat einen Wert von: " + Spieler.getspielerKartenwert(0)));
+			ass.setVisible(false);
+			if (Spieler.getspielerKartenwert(0) < 21) {
+				Karte.setEnabled(true);
+			}
+		}
 
 	}
 
@@ -430,8 +411,7 @@ public class Gui extends JFrame implements ActionListener {
 
 		if (resource == null) {
 			// TODO Replace by logger
-			System.err.println("Error in " + Gui.class.getName()
-					+ ": Icon /images/" + iconName + " could not be loaded.");
+			System.err.println("Error in " + Gui.class.getName() + ": Icon /images/" + iconName + " could not be loaded.");
 			return new ImageIcon();
 		}
 		return new ImageIcon(resource);
@@ -614,7 +594,7 @@ public class Gui extends JFrame implements ActionListener {
 	}
 
 	public void setEinsatzt_feld(JTextField einsatzt_feld) {
-		this.einsatzt_feld = einsatzt_feld;
+		Gui.einsatzt_feld = einsatzt_feld;
 	}
 
 	public JButton getEinsatzButton() {
