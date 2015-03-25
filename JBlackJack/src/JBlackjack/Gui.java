@@ -80,6 +80,7 @@ public class Gui extends JFrame implements ActionListener {
 		beenden = new JButton("Keine Karten nehmen");
 		Weiter = new JButton("Weiter");
 		starten = new JButton("Neue Runde starten");
+		ass = new JButton("Ass wert verändern");
 
 		// JFrame Eigenschaften
 		setSize(800, 700);
@@ -103,8 +104,10 @@ public class Gui extends JFrame implements ActionListener {
 		menu.add(beenden, BorderLayout.SOUTH, FlowLayout.RIGHT);
 		menu.add(Weiter, BorderLayout.EAST, FlowLayout.LEFT);
 		menu.add(starten, BorderLayout.EAST);
+		menu.add(ass,BorderLayout.EAST);
 		menu.setBackground(new Color(10, 108, 3));
 		menu.add(label);
+		ass.setVisible(false);
 		this.add(menu, BorderLayout.SOUTH);
 
 		// Eigenschaften des Dealers
@@ -163,7 +166,6 @@ public class Gui extends JFrame implements ActionListener {
 
 			if (Spieler.getspielerKartenwert(0) <= 21) {
 
-
 				if (i == 0) {
 					System.out.println("Ihr Einsatz : " + Bank.getEinsatz());
 					Kartenstapel.stapelGenerieren();
@@ -184,14 +186,20 @@ public class Gui extends JFrame implements ActionListener {
 					i++;
 					Karte.setEnabled(false);
 
-					if ((Dealer.getdealerKartenwert(0) < 17)|| (Spieler.getspielerKartenwert(0) > Dealer.getdealerKartenwert(0))) {
+					if ((Dealer.getdealerKartenwert(0) < 17)
+							|| (Spieler.getspielerKartenwert(0) > Dealer
+									.getdealerKartenwert(0))) {
 						Weiter.setEnabled(true);
 					}
-					if (Kartenstapel.obersteKarte.equals("Spade Ace")
-							|| Kartenstapel.obersteKarte.equals("Clubs Ace")
-							|| Kartenstapel.obersteKarte.equals("Hearts Ace")
-							|| Kartenstapel.obersteKarte.equals("Diamons Ace")) {
+					if (Kartenstapel.obersteKarte.getName().equals("Spade Ace")
+							|| Kartenstapel.obersteKarte.getName().equals(
+									"Clubs Ace")
+							|| Kartenstapel.obersteKarte.getName().equals(
+									"Hearts Ace")
+							|| Kartenstapel.obersteKarte.getName().equals(
+									"Diamons Ace")) {
 						System.out.println("Ass");
+						ass.setVisible(true);
 					}
 					revalidate();
 					repaint();
@@ -247,7 +255,7 @@ public class Gui extends JFrame implements ActionListener {
 			beenden.setEnabled(false);
 			Einsatz.setEnabled(false);
 			Karte.setEnabled(false);
-			}
+		}
 		if (ae.getSource().equals(getStarten())) {
 			gewinner.setText("Der " + Bank.gewinnerErmitteln()
 					+ " hat gewonnen");
@@ -259,48 +267,48 @@ public class Gui extends JFrame implements ActionListener {
 			Dealer.dealerHand.clear();
 			Spieler.spielerHand.clear();
 
-
 		}
 		if (ae.getSource().equals(getStarten())) {
-			gewinner.setText("Der " + Bank.gewinnerErmitteln()+ " hat gewonnen");
-            Kontostand_Label.setText("Einsatz: "+ String.valueOf(Bank.getEinsatz() + " \n Kontostand: "+ Bank.getKontostand()));
-            Kartenstapel.Kartenstappel.clear();
-            Kartenstapel.stapelGenerieren();
-            Dealer.dealerHand.clear();
-            Spieler.spielerHand.clear();
+			gewinner.setText("Der " + Bank.gewinnerErmitteln()
+					+ " hat gewonnen");
+			Kontostand_Label.setText("Einsatz: "
+					+ String.valueOf(Bank.getEinsatz() + " \n Kontostand: "
+							+ Bank.getKontostand()));
+			Kartenstapel.Kartenstappel.clear();
+			Kartenstapel.stapelGenerieren();
+			Dealer.dealerHand.clear();
+			Spieler.spielerHand.clear();
 
-            Container parent = hand_dealer.getParent();
-            parent.remove(hand_dealer);
-            parent.setBackground(new Color(10, 108, 3));
+			Container parent = hand_dealer.getParent();
+			parent.remove(hand_dealer);
+			parent.setBackground(new Color(10, 108, 3));
 
-            Container parent_2 = hand_spieler.getParent();
-            parent_2.remove(hand_spieler);
-            parent_2.setBackground(new Color(10, 108, 3));
+			Container parent_2 = hand_spieler.getParent();
+			parent_2.remove(hand_spieler);
+			parent_2.setBackground(new Color(10, 108, 3));
 
-            hand_dealer.removeAll();
-            hand_spieler.removeAll();
+			hand_dealer.removeAll();
+			hand_spieler.removeAll();
 
-            hand_dealer.updateUI();
-            hand_spieler.updateUI();
+			hand_dealer.updateUI();
+			hand_spieler.updateUI();
 
-            Spieler.getspielerKartenwert(1);
-            Dealer.getdealerKartenwert(1);
-
+			Spieler.getspielerKartenwert(1);
+			Dealer.getdealerKartenwert(1);
 
 			Einsatz.setEnabled(true);
 			Weiter.setEnabled(false);
 			Karte.setEnabled(true);
 			beenden.setEnabled(false);
 			starten.setEnabled(false);
-			
+
 			info.setVisible(true);
 
-            kartenwert_spieler = new JLabel();
-            kartenwert_dealer = new JLabel();
+			kartenwert_spieler = new JLabel();
+			kartenwert_dealer = new JLabel();
 
-            Weiter.setEnabled(false);
-            Karte.setEnabled(true);
-
+			Weiter.setEnabled(false);
+			Karte.setEnabled(true);
 
 			i = 0;
 		}
