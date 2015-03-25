@@ -184,6 +184,12 @@ public class Gui extends JFrame implements ActionListener {
 									.getdealerKartenwert(0))) {
 						Weiter.setEnabled(true);
 					}
+					if (Kartenstapel.obersteKarte.equals("Spade Ace")
+							|| Kartenstapel.obersteKarte.equals("Clubs Ace")
+							|| Kartenstapel.obersteKarte.equals("Hearts Ace")
+							|| Kartenstapel.obersteKarte.equals("Diamons Ace")) {
+						System.out.println("Ass");
+					}
 					revalidate();
 					repaint();
 				}
@@ -228,35 +234,38 @@ public class Gui extends JFrame implements ActionListener {
 
 		}
 		if (ae.getSource().equals(getStarten())) {
-			gewinner.setText("Der " + Bank.gewinnerErmitteln()+ " hat gewonnen");
-            Kontostand_Label.setText("Einsatz: "+ String.valueOf(Bank.getEinsatz() + " \n Kontostand: "+ Bank.getKontostand()));
-            Kartenstapel.Kartenstappel.clear();
-            Kartenstapel.stapelGenerieren();
-            Dealer.dealerHand.clear();
-            Spieler.spielerHand.clear();
+			gewinner.setText("Der " + Bank.gewinnerErmitteln()
+					+ " hat gewonnen");
+			Kontostand_Label.setText("Einsatz: "
+					+ String.valueOf(Bank.getEinsatz() + " \n Kontostand: "
+							+ Bank.getKontostand()));
+			Kartenstapel.Kartenstappel.clear();
+			Kartenstapel.stapelGenerieren();
+			Dealer.dealerHand.clear();
+			Spieler.spielerHand.clear();
 
-            Container parent = hand_dealer.getParent();
-            parent.remove(hand_dealer);
-            parent.setBackground(new Color(10, 108, 3));
+			Container parent = hand_dealer.getParent();
+			parent.remove(hand_dealer);
+			parent.setBackground(new Color(10, 108, 3));
 
-            Container parent_2 = hand_spieler.getParent();
-            parent_2.remove(hand_spieler);
-            parent_2.setBackground(new Color(10, 108, 3));
+			Container parent_2 = hand_spieler.getParent();
+			parent_2.remove(hand_spieler);
+			parent_2.setBackground(new Color(10, 108, 3));
 
-            hand_dealer.removeAll();
-            hand_spieler.removeAll();
+			hand_dealer.removeAll();
+			hand_spieler.removeAll();
 
-            hand_dealer.updateUI();
-            hand_spieler.updateUI();
+			hand_dealer.updateUI();
+			hand_spieler.updateUI();
 
-            Spieler.getspielerKartenwert(1);
-            Dealer.getdealerKartenwert(1);
+			Spieler.getspielerKartenwert(1);
+			Dealer.getdealerKartenwert(1);
 
-            kartenwert_spieler = new JLabel();
-            kartenwert_dealer = new JLabel();
+			kartenwert_spieler = new JLabel();
+			kartenwert_dealer = new JLabel();
 
-            Weiter.setEnabled(false);
-            Karte.setEnabled(true);
+			Weiter.setEnabled(false);
+			Karte.setEnabled(true);
 
 		}
 		if (ae.getSource().equals(getVerlassen())) {
@@ -307,6 +316,9 @@ public class Gui extends JFrame implements ActionListener {
 						Karte.setEnabled(true);
 					}
 					i = 0;
+					// if(Person.assUeberpruefung(wert)){
+					// System.out.println("Ass");
+					// }
 				}
 			}
 		}
@@ -333,7 +345,6 @@ public class Gui extends JFrame implements ActionListener {
 		final URL resource = Gui.class.getResource("/images/" + iconName);
 
 		if (resource == null) {
-			// TODO Replace by logger
 			System.err.println("Error in " + Gui.class.getName()
 					+ ": Icon /images/" + iconName + " could not be loaded.");
 			return new ImageIcon();

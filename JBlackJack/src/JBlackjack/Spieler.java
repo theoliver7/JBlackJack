@@ -1,7 +1,5 @@
 package JBlackjack;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class Spieler extends Person {
@@ -13,8 +11,7 @@ public class Spieler extends Person {
 	static int spielerKartenwert = 0;
 	static ArrayList<Karte> spielerHand = new ArrayList<Karte>();
 	private static String weitereKarte;
-	static BufferedReader br = new BufferedReader(new InputStreamReader(
-			System.in));
+
 
 	// Methoden
 	public boolean entscheiden_S() {
