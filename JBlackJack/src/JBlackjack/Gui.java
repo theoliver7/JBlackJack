@@ -4,10 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
 
+import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 
@@ -23,12 +26,16 @@ public class Gui extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	// JButton's
 	protected JButton Karte;
-	protected JButton Einsatz;
+
 	protected JButton beenden;
 	protected JButton Weiter;
 	protected JButton Verlassen;
 	protected JButton ass;
 	protected JButton starten;
+	protected JButton einsatzButton;
+
+	// Jtextfields
+	private JTextField einsatzt_feld;
 	// JPanel's
 	protected JPanel Buttons;
 	protected JPanel Navigation;
@@ -38,6 +45,7 @@ public class Gui extends JFrame implements ActionListener {
 	protected JPanel hand_spieler;
 	protected JPanel hand_dealer;
 	protected JPanel info;
+	protected JPanel einsatz_panel = new JPanel();
 
 	// JLabel's
 	protected JLabel Einsatz_Label;
@@ -45,7 +53,7 @@ public class Gui extends JFrame implements ActionListener {
 	protected JLabel label;
 	protected JLabel kartenwert_spieler;
 	protected JLabel kartenwert_dealer;
-	protected JLabel gewinner;
+	protected JLabel befehle;
 
 	// Zähler Initialisierung
 	int i = 0;
@@ -71,44 +79,57 @@ public class Gui extends JFrame implements ActionListener {
 		Einsatz_Label = new JLabel();
 		kartenwert_spieler = new JLabel();
 		kartenwert_dealer = new JLabel();
-		gewinner = new JLabel();
+		befehle = new JLabel();
 
 		// Button Objekte erstellen
 		Karte = new JButton("Karte nehmen");
-		Einsatz = new JButton("Einsatz erhöhen [+20]");
+
 		Verlassen = new JButton("Verlassen");
 		beenden = new JButton("Keine Karten nehmen");
 		Weiter = new JButton("Weiter");
 		starten = new JButton("Neue Runde starten");
 		ass = new JButton("Ass wert verändern");
+		einsatzButton = new JButton("Einsetzen");
 
 		// JFrame Eigenschaften
 		setSize(800, 700);
 		setTitle("JBlackJack");
 		setLocationRelativeTo(null);
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 
 		// actionListener den Button's hinzuf�gen
 		Karte.addActionListener(this);
-		Einsatz.addActionListener(this);
+
 		beenden.addActionListener(this);
 		Verlassen.addActionListener(this);
 		Weiter.addActionListener(this);
 		starten.addActionListener(this);
 		Weiter.setEnabled(false);
+		einsatzButton.addActionListener(this);
 
 		// Buttons dem BefehleMenu hinzuf�gen
+
+		menu.add(einsatz_panel);
 		menu.add(Karte, BorderLayout.EAST, FlowLayout.LEFT);
-		menu.add(Einsatz, BorderLayout.NORTH, FlowLayout.CENTER);
+
 		menu.add(beenden, BorderLayout.SOUTH, FlowLayout.RIGHT);
 		menu.add(Weiter, BorderLayout.EAST, FlowLayout.LEFT);
 		menu.add(starten, BorderLayout.EAST);
-		menu.add(ass,BorderLayout.EAST);
+		menu.add(ass, BorderLayout.EAST);
 		menu.setBackground(new Color(10, 108, 3));
 		menu.add(label);
 		ass.setVisible(false);
 		this.add(menu, BorderLayout.SOUTH);
+
+		einsatz_panel.setLayout(new BoxLayout(einsatz_panel, BoxLayout.X_AXIS));
+		einsatz_panel.setOpaque(false);
+
+		einsatzt_feld = new JTextField(5);
+
+		einsatz_panel.add(einsatzt_feld);
+		einsatz_panel.add(einsatzButton);
 
 		// Eigenschaften des Dealers
 		hand_dealer.setBorder(new EmptyBorder(100, 10, 10, 0));
@@ -134,12 +155,14 @@ public class Gui extends JFrame implements ActionListener {
 						+ Bank.getKontostand()));
 		Kontostand_Panel.add(Kontostand_Label, BorderLayout.EAST);
 		Kontostand_Panel.setBackground(new Color(10, 108, 3));
-		Kontostand_Panel.add(gewinner);
+		befehle.setText("Nimm eine Karte");
+		Kontostand_Panel.add(befehle);
+
 		this.add(Kontostand_Panel, BorderLayout.WEST);
 
 		// Eigenschaften des Info Panels
-		info.add(gewinner);
-		info.setBackground(new Color(10, 108, 3));
+		info.add(befehle);
+		info.setBackground(new Color(112, 127, 112));
 		this.add(info, BorderLayout.NORTH);
 
 		if (Spieler.getspielerKartenwert(0) > 0
@@ -148,7 +171,7 @@ public class Gui extends JFrame implements ActionListener {
 		}
 
 		starten.setEnabled(false);
-
+		beenden.setEnabled(false);
 	}
 
 	public static void main(String[] args) {
@@ -159,6 +182,9 @@ public class Gui extends JFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent ae) {
 		if (ae.getSource().equals(getKarte())) {
+
+			befehle.setText("Peter?");
+		
 			/*
 			 * Das Kartenstapel wird generiert und die Karte die der Spieler
 			 * nimmt wird auf dem Frame abgebildet
@@ -167,11 +193,12 @@ public class Gui extends JFrame implements ActionListener {
 			if (Spieler.getspielerKartenwert(0) <= 21) {
 
 				if (i == 0) {
+
 					System.out.println("Ihr Einsatz : " + Bank.getEinsatz());
 					Kartenstapel.stapelGenerieren();
 					Spieler.spieler_kartenehmen();
 					final Icon newImageIcon = loadIcon(Kartenstapel.obersteKarte
-							.getName() + ".jpg");
+							.getName() + ".png");
 					JMenuItem newMenuItem = new JMenuItem(newImageIcon);
 					hand_spieler.add(newMenuItem);
 					hand_dealer.setBackground(new Color(10, 108, 3));
@@ -215,20 +242,10 @@ public class Gui extends JFrame implements ActionListener {
 						starten.setEnabled(true);
 					}
 
-					Einsatz.setEnabled(false);
+					einsatzButton.setEnabled(false);
 				}
-				info.setVisible(false);
-			}
-		}
-		if (ae.getSource().equals(getEinsatz())) {
-			if (Bank.getKontostand() > Bank.getEinsatz()) {
-				Einsatz.setEnabled(true);
-				Bank.einsatzErhoehen(20);
-				Kontostand_Label.setText("Einsatz: "
-						+ String.valueOf(Bank.getEinsatz() + " \n Kontostand: "
-								+ Bank.getKontostand()));
-			} else {
-				Einsatz.setEnabled(false);
+				info.setVisible(true);
+
 			}
 		}
 		if (ae.getSource().equals(getAufgeben())) {
@@ -237,7 +254,7 @@ public class Gui extends JFrame implements ActionListener {
 
 				Dealer.dealer_kartenehmen();
 				final Icon newImageIcon_2 = loadIcon(Kartenstapel.obersteKarte
-						.getName() + ".jpg");
+						.getName() + ".png");
 				JMenuItem newMenuItem_2 = new JMenuItem(newImageIcon_2);
 				hand_dealer.add(newMenuItem_2);
 				newMenuItem_2.setBackground(new Color(10, 108, 3));
@@ -253,12 +270,11 @@ public class Gui extends JFrame implements ActionListener {
 
 			starten.setEnabled(true);
 			beenden.setEnabled(false);
-			Einsatz.setEnabled(false);
+			einsatzButton.setEnabled(false);
 			Karte.setEnabled(false);
 		}
 		if (ae.getSource().equals(getStarten())) {
-			gewinner.setText("Der " + Bank.gewinnerErmitteln()
-					+ " hat gewonnen");
+			befehle.setText("Der " + Bank.gewinnerErmitteln() + " hat gewonnen");
 			Kontostand_Label.setText("Einsatz: "
 					+ String.valueOf(Bank.getEinsatz() + " \n Kontostand: "
 							+ Bank.getKontostand()));
@@ -268,9 +284,22 @@ public class Gui extends JFrame implements ActionListener {
 			Spieler.spielerHand.clear();
 
 		}
+		if (ae.getSource().equals(getEinsatzButton())) {
+			if (Bank.getKontostand() > Bank.getEinsatz()) {
+				einsatzButton.setEnabled(true);
+				int einsatz = Integer.parseInt(einsatzt_feld.getText());
+				Bank.einsatzErhoehen(einsatz);
+				Kontostand_Label.setText("Einsatz: "
+						+ String.valueOf(Bank.getEinsatz() + " \n Kontostand: "
+								+ Bank.getKontostand()));
+			} else {
+				einsatzButton.setEnabled(false);
+			}
+
+		}
+
 		if (ae.getSource().equals(getStarten())) {
-			gewinner.setText("Der " + Bank.gewinnerErmitteln()
-					+ " hat gewonnen");
+			befehle.setText("Der " + Bank.gewinnerErmitteln() + " hat gewonnen");
 			Kontostand_Label.setText("Einsatz: "
 					+ String.valueOf(Bank.getEinsatz() + " \n Kontostand: "
 							+ Bank.getKontostand()));
@@ -296,7 +325,7 @@ public class Gui extends JFrame implements ActionListener {
 			Spieler.getspielerKartenwert(1);
 			Dealer.getdealerKartenwert(1);
 
-			Einsatz.setEnabled(true);
+			einsatzButton.setEnabled(true);
 			Weiter.setEnabled(false);
 			Karte.setEnabled(true);
 			beenden.setEnabled(false);
@@ -333,7 +362,7 @@ public class Gui extends JFrame implements ActionListener {
 				if (Spieler.getspielerKartenwert(0) <= 21) {
 					Dealer.dealer_kartenehmen();
 					final Icon newImageIcon_2 = loadIcon(Kartenstapel.obersteKarte
-							.getName() + ".jpg");
+							.getName() + ".png");
 					JMenuItem newMenuItem_2 = new JMenuItem(newImageIcon_2);
 					hand_dealer.add(newMenuItem_2);
 					newMenuItem_2.setBackground(new Color(10, 108, 3));
@@ -349,7 +378,7 @@ public class Gui extends JFrame implements ActionListener {
 					if (Spieler.getspielerKartenwert(0) > 21) {
 						Karte.setEnabled(false);
 						beenden.setEnabled(false);
-						Einsatz.setEnabled(false);
+						einsatzButton.setEnabled(false);
 						starten.setEnabled(true);
 					}
 
@@ -400,14 +429,6 @@ public class Gui extends JFrame implements ActionListener {
 
 	public void setKarte(JButton karte) {
 		Karte = karte;
-	}
-
-	public JButton getEinsatz() {
-		return Einsatz;
-	}
-
-	public void setEinsatz(JButton einsatz) {
-		Einsatz = einsatz;
 	}
 
 	public JButton getAufgeben() {
@@ -563,11 +584,11 @@ public class Gui extends JFrame implements ActionListener {
 	}
 
 	public JLabel getGewinner() {
-		return gewinner;
+		return befehle;
 	}
 
 	public void setGewinner(JLabel gewinner) {
-		this.gewinner = gewinner;
+		this.befehle = gewinner;
 	}
 
 	public int getI() {
@@ -580,6 +601,22 @@ public class Gui extends JFrame implements ActionListener {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public JTextField getEinsatzt_feld() {
+		return einsatzt_feld;
+	}
+
+	public void setEinsatzt_feld(JTextField einsatzt_feld) {
+		this.einsatzt_feld = einsatzt_feld;
+	}
+
+	public JButton getEinsatzButton() {
+		return einsatzButton;
+	}
+
+	public void setEinsatzButton(JButton einsatzButton) {
+		this.einsatzButton = einsatzButton;
 	}
 
 }

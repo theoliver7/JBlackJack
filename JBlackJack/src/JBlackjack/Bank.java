@@ -12,37 +12,21 @@ public class Bank {
 		int spieler = Spieler.getspielerKartenwert(0);
 		String gewinner = null;
 
-		if (dealer >= spieler) {
-			if (dealer < 22 ) {
-				int RAM = Einsatz;
-				Einsatz = Einsatz - Einsatz - Einsatz;
-				kontostandanpassen(Einsatz);
-				Einsatz = RAM;
-				System.out.println(kontostand);
-				gewinner = "Dealer";
+		if (dealer >= spieler && dealer < 22) {
 
-			} else {
-				kontostandanpassen(Einsatz);
-				System.out.println(kontostand);
-				gewinner = "Spieler";
-			}
-			return gewinner;
-		}
-		if (spieler >= dealer) {
-			if (spieler < 22) {
-				kontostandanpassen(Einsatz);
-				System.out.println(kontostand);
-				gewinner = "Spieler";
+			int RAM = Einsatz;
+			Einsatz = Einsatz - Einsatz - Einsatz;
+			kontostandanpassen(Einsatz);
+			Einsatz = RAM;
+			System.out.println(kontostand);
+			gewinner = "Dealer";
 
-			} else{
-				int RAM = Einsatz;
-				Einsatz = Einsatz - Einsatz - Einsatz;
-				kontostandanpassen(Einsatz);
-				Einsatz = RAM;
-				System.out.println(kontostand);
-				gewinner = "Dealer";
-			}
+		} else {
+			kontostandanpassen(Einsatz);
+			System.out.println(kontostand);
+			gewinner = "Spieler";
 		}
+
 		return gewinner;
 	}
 
