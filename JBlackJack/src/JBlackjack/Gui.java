@@ -47,7 +47,7 @@ public class Gui extends JFrame implements ActionListener {
 	protected JLabel kartenwert_dealer;
 	protected JLabel gewinner;
 
-	// Zähler initialisierung
+	// Zähler Initialisierung
 	int i = 0;
 
 	// Timer
@@ -186,6 +186,12 @@ public class Gui extends JFrame implements ActionListener {
 
 					if ((Dealer.getdealerKartenwert(0) < 17)|| (Spieler.getspielerKartenwert(0) > Dealer.getdealerKartenwert(0))) {
 						Weiter.setEnabled(true);
+					}
+					if (Kartenstapel.obersteKarte.equals("Spade Ace")
+							|| Kartenstapel.obersteKarte.equals("Clubs Ace")
+							|| Kartenstapel.obersteKarte.equals("Hearts Ace")
+							|| Kartenstapel.obersteKarte.equals("Diamons Ace")) {
+						System.out.println("Ass");
 					}
 					revalidate();
 					repaint();
