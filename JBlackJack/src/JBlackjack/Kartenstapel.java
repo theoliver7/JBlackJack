@@ -13,9 +13,8 @@ public class Kartenstapel {
 	public static void stapelGenerieren() {
 		ArrayList<Karte> Kartenstappel_backup = new ArrayList<Karte>();
 		
-		String typ[] = { "Spade", "Hearts", "Clubs", "Diamonds" };
-		String nummer[] = { "Ace", "2", "3", "4", "5", "6", "7", "8", "9",
-				"10", "Jack", "Queen", "King" };
+		String typ[] = { "spades", "hearts", "clubs", "diamonds" };
+		String nummer[] = { "ace", "2", "3", "4", "5", "6", "7", "8", "9","10", "jack", "queen", "king" };
 		int wert[] = { 11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10 };
 		int k = 0;
 		for (int i = 0; i < typ.length; i++) {

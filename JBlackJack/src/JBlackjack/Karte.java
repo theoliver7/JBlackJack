@@ -15,7 +15,7 @@ public class Karte {
 	}
 
 	public Karte(String string, String nummer, int wert) {
-		this.setName(string + " " + nummer);
+		this.setName(nummer + "_of_" + string);
 		this.setWert(wert);
 
 	}
