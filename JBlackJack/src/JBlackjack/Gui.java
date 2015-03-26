@@ -392,7 +392,7 @@ public class Gui extends JFrame implements ActionListener {
 			info.setVisible(true);
 
 		}
-		if (Dealer.getdealerKartenwert(0) <= 20) {
+		if (Dealer.getdealerKartenwert(0) <= 16) {
 			Dealer.dealer_kartenehmen();
 			if (Kartenstapel.obersteKarte.getName().equals("ace_of_clubs") || Kartenstapel.obersteKarte.getName().equals("ace_of_diamonds")
 					|| Kartenstapel.obersteKarte.getName().equals("ace_of_hearts") || Kartenstapel.obersteKarte.getName().equals("ace_of_spades")) {

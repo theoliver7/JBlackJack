@@ -26,13 +26,6 @@ public class Bank {
 				gewinner = "Beide Spieler haben den gleichen Kartenwert";
 			}
 		} else {
-			if (dealer >= spieler && dealer < 22 || spieler > 21 && dealer <= 21) {
-
-				if (Spieler.getspielerKartenwert(0) <= 21 && Dealer.getdealerKartenwert(0) <= 21) {
-					gewinner = "Beide Spieler haben den gleichen Kartenwertert";
-				}
-			} else {
-
 				if (dealer >= spieler && dealer < 22 || spieler > 21) {
 
 					int RAM = Einsatz;
@@ -45,7 +38,6 @@ public class Bank {
 					kontostandanpassen(Einsatz);
 					gewinner = "Du hast gewonnen, zieh eine Karte um eine neue Runde zu beginnen";
 				}
-			}
 		}
 		return gewinner;
 	}
