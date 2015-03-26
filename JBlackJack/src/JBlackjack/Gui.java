@@ -329,7 +329,7 @@ public class Gui extends JFrame implements ActionListener {
 							.getspielerKartenwert(0))) {
 				/*
 				 * Wenn Spieler mehr als 21 dann abbrechen
-				 */
+				 */									
 				if (Spieler.getspielerKartenwert(0) <= 21) {
 					Dealer.dealer_kartenehmen();
 					final Icon newImageIcon_2 = loadIcon(Kartenstapel.obersteKarte
@@ -337,9 +337,7 @@ public class Gui extends JFrame implements ActionListener {
 					JMenuItem newMenuItem_2 = new JMenuItem(newImageIcon_2);
 					hand_dealer.add(newMenuItem_2);
 					newMenuItem_2.setBackground(new Color(10, 108, 3));
-					kartenwert_dealer.setText(String
-							.valueOf("Der Dealer hat eine Hand mit dem Wert: "
-									+ Dealer.getdealerKartenwert(0)));
+					kartenwert_dealer.setText(String.valueOf("Der Dealer hat eine Hand mit dem Wert: "+ Dealer.getdealerKartenwert(0)));
 					this.add(hand_dealer);
 					hand_dealer.add(kartenwert_dealer);
 					revalidate();
