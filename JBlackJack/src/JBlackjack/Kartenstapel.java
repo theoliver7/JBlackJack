@@ -49,7 +49,7 @@ public class Kartenstapel {
 		 * Zum Schluss wird noch die oberste Karte bestummen
 		 */
 		for (int i = 55;i >= 0; i--) {
-			int max = 56;
+			int max = 55;
 			int min = 0;
 			int diff = max - min;
 			Random ran = new Random();
