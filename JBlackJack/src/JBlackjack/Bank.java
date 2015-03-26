@@ -13,8 +13,11 @@ public class Bank {
 		String gewinner = null;
 		int Einsatz = Integer.parseInt(Gui.einsatzt_feld.getText());
 
+		
 		if (spieler == dealer) {
-			gewinner = "Beide Spieler haben den gleichen Kartenwertert";
+			if(Spieler.getspielerKartenwert(0) <=21 && Dealer.getdealerKartenwert(0) <= 21){
+				gewinner = "Beide Spieler haben den gleichen Kartenwertert";
+			} 
 		} else {
 
 			if (dealer >= spieler && dealer < 22 || spieler > 21) {
@@ -34,7 +37,6 @@ public class Bank {
 				gewinner = "Du hast gewonnen, zieh eine Karte um eine neue Runde zu beginnen";
 			}
 		}
-
 		return gewinner;
 	}
 

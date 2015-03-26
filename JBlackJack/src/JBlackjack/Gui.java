@@ -8,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.swing.BoxLayout;
@@ -57,6 +56,7 @@ public class Gui extends JFrame implements ActionListener {
 	protected JLabel befehle;
 
 	// Zähler Initialisierung
+	int assHand = 0;
 	int i = 0;
 
 	// Gui Klasse
@@ -80,14 +80,14 @@ public class Gui extends JFrame implements ActionListener {
 		befehle = new JLabel();
 
 		// Button Objekte erstellen
-		Karte = new JButton("Karte nehmen");
+		Karte = new JButton("Karte nehmen [K]");
 
-		Verlassen = new JButton("Verlassen");
-		beenden = new JButton("Keine Karten nehmen");
+		Verlassen = new JButton("Verlassen [ESC]");
+		beenden = new JButton("Keine Karten nehmen[SPACE]");
 
-		starten = new JButton("Neue Runde starten");
-		ass = new JButton("Ass wert verändern");
-		einsatzButton = new JButton("Einsetzen");
+		starten = new JButton("Neue Runde starten[ENTER]");
+		ass = new JButton("Ass wert verändern[A]");
+		einsatzButton = new JButton("Einsetzen[E]");
 
 		// JFrame Eigenschaften
 		setSize(1000, 900);
@@ -104,26 +104,55 @@ public class Gui extends JFrame implements ActionListener {
 		ass.addActionListener(this);
 		starten.addActionListener(this);
 		einsatzButton.addActionListener(this);
+		this.setFocusable(true);
 		this.addKeyListener(new KeyListener() {
-			@Override			
-			public void keyPressed(KeyEvent e) {
+			@Override
+			public void keyPressed(KeyEvent a) {
 				// TODO Auto-generated method stub
-				int key = e.getKeyCode();
+				int key = a.getKeyCode();
+				if (key == KeyEvent.VK_K) {
+					if (Karte.isEnabled() == false) {
+						befehle.setText("Bitte mache zuerst einen Einsatz");
+					} else {
+						karteZiehen();
+					}
+				}
 				if (key == KeyEvent.VK_SPACE) {
-					
+					if (beenden.isEnabled() == true) {
+						keineKarteZiehen();
+					} else {
+						befehle.setText("Nimm zuerst eine Karte");
+					}
+				}
+				if (key == KeyEvent.VK_ESCAPE) {
+					spielVerlassen();
+				}
+				if (key == KeyEvent.VK_ENTER) {
+					if (starten.isEnabled() == true) {
+						neueRunde();
+					}
+				}
+				if (key == KeyEvent.VK_E) {
+					if (einsatzButton.isEnabled() == true) {
+						einsetzen();
+					}
+				}
+				if (key == KeyEvent.VK_A){
+					if (ass.isVisible() == true){
+						assWertAendern();
+					}
 				}
 			}
 
 			@Override
 			public void keyReleased(KeyEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void keyTyped(KeyEvent e) {
 				// TODO Auto-generated method stub
-				
 			}
 		});
 
@@ -194,195 +223,44 @@ public class Gui extends JFrame implements ActionListener {
 		bl.setVisible(true);
 	}
 
-	public void actionPerformed(ActionEvent ae) {
-		if (ae.getSource().equals(getKarte())) {
-			befehle.setText("Entscheide ob du noch eine Karte nehmen willst oder nicht");
+	public void assWertAendern() {
+		Spieler.setspielerKartenwert(-10);
+		kartenwert_spieler.setText(String.valueOf("Deine Hand hat einen Wert von: "+ Spieler.getspielerKartenwert(0)));
+		ass.setVisible(false);
+		Karte.setEnabled(true);
+		beenden.setEnabled(true);
+	}
+	
+	
+	public void einsetzen() {
+		if (Bank.getKontostand() >= Bank.getEinsatz()) {
+			einsatzButton.setEnabled(true);
+			try {
+				int einsatz = Integer.parseInt(einsatzt_feld.getText());
+				if (einsatz > Bank.getKontostand()) {
+					befehle.setText("Du hast zu wenig Geld");
+				} else if (einsatz < 10) {
 
-			/*
-			 * Das Kartenstapel wird generiert und die Karte die der Spieler
-			 * nimmt wird auf dem Frame abgebildet
-			 */
-
-			if (Spieler.getspielerKartenwert(0) <= 21) {
-				if (i == 0) {
-					System.out.println("Ihr Einsatz : " + Bank.getEinsatz());
-					Kartenstapel.stapelGenerieren();
-					Spieler.spieler_kartenehmen();
-					final Icon newImageIcon = loadIcon(Kartenstapel.obersteKarte
-							.getName() + ".png");
-					JMenuItem newMenuItem = new JMenuItem(newImageIcon);
-					hand_spieler.add(newMenuItem);
-					hand_dealer.setBackground(new Color(10, 108, 3));
-					kartenwert_spieler.setText(String
-							.valueOf("Deine Hand hat einen Wert von: "
-									+ Spieler.getspielerKartenwert(0)));
-					hand_dealer.setBackground(new Color(10, 108, 3));
-					newMenuItem.setBackground(new Color(10, 108, 3));
-					this.add(hand_spieler, BorderLayout.SOUTH);
-					this.add(hand_dealer);
-					hand_spieler.add(kartenwert_spieler, BorderLayout.WEST);
-					i++;
-					Karte.setEnabled(false);
-
-					if (Kartenstapel.obersteKarte.getName().equals(
-							"ace_of_clubs")
-							|| Kartenstapel.obersteKarte.getName().equals(
-									"ace_of_diamonds")
-							|| Kartenstapel.obersteKarte.getName().equals(
-									"ace_of_hearts")
-							|| Kartenstapel.obersteKarte.getName().equals(
-									"ace_of_spades")) {
-						ass.setVisible(true);
-						menu.add(ass);
-
-					}
-					revalidate();
-					repaint();
-
-					if (Spieler.getspielerKartenwert(0) <= 21) {
-						Karte.setEnabled(true);
-						beenden.setEnabled(true);
-						i = 0;
-						starten.setEnabled(false);
-					} else {
-
-						Karte.setEnabled(false);
-						beenden.setEnabled(false);
-						starten.setEnabled(true);
-
-					}
-
-					einsatzButton.setEnabled(false);
-				}
-				info.setVisible(true);
-
-			}
-			if (Dealer.getdealerKartenwert(0) <= 16) {
-				Dealer.dealer_kartenehmen();
-				int test = 0;
-				if (Kartenstapel.obersteKarte.getName().equals("ace_of_clubs")
-						|| Kartenstapel.obersteKarte.getName().equals(
-								"ace_of_diamonds")
-						|| Kartenstapel.obersteKarte.getName().equals(
-								"ace_of_hearts")
-						|| Kartenstapel.obersteKarte.getName().equals(
-								"ace_of_spades")) {
-					test = 1;
-				}
-				if (Dealer.getdealerKartenwert(0) > 21 && test == 1) {
-					System.out.println("Ass detected");
-					Dealer.setdealerkKartenwert(-10);
-					test = 0;
-				}
-				final Icon newImageIcon_2 = loadIcon(Kartenstapel.obersteKarte
-						.getName() + ".png");
-				JMenuItem newMenuItem_2 = new JMenuItem(newImageIcon_2);
-				hand_dealer.add(newMenuItem_2);
-				newMenuItem_2.setBackground(new Color(10, 108, 3));
-				kartenwert_dealer.setText(String
-						.valueOf("Der Dealer hat eine Hand mit dem Wert: "
-								+ Dealer.getdealerKartenwert(0)));
-				this.add(hand_dealer);
-				hand_dealer.add(kartenwert_dealer);
-				revalidate();
-				repaint();
-				i = 0;
-
-				if (Spieler.getspielerKartenwert(0) > 21
-						|| Dealer.getdealerKartenwert(0) > 21) {
-					Karte.setEnabled(false);
-					beenden.setEnabled(false);
-					einsatzButton.setEnabled(false);
-					starten.setEnabled(true);
+					befehle.setText("Du musst mindestens 10$ setzen");
 				} else {
 					Karte.setEnabled(true);
+					einsatzButton.setEnabled(false);
+					befehle.setText("Nimm eine Karte");
+					Bank.einsatzErhoehen(einsatz);
+					Kontostand_Label.setText("Einsatz: " + String.valueOf(Bank.getEinsatz() + "$" + " \n Kontostand: " + Bank.getKontostand()) + "$");
 
 				}
-	
-				if (Spieler.getspielerKartenwert(0)==21){
-					URL url = null;
-					try {
-						url = new URL("http://www.picgifs.com/graphics/f/fireworks/graphics-fireworks-432653.gif");
-					} catch (MalformedURLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					Icon icon = new ImageIcon(url);
-					JLabel label = new JLabel(icon);
-
-					JFrame f = new JFrame("Animation");
-					f.getContentPane().add(label);
-					f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-					f.pack();
-					f.setLocationRelativeTo(null);
-					f.setVisible(true);
-				}
-				i = 0;
+			} catch (NumberFormatException e) {
+				befehle.setText("Dein Einsatz muss eine Zahl sein");
+				return;
 			}
-
-		}
-		if (ae.getSource().equals(getAufgeben())) {
-
-			while (Dealer.getdealerKartenwert(0) <= 17) {
-
-				Dealer.dealer_kartenehmen();
-				final Icon newImageIcon_2 = loadIcon(Kartenstapel.obersteKarte
-						.getName() + ".png");
-				JMenuItem newMenuItem_2 = new JMenuItem(newImageIcon_2);
-				hand_dealer.add(newMenuItem_2);
-				newMenuItem_2.setBackground(new Color(10, 108, 3));
-				kartenwert_dealer.setText(String
-						.valueOf("Der Dealer hat eine Hand mit dem Wert: "
-								+ Dealer.getdealerKartenwert(0)));
-				this.add(hand_dealer);
-				hand_dealer.add(kartenwert_dealer);
-				ass.setVisible(false);
-				revalidate();
-				repaint();
-
-			}
-
-			starten.setEnabled(true);
-			beenden.setEnabled(false);
+		} else {
 			einsatzButton.setEnabled(false);
-			Karte.setEnabled(false);
 		}
+	}
 
-		if (ae.getSource().equals(getEinsatzButton())) {
-
-			if (Bank.getKontostand() >= Bank.getEinsatz()) {
-				einsatzButton.setEnabled(true);
-				try {
-					int einsatz = Integer.parseInt(einsatzt_feld.getText());
-					if (einsatz > Bank.getKontostand()) {
-						befehle.setText("Du hast zu wenig Geld");
-					} else if (einsatz < 10) {
-
-						befehle.setText("Du musst mindestens 10$ setzen");
-					} else {
-						Karte.setEnabled(true);
-						einsatzButton.setEnabled(false);
-						befehle.setText("Nimm eine Karte");
-						Bank.einsatzErhoehen(einsatz);
-						Kontostand_Label.setText("Einsatz: "
-								+ String.valueOf(Bank.getEinsatz() + "$"
-										+ " \n Kontostand: "
-										+ Bank.getKontostand()) + "$");
-
-					}
-				} catch (NumberFormatException e) {
-					befehle.setText("Dein Einsatz muss eine Zahl sein");
-					return;
-				}
-
-			} else {
-				einsatzButton.setEnabled(false);
-			}
-
-		}
-
-		if (ae.getSource().equals(getStarten())) {
-
+	public void neueRunde() {
+		if (starten.isEnabled() == true) {
 			Bank.setEinsatz(0);
 			befehle.setText(Bank.gewinnerErmitteln());
 			Kontostand_Label.setText("Einsatz: "
@@ -444,23 +322,192 @@ public class Gui extends JFrame implements ActionListener {
 				}
 			}
 		}
-		if (ae.getSource().equals(getVerlassen())) {
-			int eingabe = JOptionPane.showConfirmDialog(null,
-					"Wollen Sie das Spiel wirklich verlassen?", "Verlassen?",
-					JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-			if (eingabe == JOptionPane.YES_OPTION) {
-				System.exit(0);
-			}
+	}
+
+	public void spielVerlassen() {
+		int eingabe = JOptionPane.showConfirmDialog(null,
+				"Wollen Sie das Spiel wirklich verlassen?", "Verlassen?",
+				JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+		if (eingabe == JOptionPane.YES_OPTION) {
+			System.exit(0);
+		}
+
+	}
+
+	public void keineKarteZiehen() {
+		while (Dealer.getdealerKartenwert(0) <= 17) {
+
+			Dealer.dealer_kartenehmen();
+			final Icon newImageIcon_2 = loadIcon(Kartenstapel.obersteKarte
+					.getName() + ".png");
+			JMenuItem newMenuItem_2 = new JMenuItem(newImageIcon_2);
+			hand_dealer.add(newMenuItem_2);
+			newMenuItem_2.setBackground(new Color(10, 108, 3));
+			kartenwert_dealer.setText(String
+					.valueOf("Der Dealer hat eine Hand mit dem Wert: "
+							+ Dealer.getdealerKartenwert(0)));
+			this.add(hand_dealer);
+			hand_dealer.add(kartenwert_dealer);
+			ass.setVisible(false);
+			revalidate();
+			repaint();
 
 		}
-		if (ae.getSource().equals(getAss())) {
-			Spieler.setspielerKartenwert(-10);
-			kartenwert_spieler.setText(String
-					.valueOf("Deine Hand hat einen Wert von: "
-							+ Spieler.getspielerKartenwert(0)));
-			ass.setVisible(false);
-			Karte.setEnabled(true);
 
+		starten.setEnabled(true);
+		beenden.setEnabled(false);
+		einsatzButton.setEnabled(false);
+		Karte.setEnabled(false);
+	}
+
+	public void karteZiehen() {
+
+		befehle.setText("Entscheide ob du noch eine Karte nehmen willst oder nicht");
+		/*
+		 * Das Kartenstapel wird generiert und die Karte die der Spieler nimmt
+		 * wird auf dem Frame abgebildet
+		 */
+
+		if (Spieler.getspielerKartenwert(0) <= 21) {
+			if (i == 0) {
+				System.out.println("Ihr Einsatz : " + Bank.getEinsatz());
+				Kartenstapel.stapelGenerieren();
+				Spieler.spieler_kartenehmen();
+				final Icon newImageIcon = loadIcon(Kartenstapel.obersteKarte
+						.getName() + ".png");
+				JMenuItem newMenuItem = new JMenuItem(newImageIcon);
+				hand_spieler.add(newMenuItem);
+				hand_dealer.setBackground(new Color(10, 108, 3));
+				kartenwert_spieler.setText(String
+						.valueOf("Deine Hand hat einen Wert von: "
+								+ Spieler.getspielerKartenwert(0)));
+				hand_dealer.setBackground(new Color(10, 108, 3));
+				newMenuItem.setBackground(new Color(10, 108, 3));
+				this.add(hand_spieler, BorderLayout.SOUTH);
+				this.add(hand_dealer);
+				hand_spieler.add(kartenwert_spieler, BorderLayout.WEST);
+				i++;
+				Karte.setEnabled(false);
+
+				if (Kartenstapel.obersteKarte.getName().equals("ace_of_clubs")
+						|| Kartenstapel.obersteKarte.getName().equals(
+								"ace_of_diamonds")
+						|| Kartenstapel.obersteKarte.getName().equals(
+								"ace_of_hearts")
+						|| Kartenstapel.obersteKarte.getName().equals(
+								"ace_of_spades")) {
+					ass.setVisible(true);
+					menu.add(ass);
+
+				}
+				revalidate();
+				repaint();
+
+				if (Spieler.getspielerKartenwert(0) <= 21) {
+					Karte.setEnabled(true);
+					beenden.setEnabled(true);
+					i = 0;
+					starten.setEnabled(false);
+				} else {
+
+					Karte.setEnabled(false);
+					beenden.setEnabled(false);
+					starten.setEnabled(true);
+
+				}
+
+				einsatzButton.setEnabled(false);
+			}
+			info.setVisible(true);
+
+		}
+		if (Dealer.getdealerKartenwert(0) <= 16) {
+			if (Kartenstapel.obersteKarte.getName().equals("ace_of_clubs")
+					|| Kartenstapel.obersteKarte.getName().equals(
+							"ace_of_diamonds")
+					|| Kartenstapel.obersteKarte.getName().equals(
+							"ace_of_hearts")
+					|| Kartenstapel.obersteKarte.getName().equals(
+							"ace_of_spades")) {
+				assHand++;
+				System.out.println(assHand);
+			}
+			Dealer.dealer_kartenehmen();
+			if (Dealer.getdealerKartenwert(0) > 21 && assHand > 0) {
+				System.out.println("Ass detected");
+				Dealer.setdealerkKartenwert(-10);
+				assHand--;
+			}
+			final Icon newImageIcon_2 = loadIcon(Kartenstapel.obersteKarte
+					.getName() + ".png");
+			JMenuItem newMenuItem_2 = new JMenuItem(newImageIcon_2);
+			hand_dealer.add(newMenuItem_2);
+			newMenuItem_2.setBackground(new Color(10, 108, 3));
+			kartenwert_dealer.setText(String
+					.valueOf("Der Dealer hat eine Hand mit dem Wert: "
+							+ Dealer.getdealerKartenwert(0)));
+			this.add(hand_dealer);
+			hand_dealer.add(kartenwert_dealer);
+			revalidate();
+			repaint();
+			i = 0;
+
+			if (Spieler.getspielerKartenwert(0) > 21
+					|| Dealer.getdealerKartenwert(0) > 21) {
+				Karte.setEnabled(false);
+				beenden.setEnabled(false);
+				einsatzButton.setEnabled(false);
+				starten.setEnabled(true);
+			} else {
+				Karte.setEnabled(true);
+
+			}
+
+			// if (Spieler.getspielerKartenwert(0)==21){
+			// URL url = null;
+			// try {
+			// url = new
+			// URL("http://www.picgifs.com/graphics/f/fireworks/graphics-fireworks-432653.gif");
+			// } catch (MalformedURLException e) {
+			// // TODO Auto-generated catch block
+			// e.printStackTrace();
+			// }
+			// Icon icon = new ImageIcon(url);
+			// JLabel label = new JLabel(icon);
+			//
+			//
+			// this.getContentPane().add(label);
+			// this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			// this.pack();
+			// this.setLocationRelativeTo(null);
+			// this.setVisible(true);
+			// }
+			i = 0;
+		}
+
+	}
+
+	public void actionPerformed(ActionEvent ae) {
+		if (ae.getSource().equals(getKarte())) {
+			karteZiehen();
+
+		}
+		if (ae.getSource().equals(getAufgeben())) {
+			keineKarteZiehen();
+		}
+
+		if (ae.getSource().equals(getEinsatzButton())) {
+			einsetzen();
+		}
+
+		if (ae.getSource().equals(getStarten())) {
+			neueRunde();
+		}
+		if (ae.getSource().equals(getVerlassen())) {
+			spielVerlassen();
+		}
+		if (ae.getSource().equals(getAss())) {
+			assWertAendern();
 		}
 	}
 
