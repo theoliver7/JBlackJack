@@ -293,10 +293,11 @@ public class Gui extends JFrame implements ActionListener {
 
 			ass.setVisible(false);
 			i = 0;
+			assHand = 0;
 			if (Bank.getKontostand() == 0) {
 				int checker = JOptionPane.showConfirmDialog(null, "Sie haben verloren, wollen sie ein neues Spiel starten?", "Verloren", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 				if (checker == JOptionPane.YES_OPTION) {
-					
+
 					Bank.setKontostand(500);
 					Kontostand_Label.setText("Einsatz: " + String.valueOf(Bank.getEinsatz() + "$" + " \n Kontostand: " + Bank.getKontostand() + "$"));
 					befehle.setText("Nimm eine Karte");
@@ -319,8 +320,27 @@ public class Gui extends JFrame implements ActionListener {
 
 	public void keineKarteZiehen() {
 
-		while (Dealer.getdealerKartenwert(0) <= 17) {
+		while (Dealer.getdealerKartenwert(0) <= 16) {
+			dealerKarteNehmen();
+		}
+
+		starten.setEnabled(true);
+		beenden.setEnabled(false);
+		einsatzButton.setEnabled(false);
+		Karte.setEnabled(false);
+	}
+
+	public void dealerKarteNehmen() {
+		if (Dealer.getdealerKartenwert(0) <= 16) {
 			Dealer.dealer_kartenehmen();
+			if (Kartenstapel.obersteKarte.getName().equals("ace_of_clubs") || Kartenstapel.obersteKarte.getName().equals("ace_of_diamonds")
+					|| Kartenstapel.obersteKarte.getName().equals("ace_of_hearts") || Kartenstapel.obersteKarte.getName().equals("ace_of_spades")) {
+				assHand++;
+			}
+			if (Dealer.getdealerKartenwert(0) > 21 && assHand > 0) {
+				Dealer.setdealerkKartenwert(-10);
+				assHand--;
+			}
 			final Icon newImageIcon_2 = loadIcon(Kartenstapel.obersteKarte.getName() + ".png");
 			JMenuItem newMenuItem_2 = new JMenuItem(newImageIcon_2);
 			hand_dealer.add(newMenuItem_2);
@@ -328,15 +348,10 @@ public class Gui extends JFrame implements ActionListener {
 			kartenwert_dealer.setText(String.valueOf("Der Dealer hat eine Hand mit dem Wert: " + Dealer.getdealerKartenwert(0)));
 			this.add(hand_dealer);
 			hand_dealer.add(kartenwert_dealer);
-			ass.setVisible(false);
 			revalidate();
 			repaint();
+			i = 0;
 		}
-
-		starten.setEnabled(true);
-		beenden.setEnabled(false);
-		einsatzButton.setEnabled(false);
-		Karte.setEnabled(false);
 	}
 
 	public void karteZiehen() {
@@ -349,7 +364,7 @@ public class Gui extends JFrame implements ActionListener {
 
 		if (Spieler.getspielerKartenwert(0) <= 21) {
 			if (i == 0) {
-				
+
 				Kartenstapel.stapelGenerieren();
 				Spieler.spieler_kartenehmen();
 				final Icon newImageIcon = loadIcon(Kartenstapel.obersteKarte.getName() + ".png");
@@ -392,60 +407,36 @@ public class Gui extends JFrame implements ActionListener {
 			info.setVisible(true);
 
 		}
-		if (Dealer.getdealerKartenwert(0) <= 16) {
-			Dealer.dealer_kartenehmen();
-			if (Kartenstapel.obersteKarte.getName().equals("ace_of_clubs") || Kartenstapel.obersteKarte.getName().equals("ace_of_diamonds")
-					|| Kartenstapel.obersteKarte.getName().equals("ace_of_hearts") || Kartenstapel.obersteKarte.getName().equals("ace_of_spades")) {
-				assHand++;
-			}
-			if (Dealer.getdealerKartenwert(0) > 21 && assHand > 0) {
-			
-				Dealer.setdealerkKartenwert(-10);
-				assHand--;
-			}
-			final Icon newImageIcon_2 = loadIcon(Kartenstapel.obersteKarte.getName() + ".png");
-			JMenuItem newMenuItem_2 = new JMenuItem(newImageIcon_2);
-			hand_dealer.add(newMenuItem_2);
-			newMenuItem_2.setBackground(new Color(10, 108, 3));
-			kartenwert_dealer.setText(String.valueOf("Der Dealer hat eine Hand mit dem Wert: " + Dealer.getdealerKartenwert(0)));
-			this.add(hand_dealer);
-			hand_dealer.add(kartenwert_dealer);
-			revalidate();
-			repaint();
-			i = 0;
+		dealerKarteNehmen();
 
-			if (Spieler.getspielerKartenwert(0) > 21 || Dealer.getdealerKartenwert(0) > 21) {
-				Karte.setEnabled(false);
-				beenden.setEnabled(false);
-				einsatzButton.setEnabled(false);
-				starten.setEnabled(true);
-			} else {
-				Karte.setEnabled(true);
-
-			}
-
-
-			if (Spieler.getspielerKartenwert(0)==21){
-				URL url = null;
-				try {
-					url = new URL("http://img1.gbpicsonline.com/gb/64c/017.gif");
-				} catch (MalformedURLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				Icon icon = new ImageIcon(url);
-				JLabel label = new JLabel(icon);
-
-				JFrame f = new JFrame("BLACKJACKKKKKKKK");
-				f.getContentPane().add(label);
-				
-				f.pack();
-				f.setLocationRelativeTo(null);
-				f.setVisible(true);
-			}
-			i = 0;
+		if (Spieler.getspielerKartenwert(0) > 21 || Dealer.getdealerKartenwert(0) > 21) {
+			Karte.setEnabled(false);
+			beenden.setEnabled(false);
+			einsatzButton.setEnabled(false);
+			starten.setEnabled(true);
+		} else {
+			Karte.setEnabled(true);
 		}
 
+		if (Spieler.getspielerKartenwert(0) == 21) {
+			URL url = null;
+			try {
+				url = new URL("http://img1.gbpicsonline.com/gb/64c/017.gif");
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			Icon icon = new ImageIcon(url);
+			JLabel label = new JLabel(icon);
+
+			JFrame f = new JFrame("BLACKJACKKKKKKKK");
+			f.getContentPane().add(label);
+
+			f.pack();
+			f.setLocationRelativeTo(null);
+			f.setVisible(true);
+		}
+		i = 0;
 	}
 
 	public void actionPerformed(ActionEvent ae) {
