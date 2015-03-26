@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.swing.BoxLayout;
@@ -137,8 +138,8 @@ public class Gui extends JFrame implements ActionListener {
 						einsetzen();
 					}
 				}
-				if (key == KeyEvent.VK_A){
-					if (ass.isVisible() == true){
+				if (key == KeyEvent.VK_A) {
+					if (ass.isVisible() == true) {
 						assWertAendern();
 					}
 				}
@@ -192,9 +193,7 @@ public class Gui extends JFrame implements ActionListener {
 		this.add(Navigation, BorderLayout.EAST);
 
 		// Kontostand Eigenschaften
-		Kontostand_Label.setText("Einsatz: "
-				+ String.valueOf(Bank.getEinsatz() + "$" + " \n Kontostand: "
-						+ Bank.getKontostand()) + "$");
+		Kontostand_Label.setText("Einsatz: " + String.valueOf(Bank.getEinsatz() + "$" + " \n Kontostand: " + Bank.getKontostand()) + "$");
 		Kontostand_Panel.add(Kontostand_Label, BorderLayout.EAST);
 		Kontostand_Panel.setBackground(new Color(10, 108, 3));
 		befehle.setText("Mach einen Einsatz und nimm dannach eine Karte um das Spiel zu beginnen");
@@ -207,8 +206,7 @@ public class Gui extends JFrame implements ActionListener {
 		info.setBackground(new Color(255, 0, 0));
 		this.add(info, BorderLayout.NORTH);
 
-		if (Spieler.getspielerKartenwert(0) > 0
-				&& Dealer.getdealerKartenwert(0) > 0) {
+		if (Spieler.getspielerKartenwert(0) > 0 && Dealer.getdealerKartenwert(0) > 0) {
 			beenden.setEnabled(true);
 		}
 
@@ -225,13 +223,13 @@ public class Gui extends JFrame implements ActionListener {
 
 	public void assWertAendern() {
 		Spieler.setspielerKartenwert(-10);
-		kartenwert_spieler.setText(String.valueOf("Deine Hand hat einen Wert von: "+ Spieler.getspielerKartenwert(0)));
+		kartenwert_spieler.setText(String.valueOf("Deine Hand hat einen Wert von: " + Spieler.getspielerKartenwert(0)));
 		ass.setVisible(false);
 		Karte.setEnabled(true);
 		beenden.setEnabled(true);
+		i = 0;
 	}
-	
-	
+
 	public void einsetzen() {
 		if (Bank.getKontostand() >= Bank.getEinsatz()) {
 			einsatzButton.setEnabled(true);
@@ -263,9 +261,7 @@ public class Gui extends JFrame implements ActionListener {
 		if (starten.isEnabled() == true) {
 			Bank.setEinsatz(0);
 			befehle.setText(Bank.gewinnerErmitteln());
-			Kontostand_Label.setText("Einsatz: "
-					+ String.valueOf(Bank.getEinsatz() + "$"
-							+ " \n Kontostand: " + Bank.getKontostand() + "$"));
+			Kontostand_Label.setText("Einsatz: " + String.valueOf(Bank.getEinsatz() + "$" + " \n Kontostand: " + Bank.getKontostand() + "$"));
 			Kartenstapel.Kartenstappel.clear();
 			Kartenstapel.stapelGenerieren();
 			Dealer.dealerHand.clear();
@@ -301,19 +297,11 @@ public class Gui extends JFrame implements ActionListener {
 			ass.setVisible(false);
 			i = 0;
 			if (Bank.getKontostand() == 0) {
-				int checker = JOptionPane
-						.showConfirmDialog(
-								null,
-								"Sie haben verloren, wollen sie ein neues Spiel starten?",
-								"Verloren", JOptionPane.YES_NO_OPTION,
-								JOptionPane.WARNING_MESSAGE);
+				int checker = JOptionPane.showConfirmDialog(null, "Sie haben verloren, wollen sie ein neues Spiel starten?", "Verloren", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 				if (checker == JOptionPane.YES_OPTION) {
 					System.out.println("5000");
 					Bank.setKontostand(500);
-					Kontostand_Label.setText("Einsatz: "
-							+ String.valueOf(Bank.getEinsatz() + "$"
-									+ " \n Kontostand: " + Bank.getKontostand()
-									+ "$"));
+					Kontostand_Label.setText("Einsatz: " + String.valueOf(Bank.getEinsatz() + "$" + " \n Kontostand: " + Bank.getKontostand() + "$"));
 					befehle.setText("Nimm eine Karte");
 
 					this.add(Kontostand_Panel, BorderLayout.WEST);
@@ -325,9 +313,7 @@ public class Gui extends JFrame implements ActionListener {
 	}
 
 	public void spielVerlassen() {
-		int eingabe = JOptionPane.showConfirmDialog(null,
-				"Wollen Sie das Spiel wirklich verlassen?", "Verlassen?",
-				JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+		int eingabe = JOptionPane.showConfirmDialog(null, "Wollen Sie das Spiel wirklich verlassen?", "Verlassen?", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 		if (eingabe == JOptionPane.YES_OPTION) {
 			System.exit(0);
 		}
@@ -335,23 +321,20 @@ public class Gui extends JFrame implements ActionListener {
 	}
 
 	public void keineKarteZiehen() {
+
 		while (Dealer.getdealerKartenwert(0) <= 17) {
 
 			Dealer.dealer_kartenehmen();
-			final Icon newImageIcon_2 = loadIcon(Kartenstapel.obersteKarte
-					.getName() + ".png");
+			final Icon newImageIcon_2 = loadIcon(Kartenstapel.obersteKarte.getName() + ".png");
 			JMenuItem newMenuItem_2 = new JMenuItem(newImageIcon_2);
 			hand_dealer.add(newMenuItem_2);
 			newMenuItem_2.setBackground(new Color(10, 108, 3));
-			kartenwert_dealer.setText(String
-					.valueOf("Der Dealer hat eine Hand mit dem Wert: "
-							+ Dealer.getdealerKartenwert(0)));
+			kartenwert_dealer.setText(String.valueOf("Der Dealer hat eine Hand mit dem Wert: " + Dealer.getdealerKartenwert(0)));
 			this.add(hand_dealer);
 			hand_dealer.add(kartenwert_dealer);
 			ass.setVisible(false);
 			revalidate();
 			repaint();
-
 		}
 
 		starten.setEnabled(true);
@@ -373,14 +356,11 @@ public class Gui extends JFrame implements ActionListener {
 				System.out.println("Ihr Einsatz : " + Bank.getEinsatz());
 				Kartenstapel.stapelGenerieren();
 				Spieler.spieler_kartenehmen();
-				final Icon newImageIcon = loadIcon(Kartenstapel.obersteKarte
-						.getName() + ".png");
+				final Icon newImageIcon = loadIcon(Kartenstapel.obersteKarte.getName() + ".png");
 				JMenuItem newMenuItem = new JMenuItem(newImageIcon);
 				hand_spieler.add(newMenuItem);
 				hand_dealer.setBackground(new Color(10, 108, 3));
-				kartenwert_spieler.setText(String
-						.valueOf("Deine Hand hat einen Wert von: "
-								+ Spieler.getspielerKartenwert(0)));
+				kartenwert_spieler.setText(String.valueOf("Deine Hand hat einen Wert von: " + Spieler.getspielerKartenwert(0)));
 				hand_dealer.setBackground(new Color(10, 108, 3));
 				newMenuItem.setBackground(new Color(10, 108, 3));
 				this.add(hand_spieler, BorderLayout.SOUTH);
@@ -389,13 +369,8 @@ public class Gui extends JFrame implements ActionListener {
 				i++;
 				Karte.setEnabled(false);
 
-				if (Kartenstapel.obersteKarte.getName().equals("ace_of_clubs")
-						|| Kartenstapel.obersteKarte.getName().equals(
-								"ace_of_diamonds")
-						|| Kartenstapel.obersteKarte.getName().equals(
-								"ace_of_hearts")
-						|| Kartenstapel.obersteKarte.getName().equals(
-								"ace_of_spades")) {
+				if (Kartenstapel.obersteKarte.getName().equals("ace_of_clubs") || Kartenstapel.obersteKarte.getName().equals("ace_of_diamonds")
+						|| Kartenstapel.obersteKarte.getName().equals("ace_of_hearts") || Kartenstapel.obersteKarte.getName().equals("ace_of_spades")) {
 					ass.setVisible(true);
 					menu.add(ass);
 
@@ -421,39 +396,29 @@ public class Gui extends JFrame implements ActionListener {
 			info.setVisible(true);
 
 		}
-		if (Dealer.getdealerKartenwert(0) <= 16) {
-			if (Kartenstapel.obersteKarte.getName().equals("ace_of_clubs")
-					|| Kartenstapel.obersteKarte.getName().equals(
-							"ace_of_diamonds")
-					|| Kartenstapel.obersteKarte.getName().equals(
-							"ace_of_hearts")
-					|| Kartenstapel.obersteKarte.getName().equals(
-							"ace_of_spades")) {
-				assHand++;
-				System.out.println(assHand);
-			}
+		if (Dealer.getdealerKartenwert(0) <= 20) {
 			Dealer.dealer_kartenehmen();
+			if (Kartenstapel.obersteKarte.getName().equals("ace_of_clubs") || Kartenstapel.obersteKarte.getName().equals("ace_of_diamonds")
+					|| Kartenstapel.obersteKarte.getName().equals("ace_of_hearts") || Kartenstapel.obersteKarte.getName().equals("ace_of_spades")) {
+				assHand++;
+			}
 			if (Dealer.getdealerKartenwert(0) > 21 && assHand > 0) {
 				System.out.println("Ass detected");
 				Dealer.setdealerkKartenwert(-10);
 				assHand--;
 			}
-			final Icon newImageIcon_2 = loadIcon(Kartenstapel.obersteKarte
-					.getName() + ".png");
+			final Icon newImageIcon_2 = loadIcon(Kartenstapel.obersteKarte.getName() + ".png");
 			JMenuItem newMenuItem_2 = new JMenuItem(newImageIcon_2);
 			hand_dealer.add(newMenuItem_2);
 			newMenuItem_2.setBackground(new Color(10, 108, 3));
-			kartenwert_dealer.setText(String
-					.valueOf("Der Dealer hat eine Hand mit dem Wert: "
-							+ Dealer.getdealerKartenwert(0)));
+			kartenwert_dealer.setText(String.valueOf("Der Dealer hat eine Hand mit dem Wert: " + Dealer.getdealerKartenwert(0)));
 			this.add(hand_dealer);
 			hand_dealer.add(kartenwert_dealer);
 			revalidate();
 			repaint();
 			i = 0;
 
-			if (Spieler.getspielerKartenwert(0) > 21
-					|| Dealer.getdealerKartenwert(0) > 21) {
+			if (Spieler.getspielerKartenwert(0) > 21 || Dealer.getdealerKartenwert(0) > 21) {
 				Karte.setEnabled(false);
 				beenden.setEnabled(false);
 				einsatzButton.setEnabled(false);
@@ -463,25 +428,25 @@ public class Gui extends JFrame implements ActionListener {
 
 			}
 
-			// if (Spieler.getspielerKartenwert(0)==21){
-			// URL url = null;
-			// try {
-			// url = new
-			// URL("http://www.picgifs.com/graphics/f/fireworks/graphics-fireworks-432653.gif");
-			// } catch (MalformedURLException e) {
-			// // TODO Auto-generated catch block
-			// e.printStackTrace();
-			// }
-			// Icon icon = new ImageIcon(url);
-			// JLabel label = new JLabel(icon);
-			//
-			//
-			// this.getContentPane().add(label);
-			// this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			// this.pack();
-			// this.setLocationRelativeTo(null);
-			// this.setVisible(true);
-			// }
+
+			if (Spieler.getspielerKartenwert(0)==21){
+				URL url = null;
+				try {
+					url = new URL("http://img1.gbpicsonline.com/gb/64c/017.gif");
+				} catch (MalformedURLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				Icon icon = new ImageIcon(url);
+				JLabel label = new JLabel(icon);
+
+				JFrame f = new JFrame("BLACKJACKKKKKKKK");
+				f.getContentPane().add(label);
+				
+				f.pack();
+				f.setLocationRelativeTo(null);
+				f.setVisible(true);
+			}
 			i = 0;
 		}
 
@@ -524,8 +489,7 @@ public class Gui extends JFrame implements ActionListener {
 
 		if (resource == null) {
 			// TODO Replace by logger
-			System.err.println("Error in " + Gui.class.getName()
-					+ ": Icon /images/" + iconName + " could not be loaded.");
+			System.err.println("Error in " + Gui.class.getName() + ": Icon /images/" + iconName + " could not be loaded.");
 			return new ImageIcon();
 		}
 		return new ImageIcon(resource);
