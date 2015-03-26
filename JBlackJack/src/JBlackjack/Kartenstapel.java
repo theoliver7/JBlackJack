@@ -44,8 +44,8 @@ public class Kartenstapel {
 		}
 		
 		/*
-		 * Aus dem Kartenstapel wird eine zuf�llige Karte ausgesucht
-		 * Diese wird dem Kartenstapel hinzugef�gt und aus dem Backup gel�scht
+		 * Aus dem Kartenstapel wird eine zufällige Karte ausgesucht
+		 * Diese wird dem Kartenstapel hinzugefügt und aus dem Backup gelöscht
 		 * Zum Schluss wird noch die oberste Karte bestummen
 		 */
 		for (int i = 51;i >= 0; i--) {
