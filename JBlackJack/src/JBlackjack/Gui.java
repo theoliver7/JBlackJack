@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.swing.BoxLayout;
@@ -317,6 +318,7 @@ public class Gui extends JFrame implements ActionListener {
 	}
 
 	public void keineKarteZiehen() {
+
 		while (Dealer.getdealerKartenwert(0) <= 17) {
 			Dealer.dealer_kartenehmen();
 			final Icon newImageIcon_2 = loadIcon(Kartenstapel.obersteKarte.getName() + ".png");
@@ -422,25 +424,25 @@ public class Gui extends JFrame implements ActionListener {
 
 			}
 
-			// if (Spieler.getspielerKartenwert(0)==21){
-			// URL url = null;
-			// try {
-			// url = new
-			// URL("http://www.picgifs.com/graphics/f/fireworks/graphics-fireworks-432653.gif");
-			// } catch (MalformedURLException e) {
-			// // TODO Auto-generated catch block
-			// e.printStackTrace();
-			// }
-			// Icon icon = new ImageIcon(url);
-			// JLabel label = new JLabel(icon);
-			//
-			//
-			// this.getContentPane().add(label);
-			// this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			// this.pack();
-			// this.setLocationRelativeTo(null);
-			// this.setVisible(true);
-			// }
+
+			if (Spieler.getspielerKartenwert(0)==21){
+				URL url = null;
+				try {
+					url = new URL("http://img1.gbpicsonline.com/gb/64c/017.gif");
+				} catch (MalformedURLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				Icon icon = new ImageIcon(url);
+				JLabel label = new JLabel(icon);
+
+				JFrame f = new JFrame("BLACKJACKKKKKKKK");
+				f.getContentPane().add(label);
+				
+				f.pack();
+				f.setLocationRelativeTo(null);
+				f.setVisible(true);
+			}
 			i = 0;
 		}
 
