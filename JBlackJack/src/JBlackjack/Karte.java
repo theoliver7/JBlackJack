@@ -2,10 +2,23 @@ package JBlackjack;
 
 
 public class Karte {
+	
+	//==================== Variablen deklarieren ====================
 	private String name;
 	private int wert;
 	private static String nummer;
 
+	/*
+	 * Hier wird der Name der Karten bestimmt, welcher wichtig ist 
+	 * um später einen Stapel herzustellen
+	 */
+	public Karte(String string, String nummer, int wert) {
+		this.setName(nummer + "_of_" + string);
+		this.setWert(wert);
+	}
+
+	
+	// ==================== Getter und Settermethoden ====================
 	public int getWert() {
 		return wert;
 	}
@@ -14,12 +27,7 @@ public class Karte {
 		this.wert = wert;
 	}
 
-	public Karte(String string, String nummer, int wert) {
-		this.setName(nummer + "_of_" + string);
-		this.setWert(wert);
-
-	}
-
+	
 	public String toString() {
 		return this.getName();
 	}

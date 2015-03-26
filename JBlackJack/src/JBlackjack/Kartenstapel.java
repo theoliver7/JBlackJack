@@ -4,15 +4,26 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Kartenstapel {
+	
+	// ==================== Variablen deklarieren ====================
 	static ArrayList<Karte> Kartenstappel = new ArrayList<Karte>();
 	static Karte obersteKarte;
 	static Karte stapel[] = new Karte[56];	
 	private static String nummer;
 	private static int wert;
 	
+	
+	// ==================== Methoden ====================
+	
+	 /*
+	  * Hier wird der Stapel generiert
+	  */
 	public static void stapelGenerieren() {
 		ArrayList<Karte> Kartenstappel_backup = new ArrayList<Karte>();
 		
+		/* 
+		 * Für jeden Typ wird jede Nummer hinzugefügt und jeweils den richtigen Wert hinzugeteilt
+		 */
 		String typ[] = { "spades", "hearts", "clubs", "diamonds" };
 		String nummer[] = { "ace", "2", "3", "4", "5", "6", "7", "8", "9","10", "jack", "queen", "king" };
 		int wert[] = { 11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10 };
@@ -24,11 +35,21 @@ public class Kartenstapel {
 				k++;
 			}
 		}
+		
+		/*
+		 * Es wird ein gleicher Stapel erstellt als Backup
+		 */
 		for (int i = 0; i < stapel.length; i++) {
 			Kartenstappel_backup.add(stapel[i]);
 		}
-		for (int i = 55; i < 57 && i >= 0; i--) {
-			int max = 51;
+		
+		/*
+		 * Aus dem Kartenstapel wird eine zufällige Karte ausgesucht
+		 * Diese wird dem Kartenstapel hinzugefügt und aus dem Backup gelöscht
+		 * Zum Schluss wird noch die oberste Karte bestummen
+		 */
+		for (int i = 55;i >= 0; i--) {
+			int max = 56;
 			int min = 0;
 			int diff = max - min;
 			Random ran = new Random();
@@ -43,6 +64,9 @@ public class Kartenstapel {
 			}						
 		}
 	}
+	
+	// ==================== Getter und Settermethoden ====================
+	
 	public static ArrayList<Karte> getKartenstappel() {
 		return Kartenstappel;
 	}
