@@ -8,7 +8,7 @@ public class Kartenstapel {
 	// ==================== Variablen deklarieren ====================
 	static ArrayList<Karte> Kartenstappel = new ArrayList<Karte>();
 	static Karte obersteKarte;
-	static Karte stapel[] = new Karte[56];	
+	static Karte stapel[] = new Karte[52];	
 	private static String nummer;
 	private static int wert;
 	
@@ -22,7 +22,7 @@ public class Kartenstapel {
 		ArrayList<Karte> Kartenstappel_backup = new ArrayList<Karte>();
 		
 		/* 
-		 * Für jeden Typ wird jede Nummer hinzugefügt und jeweils den richtigen Wert hinzugeteilt
+		 * Fï¿½r jeden Typ wird jede Nummer hinzugefï¿½gt und jeweils den richtigen Wert hinzugeteilt
 		 */
 		String typ[] = { "spades", "hearts", "clubs", "diamonds" };
 		String nummer[] = { "ace", "2", "3", "4", "5", "6", "7", "8", "9","10", "jack", "queen", "king" };
@@ -44,12 +44,12 @@ public class Kartenstapel {
 		}
 		
 		/*
-		 * Aus dem Kartenstapel wird eine zufällige Karte ausgesucht
-		 * Diese wird dem Kartenstapel hinzugefügt und aus dem Backup gelöscht
+		 * Aus dem Kartenstapel wird eine zufï¿½llige Karte ausgesucht
+		 * Diese wird dem Kartenstapel hinzugefï¿½gt und aus dem Backup gelï¿½scht
 		 * Zum Schluss wird noch die oberste Karte bestummen
 		 */
-		for (int i = 55;i >= 0; i--) {
-			int max = 56;
+		for (int i = 51;i >= 0; i--) {
+			int max = 51;
 			int min = 0;
 			int diff = max - min;
 			Random ran = new Random();

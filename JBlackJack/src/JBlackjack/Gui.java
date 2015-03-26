@@ -296,7 +296,7 @@ public class Gui extends JFrame implements ActionListener {
 			if (Bank.getKontostand() == 0) {
 				int checker = JOptionPane.showConfirmDialog(null, "Sie haben verloren, wollen sie ein neues Spiel starten?", "Verloren", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 				if (checker == JOptionPane.YES_OPTION) {
-					System.out.println("5000");
+					
 					Bank.setKontostand(500);
 					Kontostand_Label.setText("Einsatz: " + String.valueOf(Bank.getEinsatz() + "$" + " \n Kontostand: " + Bank.getKontostand() + "$"));
 					befehle.setText("Nimm eine Karte");
@@ -349,7 +349,7 @@ public class Gui extends JFrame implements ActionListener {
 
 		if (Spieler.getspielerKartenwert(0) <= 21) {
 			if (i == 0) {
-				System.out.println("Ihr Einsatz : " + Bank.getEinsatz());
+				
 				Kartenstapel.stapelGenerieren();
 				Spieler.spieler_kartenehmen();
 				final Icon newImageIcon = loadIcon(Kartenstapel.obersteKarte.getName() + ".png");
@@ -399,7 +399,7 @@ public class Gui extends JFrame implements ActionListener {
 				assHand++;
 			}
 			if (Dealer.getdealerKartenwert(0) > 21 && assHand > 0) {
-				System.out.println("Ass detected");
+			
 				Dealer.setdealerkKartenwert(-10);
 				assHand--;
 			}

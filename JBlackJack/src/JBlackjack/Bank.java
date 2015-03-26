@@ -52,7 +52,7 @@ public class Bank {
 
 	/*
 	 * Hier wird der Kontostand angepasst Je nachdem ob man verloren oder
-	 * gewonnen hat, wird dem Konto dann Geld abgezogen oder hinzugefügt
+	 * gewonnen hat, wird dem Konto dann Geld abgezogen oder hinzugefï¿½gt
 	 */
 	public static int kontostandanpassen(int einsatz) {
 		kontostand = kontostand + einsatz;

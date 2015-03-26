@@ -1,12 +1,29 @@
 package JBlackjack;
 
-import static org.junit.Assert.*;
+import java.util.Arrays;
+import java.util.Collection;
 
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
+@RunWith(Parameterized.class)
 public class BankTest {
+	private static int einsatz;
+	private static int kontostand;
+	private static int dealer;
+	private static int spieler;
+	private int result;
+
+	public BankTest(int einsatz, int kontostand, int result) {
+		BankTest.einsatz = einsatz;
+		BankTest.kontostand = kontostand;
+		this.result = result;
+	}
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -16,9 +33,21 @@ public class BankTest {
 	public static void tearDownAfterClass() throws Exception {
 	}
 
+	@Parameters
+	public static Collection<Object[]> values() {
+		return Arrays.asList(new Object[][] { { 21, 500, 521 }, { 10, 0, 10 }, { 0, 0, 0 } });
+	}
+
 	@Test
 	public void testKontostandanpassen() {
-		fail("Not yet implemented");
+		Bank.setKontostand(kontostand);
+		Bank.kontostandanpassen(einsatz);
+		Assert.assertEquals(Bank.getKontostand(),result);
+	}
+	public void testgewinnerErmitteln() {
+		Bank.setKontostand(kontostand);
+		Bank.kontostandanpassen(einsatz);
+		Assert.assertEquals(Bank.getKontostand(),result);
 	}
 
 }
