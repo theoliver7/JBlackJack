@@ -3,7 +3,7 @@ package JBlackjack;
 public class Bank {
 	// Variablen deklarieren
 	private static int kontostand = 500;
-	private static int Einsatz = 20;
+	private static int Einsatz = 0;
 
 	// Methoden
 
@@ -11,43 +11,32 @@ public class Bank {
 		int dealer = Dealer.getdealerKartenwert(0);
 		int spieler = Spieler.getspielerKartenwert(0);
 		String gewinner = null;
+		int Einsatz = Integer.parseInt(Gui.einsatzt_feld.getText());
+		
+		if (dealer >= spieler && dealer < 22 || spieler > 21) {
 
-		if (dealer >= spieler) {
-			if (dealer < 22 ) {
-				int RAM = Einsatz;
-				Einsatz = Einsatz - Einsatz - Einsatz;
-				kontostandanpassen(Einsatz);
-				Einsatz = RAM;
-				System.out.println(kontostand);
-				gewinner = "Dealer";
+			int RAM = Einsatz;
+			Einsatz = Einsatz - Einsatz - Einsatz;
+			kontostandanpassen(Einsatz);
+			Einsatz = RAM;
+			System.out.println(Einsatz);
+			System.out.println(kontostand);
+			gewinner = "Der Dealer hat gewonnen, zieh eine Karte um eine neue Runde zu beginnen";
 
-			} else {
-				kontostandanpassen(Einsatz);
-				System.out.println(kontostand);
-				gewinner = "Spieler";
-			}
-			return gewinner;
+		} 
+		
+		else {
+			System.out.println(Einsatz+ "test");
+			kontostandanpassen(Einsatz);
+			System.out.println(kontostand);
+			gewinner = "Du hast gewonnen, zieh eine Karte um eine neue Runde zu beginnen";
 		}
-		if (spieler >= dealer) {
-			if (spieler < 22) {
-				kontostandanpassen(Einsatz);
-				System.out.println(kontostand);
-				gewinner = "Spieler";
 
-			} else{
-				int RAM = Einsatz;
-				Einsatz = Einsatz - Einsatz - Einsatz;
-				kontostandanpassen(Einsatz);
-				Einsatz = RAM;
-				System.out.println(kontostand);
-				gewinner = "Dealer";
-			}
-		}
 		return gewinner;
 	}
 
 	public static int einsatzErhoehen(int eingesetzt) {
-		Einsatz = Einsatz + eingesetzt;
+		Einsatz = eingesetzt;
 		return Einsatz;
 	}
 
@@ -71,7 +60,7 @@ public class Bank {
 		return kontostand;
 	}
 
-	public void setKontostand(int kontostand) {
+	public static void setKontostand(int kontostand) {
 		Bank.kontostand = kontostand;
 	}
 
