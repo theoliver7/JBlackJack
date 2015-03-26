@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.swing.BoxLayout;
@@ -297,6 +298,25 @@ public class Gui extends JFrame implements ActionListener {
 					Karte.setEnabled(true);
 
 				}
+	
+				if (Spieler.getspielerKartenwert(0)==21){
+					URL url = null;
+					try {
+						url = new URL("http://www.picgifs.com/graphics/f/fireworks/graphics-fireworks-432653.gif");
+					} catch (MalformedURLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					Icon icon = new ImageIcon(url);
+					JLabel label = new JLabel(icon);
+
+					JFrame f = new JFrame("Animation");
+					f.getContentPane().add(label);
+					f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					f.pack();
+					f.setLocationRelativeTo(null);
+					f.setVisible(true);
+				}
 				i = 0;
 			}
 
@@ -439,6 +459,7 @@ public class Gui extends JFrame implements ActionListener {
 					.valueOf("Deine Hand hat einen Wert von: "
 							+ Spieler.getspielerKartenwert(0)));
 			ass.setVisible(false);
+			Karte.setEnabled(true);
 
 		}
 	}
