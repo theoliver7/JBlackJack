@@ -12,24 +12,27 @@ public class Bank {
 		int spieler = Spieler.getspielerKartenwert(0);
 		String gewinner = null;
 		int Einsatz = Integer.parseInt(Gui.einsatzt_feld.getText());
-		
-		if (dealer >= spieler && dealer < 22 || spieler > 21) {
 
-			int RAM = Einsatz;
-			Einsatz = Einsatz - Einsatz - Einsatz;
-			kontostandanpassen(Einsatz);
-			Einsatz = RAM;
-			System.out.println(Einsatz);
-			System.out.println(kontostand);
-			gewinner = "Der Dealer hat gewonnen, zieh eine Karte um eine neue Runde zu beginnen";
+		if (spieler == dealer) {
+			gewinner = "Beide Spieler haben den gleichen Kartenwertert";
+		} else {
 
-		} 
-		
-		else {
-			System.out.println(Einsatz+ "test");
-			kontostandanpassen(Einsatz);
-			System.out.println(kontostand);
-			gewinner = "Du hast gewonnen, zieh eine Karte um eine neue Runde zu beginnen";
+			if (dealer >= spieler && dealer < 22 || spieler > 21) {
+
+				int RAM = Einsatz;
+				Einsatz = Einsatz - Einsatz - Einsatz;
+				kontostandanpassen(Einsatz);
+				Einsatz = RAM;
+				System.out.println(Einsatz);
+				System.out.println(kontostand);
+				gewinner = "Der Dealer hat gewonnen, zieh eine Karte um eine neue Runde zu beginnen";
+
+			} else {
+				System.out.println(Einsatz + "test");
+				kontostandanpassen(Einsatz);
+				System.out.println(kontostand);
+				gewinner = "Du hast gewonnen, zieh eine Karte um eine neue Runde zu beginnen";
+			}
 		}
 
 		return gewinner;
