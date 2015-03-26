@@ -144,7 +144,7 @@ public class Gui extends JFrame implements ActionListener {
 		this.add(Navigation, BorderLayout.EAST);
 
 		// Kontostand Eigenschaften
-		Kontostand_Label.setText("Einsatz: " + String.valueOf(Bank.getEinsatz() + " \n Kontostand: " + Bank.getKontostand()));
+		Kontostand_Label.setText("Einsatz: " + String.valueOf(Bank.getEinsatz() +"$"+ " \n Kontostand: " + Bank.getKontostand())+"$");
 		Kontostand_Panel.add(Kontostand_Label, BorderLayout.EAST);
 		Kontostand_Panel.setBackground(new Color(10, 108, 3));
 		befehle.setText("Mach einen Einsatz und nimm dannach eine Karte um das Spiel zu beginnen");
@@ -198,9 +198,7 @@ public class Gui extends JFrame implements ActionListener {
 					hand_spieler.add(kartenwert_spieler, BorderLayout.WEST);
 					i++;
 					Karte.setEnabled(false);
-					if ((Dealer.getdealerKartenwert(0) < 17) || (Spieler.getspielerKartenwert(0) > Dealer.getdealerKartenwert(0))) {
-
-					}
+					
 					if (Kartenstapel.obersteKarte.getName().equals("ace_of_clubs") || Kartenstapel.obersteKarte.getName().equals("ace_of_diamonds")
 							|| Kartenstapel.obersteKarte.getName().equals("ace_of_hearts") || Kartenstapel.obersteKarte.getName().equals("ace_of_spades")) {
 						ass.setVisible(true);
@@ -209,6 +207,7 @@ public class Gui extends JFrame implements ActionListener {
 					}
 					revalidate();
 					repaint();
+					
 					if (Spieler.getspielerKartenwert(0) <= 21) {
 						Karte.setEnabled(true);
 						beenden.setEnabled(true);
@@ -283,6 +282,7 @@ public class Gui extends JFrame implements ActionListener {
 				kartenwert_dealer.setText(String.valueOf("Der Dealer hat eine Hand mit dem Wert: " + Dealer.getdealerKartenwert(0)));
 				this.add(hand_dealer);
 				hand_dealer.add(kartenwert_dealer);
+				ass.setVisible(false);
 				revalidate();
 				repaint();
 
@@ -304,13 +304,13 @@ public class Gui extends JFrame implements ActionListener {
 						befehle.setText("Du hast zu wenig Geld");
 					} else if (einsatz < 10) {
 
-						befehle.setText("Du musst mindestens 10 setzen");
+						befehle.setText("Du musst mindestens 10$ setzen");
 					} else {
 						Karte.setEnabled(true);
 						einsatzButton.setEnabled(false);
 						befehle.setText("Nimm eine Karte");
 						Bank.einsatzErhoehen(einsatz);
-						Kontostand_Label.setText("Einsatz: " + String.valueOf(Bank.getEinsatz() + " \n Kontostand: " + Bank.getKontostand()));
+						Kontostand_Label.setText("Einsatz: " + String.valueOf(Bank.getEinsatz() +"$"+ " \n Kontostand: " + Bank.getKontostand())+"$");
 
 					}
 				} catch (NumberFormatException e) {
@@ -328,7 +328,7 @@ public class Gui extends JFrame implements ActionListener {
 
 			Bank.setEinsatz(0);
 			befehle.setText(Bank.gewinnerErmitteln());
-			Kontostand_Label.setText("Einsatz: " + String.valueOf(Bank.getEinsatz() + " \n Kontostand: " + Bank.getKontostand()));
+			Kontostand_Label.setText("Einsatz: " + String.valueOf(Bank.getEinsatz() +"$"+ " \n Kontostand: " + Bank.getKontostand()+"$"));
 			Kartenstapel.Kartenstappel.clear();
 			Kartenstapel.stapelGenerieren();
 			Dealer.dealerHand.clear();
@@ -369,7 +369,7 @@ public class Gui extends JFrame implements ActionListener {
 					System.out.println("5000");
 
 					Bank.setKontostand(500);
-					Kontostand_Label.setText("Einsatz: " + String.valueOf(Bank.getEinsatz() + " \n Kontostand: " + Bank.getKontostand()));
+					Kontostand_Label.setText("Einsatz: " + String.valueOf(Bank.getEinsatz() +"$"+ " \n Kontostand: " + Bank.getKontostand()+"$"));
 					befehle.setText("Nimm eine Karte");
 
 					this.add(Kontostand_Panel, BorderLayout.WEST);
