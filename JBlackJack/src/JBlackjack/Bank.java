@@ -18,26 +18,30 @@ public class Bank {
 		 */
 		int dealer = Dealer.getdealerKartenwert(0);
 		int spieler = Spieler.getspielerKartenwert(0);
-		
-		
-		if (spieler == dealer) {
 
-			if (Spieler.getspielerKartenwert(0) <= 21 && Dealer.getdealerKartenwert(0) <= 21) {
-				gewinner = "Beide Spieler haben den gleichen Kartenwert";
-			}
+		if (dealer > 21 && spieler > 21) {
+			gewinner="Beide Spieler haben einen zu grossen Kartenwert";
 		} else {
 
-			if (dealer >= spieler && dealer < 22 || spieler > 21) {
+			if (spieler == dealer) {
 
-				int RAM = einsatz;
-				einsatz = einsatz - einsatz - einsatz;
-				kontostandanpassen(einsatz);
-				einsatz = RAM;
-				gewinner = "Der Dealer hat gewonnen, zieh eine Karte um eine neue Runde zu beginnen";
-
+				if (Spieler.getspielerKartenwert(0) <= 21 && Dealer.getdealerKartenwert(0) <= 21) {
+					gewinner = "Beide Spieler haben den gleichen Kartenwert";
+				}
 			} else {
-				kontostandanpassen(einsatz);
-				gewinner = "Du hast gewonnen, zieh eine Karte um eine neue Runde zu beginnen";
+
+				if (dealer >= spieler && dealer < 22 || spieler > 21) {
+
+					int RAM = einsatz;
+					einsatz = einsatz - einsatz - einsatz;
+					kontostandanpassen(einsatz);
+					einsatz = RAM;
+					gewinner = "Der Dealer hat gewonnen, zieh eine Karte um eine neue Runde zu beginnen";
+
+				} else {
+					kontostandanpassen(einsatz);
+					gewinner = "Du hast gewonnen, zieh eine Karte um eine neue Runde zu beginnen";
+				}
 			}
 		}
 		return gewinner;

@@ -38,6 +38,7 @@ public class Gui extends JFrame implements ActionListener {
 
 	// Jtextfields
 	static JTextField einsatzt_feld;
+
 	public JPanel getEinsatz_panel() {
 		return einsatz_panel;
 	}
@@ -64,16 +65,15 @@ public class Gui extends JFrame implements ActionListener {
 	protected JLabel kartenwert_spieler;
 	protected JLabel kartenwert_dealer;
 	protected JLabel befehle;
-	
 
 	// Zähler Initialisierung
 	int assHand = 0;
 	int i = 0;
+	int assSpieler = 0;
 
 	// Gui Klasse
 	public Gui() throws MalformedURLException {
-		
-		
+
 		// Panel Objekte erstellen
 		menu = new JPanel();
 		hand_spieler = new JPanel();
@@ -98,9 +98,7 @@ public class Gui extends JFrame implements ActionListener {
 		starten = new JButton("Neue Runde starten[ENTER]");
 		ass = new JButton("Ass wert verändern[A]");
 		einsatzButton = new JButton("Einsetzen[E]");
-		
-		
-		
+
 		// JFrame Eigenschaften
 		setSize(1000, 900);
 		setTitle("JBlackJack");
@@ -154,6 +152,7 @@ public class Gui extends JFrame implements ActionListener {
 					}
 				}
 			}
+
 			@Override public void keyReleased(KeyEvent e) {
 				// TODO Auto-generated method stub
 
@@ -174,7 +173,7 @@ public class Gui extends JFrame implements ActionListener {
 		menu.setBackground(new Color(10, 108, 3));
 		menu.add(label);
 		ass.setVisible(false);
-		this.add(menu,BorderLayout.SOUTH);
+		this.add(menu, BorderLayout.SOUTH);
 
 		einsatz_panel.setLayout(new BoxLayout(einsatz_panel, BoxLayout.X_AXIS));
 		einsatz_panel.setOpaque(false);
@@ -231,10 +230,13 @@ public class Gui extends JFrame implements ActionListener {
 	public void assWertAendern() {
 		Spieler.setspielerKartenwert(-10);
 		kartenwert_spieler.setText(String.valueOf("Deine Hand hat einen Wert von: " + Spieler.getspielerKartenwert(0)));
-		ass.setVisible(false);
+		assSpieler--;
 		karte.setEnabled(true);
 		beenden.setEnabled(true);
 		i = 0;
+		if (assSpieler == 0) {
+			ass.setVisible(false);
+		}
 	}
 
 	public void einsetzen() {
@@ -392,9 +394,12 @@ public class Gui extends JFrame implements ActionListener {
 
 				if (Kartenstapel.obersteKarte.getName().equals("ace_of_clubs") || Kartenstapel.obersteKarte.getName().equals("ace_of_diamonds")
 						|| Kartenstapel.obersteKarte.getName().equals("ace_of_hearts") || Kartenstapel.obersteKarte.getName().equals("ace_of_spades")) {
+					assSpieler++;
+
+				}
+				if (assSpieler > 0) {
 					ass.setVisible(true);
 					menu.add(ass);
-
 				}
 				revalidate();
 				repaint();
