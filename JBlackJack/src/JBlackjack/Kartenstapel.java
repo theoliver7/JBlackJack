@@ -39,8 +39,10 @@ public class Kartenstapel {
 		/*
 		 * Es wird ein gleicher Stapel erstellt als Backup
 		 */
+		
 		for (int i = 0; i < stapel.length; i++) {
 			Kartenstappel_backup.add(stapel[i]);
+			System.out.println(stapel[i]);
 		}
 		
 		/*

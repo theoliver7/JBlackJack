@@ -37,6 +37,14 @@ public class Gui extends JFrame implements ActionListener {
 
 	// Jtextfields
 	static JTextField einsatzt_feld;
+	public JPanel getEinsatz_panel() {
+		return einsatz_panel;
+	}
+
+	public void setEinsatz_panel(JPanel einsatz_panel) {
+		this.einsatz_panel = einsatz_panel;
+	}
+
 	// JPanel's
 	protected JPanel Buttons;
 	protected JPanel Navigation;
@@ -82,10 +90,8 @@ public class Gui extends JFrame implements ActionListener {
 
 		// Button Objekte erstellen
 		Karte = new JButton("Karte nehmen [K]");
-
 		Verlassen = new JButton("Verlassen [ESC]");
 		beenden = new JButton("Keine Karten nehmen[SPACE]");
-
 		starten = new JButton("Neue Runde starten[ENTER]");
 		ass = new JButton("Ass wert verändern[A]");
 		einsatzButton = new JButton("Einsetzen[E]");
@@ -257,6 +263,7 @@ public class Gui extends JFrame implements ActionListener {
 	public void neueRunde() {
 		if (starten.isEnabled() == true) {
 			Bank.setEinsatz(0);
+			Bank.setEinsatz(Integer.parseInt(Gui.einsatzt_feld.getText()));
 			befehle.setText(Bank.gewinnerErmitteln());
 			Kontostand_Label.setText("Einsatz: " + String.valueOf(Bank.getEinsatz() + "$" + " \n Kontostand: " + Bank.getKontostand() + "$"));
 			Kartenstapel.Kartenstappel.clear();
@@ -355,7 +362,7 @@ public class Gui extends JFrame implements ActionListener {
 	}
 
 	public void karteZiehen() {
-
+		Bank.setGewinner("");
 		befehle.setText("Entscheide ob du noch eine Karte nehmen willst oder nicht");
 		/*
 		 * Das Kartenstapel wird generiert und die Karte die der Spieler nimmt
@@ -364,7 +371,6 @@ public class Gui extends JFrame implements ActionListener {
 
 		if (Spieler.getspielerKartenwert(0) <= 21) {
 			if (i == 0) {
-
 				Kartenstapel.stapelGenerieren();
 				Spieler.spieler_kartenehmen();
 				final Icon newImageIcon = loadIcon(Kartenstapel.obersteKarte.getName() + ".png");
@@ -654,7 +660,7 @@ public class Gui extends JFrame implements ActionListener {
 		return serialVersionUID;
 	}
 
-	public JTextField getEinsatzt_feld() {
+	public static JTextField getEinsatzt_feld() {
 		return einsatzt_feld;
 	}
 

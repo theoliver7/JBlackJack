@@ -3,7 +3,8 @@ package JBlackjack;
 public class Bank {
 	// ==================== Variablen deklarieren ====================
 	private static int kontostand = 500;
-	private static int Einsatz = 0;
+	private static int Einsatz;
+	private static String gewinner;
 
 	// ==================== Methoden ====================
 
@@ -17,9 +18,8 @@ public class Bank {
 		 */
 		int dealer = Dealer.getdealerKartenwert(0);
 		int spieler = Spieler.getspielerKartenwert(0);
-		String gewinner = null;
-		int Einsatz = Integer.parseInt(Gui.einsatzt_feld.getText());
-
+		
+		
 		if (spieler == dealer) {
 
 			if (Spieler.getspielerKartenwert(0) <= 21 && Dealer.getdealerKartenwert(0) <= 21) {
@@ -76,6 +76,14 @@ public class Bank {
 
 	public static void setKontostand(int kontostand) {
 		Bank.kontostand = kontostand;
+	}
+
+	public static String getGewinner() {
+		return gewinner;
+	}
+
+	public static void setGewinner(String gewinner) {
+		Bank.gewinner = gewinner;
 	}
 
 }
