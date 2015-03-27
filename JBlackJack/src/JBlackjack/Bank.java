@@ -3,7 +3,7 @@ package JBlackjack;
 public class Bank {
 	// ==================== Variablen deklarieren ====================
 	private static int kontostand = 500;
-	private static int Einsatz;
+	private static int einsatz;
 	private static String gewinner;
 
 	// ==================== Methoden ====================
@@ -29,14 +29,14 @@ public class Bank {
 
 			if (dealer >= spieler && dealer < 22 || spieler > 21) {
 
-				int RAM = Einsatz;
-				Einsatz = Einsatz - Einsatz - Einsatz;
-				kontostandanpassen(Einsatz);
-				Einsatz = RAM;
+				int RAM = einsatz;
+				einsatz = einsatz - einsatz - einsatz;
+				kontostandanpassen(einsatz);
+				einsatz = RAM;
 				gewinner = "Der Dealer hat gewonnen, zieh eine Karte um eine neue Runde zu beginnen";
 
 			} else {
-				kontostandanpassen(Einsatz);
+				kontostandanpassen(einsatz);
 				gewinner = "Du hast gewonnen, zieh eine Karte um eine neue Runde zu beginnen";
 			}
 		}
@@ -56,18 +56,18 @@ public class Bank {
 	 * Hier wird der Einsatz festgelegt
 	 */
 	public static int einsatzErhoehen(int eingesetzt) {
-		Einsatz = eingesetzt;
-		return Einsatz;
+		einsatz = eingesetzt;
+		return einsatz;
 	}
 
 	// ==================== Getter und Settermethoden ====================
 
 	public static int getEinsatz() {
-		return Einsatz;
+		return einsatz;
 	}
 
-	public static void setEinsatz(int einsatz) {
-		Einsatz = einsatz;
+	public static void setEinsatz(int Einsatz) {
+		einsatz = Einsatz;
 	}
 
 	public static int getKontostand() {

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class Spieler {
 
 	// ==================== Variablen deklarieren ====================
-	private String SpielerName;
 	private boolean spielbeenden;
 	static int spielerKartenwert = 0;
 	static ArrayList<Karte> spielerHand = new ArrayList<Karte>();
@@ -58,14 +57,6 @@ public class Spieler {
 
 	public static void setSpielerHand(ArrayList<Karte> spielerHand) {
 		Spieler.spielerHand = spielerHand;
-	}
-
-	public String getSpielername() {
-		return SpielerName;
-	}
-
-	public void setSpielername(String spielername) {
-		SpielerName = spielername;
 	}
 
 	public boolean isSpielbeenden() {
