@@ -22,7 +22,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import javax.swing.text.AbstractDocument.Content;
 
 public class Gui extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
@@ -307,10 +306,12 @@ public class Gui extends JFrame implements ActionListener {
 			ass.setVisible(false);
 			i = 0;
 			assHand = 0;
+			assSpieler= 0;
+			Spieler.setBlackjack(0);
+			
 			if (Bank.getKontostand() == 0) {
 				int checker = JOptionPane.showConfirmDialog(null, "Sie haben verloren, wollen sie ein neues Spiel starten?", "Verloren", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 				if (checker == JOptionPane.YES_OPTION) {
-
 					Bank.setKontostand(500);
 					kontostand_Label.setText("Einsatz: " + String.valueOf(Bank.getEinsatz() + "$" + " \n Kontostand: " + Bank.getKontostand() + "$"));
 					befehle.setText("Nimm eine Karte");
@@ -433,7 +434,7 @@ public class Gui extends JFrame implements ActionListener {
 			karte.setEnabled(true);
 		}
 
-		if (Spieler.getspielerKartenwert(0) == 21) {
+		if (Spieler.getspielerKartenwert(0) == 21 && Spieler.getBlackjack() == 2) {
 			URL url = null;
 			try {
 				url = new URL("http://img1.gbpicsonline.com/gb/64c/017.gif");
@@ -444,7 +445,7 @@ public class Gui extends JFrame implements ActionListener {
 			Icon icon = new ImageIcon(url);
 			JLabel label = new JLabel(icon);
 
-			JFrame f = new JFrame("BLACKJACKKKKKKKK");
+			JFrame f = new JFrame("BLACKJACK!");
 			f.getContentPane().add(label);
 
 			f.pack();

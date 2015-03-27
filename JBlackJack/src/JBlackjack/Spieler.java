@@ -9,9 +9,12 @@ public class Spieler {
 	static int spielerKartenwert = 0;
 	static ArrayList<Karte> spielerHand = new ArrayList<Karte>();
 	private static String weitereKarte;
+	private static int blackjack;
 
 	// ==================== Methoden ====================
 	
+	
+
 	/*
 	 * Diese Methode list die oberste Karte des erstellten Kartenstapel aus, fügt dessen Wert dem der 
 	 * Spielerhand hinzu, und löscht die oberste Karte aus dem Stapel
@@ -21,6 +24,7 @@ public class Spieler {
 		Kartenstapel.getKartenstappel().remove(Kartenstapel.obersteKarte);
 		getSpielerHand();
 		setspielerKartenwert(Kartenstapel.obersteKarte.getWert());
+		blackjack++;
 	}
 
 	// ==================== Getter und Settermethoden ====================
@@ -73,6 +77,13 @@ public class Spieler {
 
 	public static void setWeitereKarte(String weitereKarte) {
 		Spieler.weitereKarte = weitereKarte;
+	}
+	public static int getBlackjack() {
+		return blackjack;
+	}
+
+	public static void setBlackjack(int blackjack) {
+		Spieler.blackjack = blackjack;
 	}
 
 }
